@@ -1,0 +1,39 @@
+---
+title: AgentFriendly
+description: Make your website readable, navigable, and monetizable for AI agents — with a single middleware.
+template: splash
+hero:
+  title: Make your website <em>agent-friendly</em>
+  tagline: A middleware SDK that detects AI agents, serves token-efficient Markdown, enforces access policies, registers callable tools, and handles micropayments — with zero changes to your existing routes.
+  actions:
+    - text: Get started
+      link: /guides/introduction
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/Jana-kabrit/AgentFriendly
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid stagger>
+  <Card title="8-layer pipeline" icon="puzzle">
+    Detection → Discovery → Content → Analytics → Access Control → Privacy → Tools → Monetization. Every layer is independently opt-in.
+  </Card>
+  <Card title="HTML → Markdown" icon="document">
+    Automatically converts your existing HTML pages to clean, token-efficient Markdown for agents. Up to 81% token reduction.
+  </Card>
+  <Card title="Agent identity & trust tiers" icon="approve-check-circle">
+    Four trust tiers — human, suspected, known, verified — resolved from Accept headers, UA database, heuristics, and cryptographic signatures (RFC 9421).
+  </Card>
+  <Card title="x402 micropayments" icon="star">
+    Charge AI agents per-request using the open x402 protocol and USDC stablecoins. Humans are never affected.
+  </Card>
+  <Card title="Multi-tenancy" icon="group">
+    RFC 8693 delegation tokens scope agent sessions to specific users and tenants — with per-scope PII unmasking.
+  </Card>
+  <Card title="TypeScript + Python" icon="laptop">
+    Full SDK for TypeScript (Next.js, Express, Hono, Nuxt, Astro) and Python (FastAPI, Django, Flask).
+  </Card>
+</CardGrid>

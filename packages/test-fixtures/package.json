@@ -1,0 +1,22 @@
+{
+  "name": "@agentfriendly/test-fixtures",
+  "version": "0.1.0",
+  "description": "Shared test fixtures for all @agentfriendly packages",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./ua-strings": "./src/ua-strings.ts",
+    "./http-headers": "./src/http-headers.ts",
+    "./html-pages": "./src/html-pages.ts",
+    "./agent-requests": "./src/agent-requests.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "license": "MIT"
+}

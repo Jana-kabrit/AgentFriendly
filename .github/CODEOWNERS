@@ -1,0 +1,13 @@
+# CODEOWNERS — Replace "your-org/maintainers" with your actual GitHub org/team or username
+# These owners will be requested for review when someone opens a pull request.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Examples:
+#   *       @your-github-username
+#   *       @your-org/maintainers
+#
+# Different owners per path:
+#   packages/core/     @your-org/core-team
+#   python_sdk/        @your-org/python-team
+
+* @Jana-kabrit

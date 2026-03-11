@@ -1,0 +1,42 @@
+{
+  "name": "@agentfriendly/ua-database",
+  "version": "0.1.0",
+  "description": "Versioned database of known AI agent user-agents, shared by TypeScript and Python SDKs",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./data": "./data/agents.json"
+  },
+  "files": [
+    "dist",
+    "data"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "test": "vitest run",
+    "validate": "node --input-type=module <<< \"import { validateDatabase } from './src/validate.ts'; validateDatabase();\"",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "user-agent",
+    "bot",
+    "detection",
+    "sdk"
+  ],
+  "license": "MIT"
+}

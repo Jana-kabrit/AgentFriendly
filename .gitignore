@@ -1,0 +1,34 @@
+node_modules/
+dist/
+build/
+.turbo/
+coverage/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.log
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo

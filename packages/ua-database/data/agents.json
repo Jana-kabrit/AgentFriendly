@@ -1,0 +1,487 @@
+{
+  "$schema": "../schema/agents-schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-07",
+  "agents": [
+    {
+      "pattern": "GPTBot",
+      "matchType": "prefix",
+      "agentName": "GPTBot",
+      "operator": "OpenAI",
+      "operatorUrl": "https://openai.com",
+      "category": "training-crawler",
+      "description": "OpenAI's crawler for training data collection for GPT models",
+      "verificationSupport": false,
+      "firstSeen": "2023-08-01",
+      "sources": [
+        "https://platform.openai.com/docs/gptbot",
+        "https://darkvisitors.com/agents/gptbot"
+      ]
+    },
+    {
+      "pattern": "OAI-SearchBot",
+      "matchType": "prefix",
+      "agentName": "OAI-SearchBot",
+      "operator": "OpenAI",
+      "operatorUrl": "https://openai.com",
+      "category": "search-bot",
+      "description": "OpenAI's bot for SearchGPT / ChatGPT search results citations",
+      "verificationSupport": false,
+      "firstSeen": "2024-07-01",
+      "sources": [
+        "https://platform.openai.com/docs/bots",
+        "https://darkvisitors.com/agents/oai-searchbot"
+      ]
+    },
+    {
+      "pattern": "ChatGPT-User",
+      "matchType": "prefix",
+      "agentName": "ChatGPT-User",
+      "operator": "OpenAI",
+      "operatorUrl": "https://openai.com",
+      "category": "interactive-agent",
+      "description": "ChatGPT browsing plugin — fetches pages on behalf of users in chat",
+      "verificationSupport": false,
+      "firstSeen": "2023-05-01",
+      "sources": [
+        "https://platform.openai.com/docs/bots",
+        "https://darkvisitors.com/agents/chatgpt-user"
+      ]
+    },
+    {
+      "pattern": "ClaudeBot",
+      "matchType": "prefix",
+      "agentName": "ClaudeBot",
+      "operator": "Anthropic",
+      "operatorUrl": "https://www.anthropic.com",
+      "category": "training-crawler",
+      "description": "Anthropic's training data crawler for Claude models",
+      "verificationSupport": false,
+      "firstSeen": "2023-09-01",
+      "sources": [
+        "https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web",
+        "https://darkvisitors.com/agents/claudebot"
+      ]
+    },
+    {
+      "pattern": "Claude-Web",
+      "matchType": "prefix",
+      "agentName": "Claude-Web",
+      "operator": "Anthropic",
+      "operatorUrl": "https://www.anthropic.com",
+      "category": "interactive-agent",
+      "description": "Claude's web browsing capability when accessing pages on behalf of users",
+      "verificationSupport": false,
+      "firstSeen": "2023-10-01",
+      "sources": [
+        "https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web"
+      ]
+    },
+    {
+      "pattern": "anthropic-ai",
+      "matchType": "prefix",
+      "agentName": "anthropic-ai",
+      "operator": "Anthropic",
+      "operatorUrl": "https://www.anthropic.com",
+      "category": "training-crawler",
+      "description": "Older Anthropic training crawler user-agent string",
+      "verificationSupport": false,
+      "firstSeen": "2023-01-01",
+      "sources": [
+        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
+      ]
+    },
+    {
+      "pattern": "Claude-SearchBot",
+      "matchType": "prefix",
+      "agentName": "Claude-SearchBot",
+      "operator": "Anthropic",
+      "operatorUrl": "https://www.anthropic.com",
+      "category": "search-bot",
+      "description": "Anthropic's search bot for Claude web search citations",
+      "verificationSupport": false,
+      "firstSeen": "2024-06-01",
+      "sources": [
+        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
+      ]
+    },
+    {
+      "pattern": "PerplexityBot",
+      "matchType": "prefix",
+      "agentName": "PerplexityBot",
+      "operator": "Perplexity AI",
+      "operatorUrl": "https://www.perplexity.ai",
+      "category": "search-bot",
+      "description": "Perplexity's crawler for real-time search and citation",
+      "verificationSupport": false,
+      "firstSeen": "2023-03-01",
+      "sources": [
+        "https://docs.perplexity.ai/docs/perplexitybot",
+        "https://darkvisitors.com/agents/perplexitybot"
+      ]
+    },
+    {
+      "pattern": "Google-Extended",
+      "matchType": "exact",
+      "agentName": "Google-Extended",
+      "operator": "Google",
+      "operatorUrl": "https://www.google.com",
+      "category": "training-crawler",
+      "description": "Google's crawler for Gemini/Bard AI training data. Does NOT affect Google Search rankings.",
+      "verificationSupport": false,
+      "firstSeen": "2023-07-01",
+      "sources": [
+        "https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers",
+        "https://darkvisitors.com/agents/google-extended"
+      ]
+    },
+    {
+      "pattern": "GoogleAgent-URLContext",
+      "matchType": "prefix",
+      "agentName": "Gemini CLI",
+      "operator": "Google",
+      "operatorUrl": "https://www.google.com",
+      "category": "interactive-agent",
+      "description": "Gemini CLI tool's web fetching user-agent. Does NOT send Accept: text/markdown.",
+      "verificationSupport": false,
+      "firstSeen": "2025-05-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "Google-CloudVertexBot",
+      "matchType": "prefix",
+      "agentName": "Google Cloud Vertex AI Bot",
+      "operator": "Google",
+      "operatorUrl": "https://cloud.google.com",
+      "category": "interactive-agent",
+      "description": "Google Cloud Vertex AI agent web access",
+      "verificationSupport": false,
+      "firstSeen": "2024-01-01",
+      "sources": [
+        "https://developers.cloudflare.com/ai-crawl-control/reference/bots/"
+      ]
+    },
+    {
+      "pattern": "Googlebot",
+      "matchType": "prefix",
+      "agentName": "Googlebot",
+      "operator": "Google",
+      "operatorUrl": "https://www.google.com",
+      "category": "search-bot",
+      "description": "Google's main search crawler. Also used for Gemini's real-time answers.",
+      "verificationSupport": true,
+      "firstSeen": "1998-01-01",
+      "sources": [
+        "https://developers.google.com/search/docs/crawling-indexing/googlebot"
+      ]
+    },
+    {
+      "pattern": "Bingbot",
+      "matchType": "prefix",
+      "agentName": "Bingbot",
+      "operator": "Microsoft",
+      "operatorUrl": "https://www.microsoft.com",
+      "category": "search-bot",
+      "description": "Microsoft Bing's crawler. Used by Copilot for search-grounded answers.",
+      "verificationSupport": true,
+      "firstSeen": "2010-01-01",
+      "sources": [
+        "https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0"
+      ]
+    },
+    {
+      "pattern": "Applebot",
+      "matchType": "prefix",
+      "agentName": "Applebot",
+      "operator": "Apple",
+      "operatorUrl": "https://www.apple.com",
+      "category": "search-bot",
+      "description": "Apple's web crawler for Siri, Spotlight, and Safari suggestions",
+      "verificationSupport": false,
+      "firstSeen": "2015-01-01",
+      "sources": [
+        "https://support.apple.com/en-us/111898"
+      ]
+    },
+    {
+      "pattern": "Applebot-Extended",
+      "matchType": "exact",
+      "agentName": "Applebot-Extended",
+      "operator": "Apple",
+      "operatorUrl": "https://www.apple.com",
+      "category": "training-crawler",
+      "description": "Apple's AI training data crawler for Apple Intelligence features",
+      "verificationSupport": false,
+      "firstSeen": "2024-07-01",
+      "sources": [
+        "https://support.apple.com/en-us/111898"
+      ]
+    },
+    {
+      "pattern": "CCBot",
+      "matchType": "prefix",
+      "agentName": "CCBot",
+      "operator": "Common Crawl",
+      "operatorUrl": "https://commoncrawl.org",
+      "category": "training-crawler",
+      "description": "Common Crawl's bot. Provides training data used by many AI models including GPT, Claude, Llama.",
+      "verificationSupport": false,
+      "firstSeen": "2012-01-01",
+      "sources": [
+        "https://commoncrawl.org/big-picture/frequently-asked-questions"
+      ]
+    },
+    {
+      "pattern": "Bytespider",
+      "matchType": "prefix",
+      "agentName": "Bytespider",
+      "operator": "ByteDance",
+      "operatorUrl": "https://www.bytedance.com",
+      "category": "training-crawler",
+      "description": "ByteDance's crawler for AI training data (TikTok/Douyin AI features)",
+      "verificationSupport": false,
+      "firstSeen": "2023-01-01",
+      "sources": [
+        "https://darkvisitors.com/agents/bytespider"
+      ]
+    },
+    {
+      "pattern": "Meta-ExternalAgent",
+      "matchType": "prefix",
+      "agentName": "Meta External Agent",
+      "operator": "Meta",
+      "operatorUrl": "https://www.meta.com",
+      "category": "training-crawler",
+      "description": "Meta's crawler for Llama model training data",
+      "verificationSupport": false,
+      "firstSeen": "2023-07-01",
+      "sources": [
+        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
+      ]
+    },
+    {
+      "pattern": "Amazonbot",
+      "matchType": "prefix",
+      "agentName": "Amazonbot",
+      "operator": "Amazon",
+      "operatorUrl": "https://www.amazon.com",
+      "category": "training-crawler",
+      "description": "Amazon's web crawler for Alexa AI and Amazon Titan training",
+      "verificationSupport": false,
+      "firstSeen": "2023-04-01",
+      "sources": [
+        "https://developer.amazon.com/support/amazonbot"
+      ]
+    },
+    {
+      "pattern": "PetalBot",
+      "matchType": "prefix",
+      "agentName": "PetalBot",
+      "operator": "Huawei",
+      "operatorUrl": "https://www.huawei.com",
+      "category": "training-crawler",
+      "description": "Huawei's search and AI training crawler",
+      "verificationSupport": false,
+      "firstSeen": "2020-01-01",
+      "sources": [
+        "https://darkvisitors.com/agents/petalbot"
+      ]
+    },
+    {
+      "pattern": "Diffbot",
+      "matchType": "prefix",
+      "agentName": "Diffbot",
+      "operator": "Diffbot",
+      "operatorUrl": "https://www.diffbot.com",
+      "category": "training-crawler",
+      "description": "Diffbot's AI-powered web scraper for knowledge graphs and AI training",
+      "verificationSupport": false,
+      "firstSeen": "2012-01-01",
+      "sources": [
+        "https://www.diffbot.com/bots"
+      ]
+    },
+    {
+      "pattern": "AI2Bot",
+      "matchType": "prefix",
+      "agentName": "AI2Bot",
+      "operator": "Allen Institute for AI",
+      "operatorUrl": "https://allenai.org",
+      "category": "training-crawler",
+      "description": "Allen Institute for AI's web crawler for academic AI research datasets",
+      "verificationSupport": false,
+      "firstSeen": "2023-01-01",
+      "sources": [
+        "https://darkvisitors.com/agents/ai2bot"
+      ]
+    },
+    {
+      "pattern": "cohere-ai",
+      "matchType": "prefix",
+      "agentName": "Cohere AI Bot",
+      "operator": "Cohere",
+      "operatorUrl": "https://cohere.com",
+      "category": "training-crawler",
+      "description": "Cohere's crawler for training their language models",
+      "verificationSupport": false,
+      "firstSeen": "2023-05-01",
+      "sources": [
+        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
+      ]
+    },
+    {
+      "pattern": "YouBot",
+      "matchType": "prefix",
+      "agentName": "YouBot",
+      "operator": "You.com",
+      "operatorUrl": "https://you.com",
+      "category": "search-bot",
+      "description": "You.com's AI search crawler",
+      "verificationSupport": false,
+      "firstSeen": "2022-01-01",
+      "sources": [
+        "https://about.you.com/youbot"
+      ]
+    },
+    {
+      "pattern": "DuckDuckBot",
+      "matchType": "prefix",
+      "agentName": "DuckDuckBot",
+      "operator": "DuckDuckGo",
+      "operatorUrl": "https://duckduckgo.com",
+      "category": "search-bot",
+      "description": "DuckDuckGo's search crawler. Used by DuckAssist AI answers.",
+      "verificationSupport": false,
+      "firstSeen": "2010-01-01",
+      "sources": [
+        "https://duckduckgo.com/duckduckbot"
+      ]
+    },
+    {
+      "pattern": "DuckAssistBot",
+      "matchType": "prefix",
+      "agentName": "DuckAssistBot",
+      "operator": "DuckDuckGo",
+      "operatorUrl": "https://duckduckgo.com",
+      "category": "search-bot",
+      "description": "DuckDuckGo's DuckAssist AI answer crawler",
+      "verificationSupport": false,
+      "firstSeen": "2023-03-01",
+      "sources": [
+        "https://help.duckduckgo.com/duckduckgo-help-pages/results/duckassist"
+      ]
+    },
+    {
+      "pattern": "colly - https://github.com/gocolly/colly",
+      "matchType": "prefix",
+      "agentName": "Windsurf (via colly)",
+      "operator": "Windsurf (Codeium)",
+      "operatorUrl": "https://windsurf.com",
+      "category": "interactive-agent",
+      "description": "Windsurf's web fetch tool. Uses the colly Go scraping framework. Does NOT send Accept: text/markdown.",
+      "verificationSupport": false,
+      "firstSeen": "2025-01-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "axios/",
+      "matchType": "prefix",
+      "agentName": "Claude Code WebFetch",
+      "operator": "Anthropic",
+      "operatorUrl": "https://www.anthropic.com",
+      "category": "interactive-agent",
+      "description": "Claude Code's WebFetch tool uses axios. DOES send Accept: text/markdown. Key UA: axios/1.x.x",
+      "verificationSupport": false,
+      "firstSeen": "2024-10-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/",
+      "matchType": "prefix",
+      "agentName": "Cursor WebFetch",
+      "operator": "Anysphere",
+      "operatorUrl": "https://cursor.com",
+      "category": "interactive-agent",
+      "description": "Cursor's WebFetch tool. DOES send Accept: text/markdown with quality factors. Uses Chrome-based UA.",
+      "verificationSupport": false,
+      "firstSeen": "2024-06-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "Mozilla/5.0 (compatible; OpenAI-Codex",
+      "matchType": "prefix",
+      "agentName": "OpenAI Codex",
+      "operator": "OpenAI",
+      "operatorUrl": "https://openai.com",
+      "category": "interactive-agent",
+      "description": "OpenAI Codex agent. Does NOT send Accept: text/markdown. Uses ChatGPT-User UA suffix.",
+      "verificationSupport": false,
+      "firstSeen": "2025-03-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "Code/",
+      "matchType": "prefix",
+      "agentName": "GitHub Copilot",
+      "operator": "GitHub / Microsoft",
+      "operatorUrl": "https://github.com/features/copilot",
+      "category": "interactive-agent",
+      "description": "GitHub Copilot's web fetch tool. Electron-based UA (VS Code). Does NOT send Accept: text/markdown.",
+      "verificationSupport": false,
+      "firstSeen": "2024-09-01",
+      "sources": [
+        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
+      ]
+    },
+    {
+      "pattern": "python-requests/",
+      "matchType": "prefix",
+      "agentName": "Python Requests (generic agent)",
+      "operator": "Various",
+      "operatorUrl": null,
+      "category": "interactive-agent",
+      "description": "Python requests library. Commonly used in automated agents and LangChain-based tools. Low confidence signal.",
+      "verificationSupport": false,
+      "firstSeen": "2011-01-01",
+      "sources": [
+        "https://docs.python-requests.org"
+      ]
+    },
+    {
+      "pattern": "python-httpx/",
+      "matchType": "prefix",
+      "agentName": "Python HTTPX (generic agent)",
+      "operator": "Various",
+      "operatorUrl": null,
+      "category": "interactive-agent",
+      "description": "Python httpx library. Used by many modern AI agent frameworks. Low confidence signal.",
+      "verificationSupport": false,
+      "firstSeen": "2019-01-01",
+      "sources": []
+    },
+    {
+      "pattern": "Scrapy/",
+      "matchType": "prefix",
+      "agentName": "Scrapy",
+      "operator": "Various",
+      "operatorUrl": "https://scrapy.org",
+      "category": "training-crawler",
+      "description": "Scrapy web scraping framework. Commonly used for content collection pipelines.",
+      "verificationSupport": false,
+      "firstSeen": "2008-01-01",
+      "sources": [
+        "https://docs.scrapy.org"
+      ]
+    }
+  ]
+}

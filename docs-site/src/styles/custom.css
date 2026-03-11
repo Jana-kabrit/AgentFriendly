@@ -1,0 +1,28 @@
+/* AgentFriendly Docs — custom brand styles */
+:root {
+  --sl-color-accent-low: #0d2340;
+  --sl-color-accent: #0057b8;
+  --sl-color-accent-high: #4da6ff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #e6edf3;
+  --sl-color-gray-2: #8b949e;
+  --sl-color-gray-4: #30363d;
+  --sl-color-gray-5: #21262d;
+  --sl-color-gray-6: #161b22;
+  --sl-color-black: #010409;
+  --sl-font: "Inter", system-ui, sans-serif;
+}
+
+/* Agent tier badges in docs */
+.tier-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--sl-font-mono, monospace);
+}
+.tier-human { background: #374151; color: #d1d5db; }
+.tier-suspected { background: #78350f; color: #fcd34d; }
+.tier-known { background: #0c4a6e; color: #7dd3fc; }
+.tier-verified { background: #064e3b; color: #6ee7b7; }

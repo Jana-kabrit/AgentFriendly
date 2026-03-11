@@ -1,0 +1,49 @@
+{
+  "name": "@agentfriendly/nuxt",
+  "version": "0.1.0",
+  "description": "Nuxt 3 module for @agentfriendly — server middleware and composables",
+  "type": "module",
+  "main": "./dist/module.cjs",
+  "module": "./dist/module.mjs",
+  "types": "./dist/types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agentfriendly/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@nuxt/kit": "^3.21.1",
+    "@nuxt/schema": "^3.21.1",
+    "@types/node": "^22.0.0",
+    "h3": "^1.15.5",
+    "nuxt": "^3.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "nuxt": ">=3.0.0"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt3",
+    "ai",
+    "agent",
+    "middleware"
+  ],
+  "license": "MIT"
+}

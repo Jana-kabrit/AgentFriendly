@@ -1,0 +1,46 @@
+{
+  "name": "@agentfriendly/cli",
+  "version": "0.1.0",
+  "description": "CLI for @agentfriendly — init, validate, test-detection, preview",
+  "type": "module",
+  "bin": {
+    "agentfriendly": "./dist/bin/agentfriendly.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "vitest run",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agentfriendly/core": "workspace:*",
+    "@agentfriendly/ua-database": "workspace:*",
+    "@inquirer/prompts": "^7.0.0",
+    "picocolors": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.15",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "agent",
+    "sdk"
+  ],
+  "license": "MIT"
+}
