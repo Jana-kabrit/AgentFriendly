@@ -1,12 +1,13 @@
-import { NextResponse } from "next/server";
-import type { NextRequest, NextMiddleware } from "next/server";
-
 import {
   AgentFriendlyMiddleware,
   agentContextStorage,
   convertResponseToMarkdown,
 } from "@agentfriendly/core";
+import { NextResponse } from "next/server";
+
 import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
+import type { NextRequest, NextMiddleware } from "next/server";
+
 
 /**
  * @agentfriendly/next — Next.js Middleware Adapter
@@ -61,16 +62,16 @@ import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
  */
 function toAgentRequest(req: NextRequest): AgentRequest {
   const headers: Record<string, string> = {};
-  req.headers.forEach((value: string, key: string) => {
+  for (const [key, value] of req.headers.entries()) {
     headers[key.toLowerCase()] = value;
-  });
+  }
 
   const url = req.url;
   const parsed = new URL(url);
   const query: Record<string, string> = {};
-  parsed.searchParams.forEach((value, key) => {
+  for (const [key, value] of parsed.searchParams.entries()) {
     query[key] = value;
-  });
+  }
 
   // Normalize path: lowercase, strip trailing slash (except root)
   const rawPath = parsed.pathname;
@@ -220,10 +221,10 @@ export function withAgentFriendly(
 /** Extract all X-AgentFriendly-* headers from a request, to re-inject into the response. */
 function extractAgentHeaders(headers: Headers): Record<string, string> {
   const result: Record<string, string> = {};
-  headers.forEach((value, key) => {
+  for (const [key, value] of headers.entries()) {
     if (key.startsWith("x-agentfriendly-") || key === "content-signal") {
       result[key] = value;
     }
-  });
+  }
   return result;
 }

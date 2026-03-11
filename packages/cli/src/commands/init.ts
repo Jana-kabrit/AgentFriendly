@@ -4,11 +4,12 @@
  * Detects the project framework (Next.js, Express, Hono, Nuxt, Astro)
  * and writes a ready-to-use configuration file.
  */
-import { confirm, select, input } from "@inquirer/prompts";
 import { writeFileSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-import { header, success, warn, info, divider, error } from "../utils/output.js";
+import { confirm, select, input } from "@inquirer/prompts";
+
+import { header, success, warn, info, divider } from "../utils/output.js";
 
 type Framework = "next" | "express" | "hono" | "nuxt" | "astro";
 

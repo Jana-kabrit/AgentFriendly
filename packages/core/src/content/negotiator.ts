@@ -1,10 +1,11 @@
 import micromatch from "micromatch";
 
-import type { AgentContext } from "../types/agent-context.js";
-import type { ContentConfig } from "../types/config.js";
-import type { PassthroughResponse } from "../types/agent-response.js";
-
 import { htmlToMarkdown } from "./html-to-markdown.js";
+
+import type { AgentContext } from "../types/agent-context.js";
+import type { PassthroughResponse } from "../types/agent-response.js";
+import type { ContentConfig } from "../types/config.js";
+
 
 /**
  * Layer 2 — Content Negotiator

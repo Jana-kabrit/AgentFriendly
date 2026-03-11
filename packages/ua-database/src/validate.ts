@@ -2,12 +2,10 @@
  * Database validation script — run via `pnpm validate` in the ua-database package.
  * Checks every entry in agents.json against the schema and prints a report.
  */
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 interface ValidationError {

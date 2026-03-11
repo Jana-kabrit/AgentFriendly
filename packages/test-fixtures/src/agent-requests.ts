@@ -1,8 +1,9 @@
 /**
  * Pre-built AgentRequest objects for use in tests.
  */
-import type { AgentRequest } from "@agentfriendly/core";
 import { HEADERS } from "./http-headers.js";
+
+import type { AgentRequest } from "@agentfriendly/core";
 
 export const REQUESTS = {
   humanBrowser: {

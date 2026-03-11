@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { findMatchingPricing, generate402Response } from "../../src/monetization/x402.js";
+
 import type { MonetizationConfig, X402RouteConfig } from "../../src/types/config.js";
 
 const SAMPLE_ROUTES: Record<string, X402RouteConfig> = {

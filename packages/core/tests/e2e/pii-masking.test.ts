@@ -5,9 +5,11 @@
  * including scope-based unmasking via multi-tenancy tokens.
  */
 import { describe, it, expect } from "vitest";
+
 import { maskTextContent, maskJsonFields } from "../../src/privacy/masker.js";
-import type { ResolvedConfig } from "../../src/types/config.js";
+
 import type { AgentContext } from "../../src/types/agent-context.js";
+import type { ResolvedConfig } from "../../src/types/config.js";
 
 function makeAgentContext(scopes: string[] = []): AgentContext {
   return {

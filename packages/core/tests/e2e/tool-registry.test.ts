@@ -4,7 +4,9 @@
  * Tests tool registration, versioning, invocation, and access control.
  */
 import { describe, it, expect } from "vitest";
+
 import { ToolRegistry } from "../../src/tools/registry.js";
+
 import type { ToolDefinition } from "../../src/types/tool-definition.js";
 
 function makeSearchTool(version = "1.0.0"): ToolDefinition {

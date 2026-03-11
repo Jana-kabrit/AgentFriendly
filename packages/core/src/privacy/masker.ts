@@ -1,7 +1,8 @@
-import type { PrivacyConfig } from "../types/config.js";
-import type { AgentContext } from "../types/agent-context.js";
-
 import { BUILT_IN_PII_PATTERNS } from "./pii-patterns.js";
+
+import type { AgentContext } from "../types/agent-context.js";
+import type { PrivacyConfig } from "../types/config.js";
+
 
 /**
  * Layer 5 — PII Masker

@@ -1,11 +1,12 @@
-import type { MiddlewareNext, APIContext } from "astro";
 
 import {
   AgentFriendlyMiddleware,
   agentContextStorage,
   convertResponseToMarkdown,
 } from "@agentfriendly/core";
+
 import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
+import type { MiddlewareNext, APIContext } from "astro";
 
 /**
  * @agentfriendly/astro — Astro Middleware
@@ -45,15 +46,15 @@ import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
  */
 function toAgentRequest(context: APIContext): AgentRequest {
   const headers: Record<string, string> = {};
-  context.request.headers.forEach((value: string, key: string) => {
+  for (const [key, value] of context.request.headers.entries()) {
     headers[key.toLowerCase()] = value;
-  });
+  }
 
   const url = new URL(context.request.url);
   const query: Record<string, string> = {};
-  url.searchParams.forEach((value: string, key: string) => {
+  for (const [key, value] of url.searchParams.entries()) {
     query[key] = value;
-  });
+  }
 
   const rawPath = url.pathname;
   const path =

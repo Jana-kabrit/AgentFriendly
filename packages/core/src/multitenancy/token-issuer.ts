@@ -1,5 +1,6 @@
-import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 import { randomUUID } from "node:crypto";
+
+import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 
 import type { TenantContext } from "../types/agent-context.js";
 import type { MultiTenancyConfig } from "../types/config.js";

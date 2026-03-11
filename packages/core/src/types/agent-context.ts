@@ -1,6 +1,6 @@
+import type { TrustTier, TierResolution, DetectionSignal } from "./trust-tier.js";
 import type { AgentEntry, AgentCategory } from "@agentfriendly/ua-database";
 
-import type { TrustTier, TierResolution, DetectionSignal } from "./trust-tier.js";
 
 /**
  * Verified identity of an agent, available only when the trust tier is "verified-agent".

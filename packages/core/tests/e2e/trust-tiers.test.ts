@@ -5,7 +5,9 @@
  * request patterns, covering all detection signal combinations.
  */
 import { describe, it, expect } from "vitest";
+
 import { AgentFriendlyMiddleware } from "../../src/middleware.js";
+
 import type { AgentRequest } from "../../src/types/agent-request.js";
 
 function makeRequest(override: Partial<AgentRequest> = {}): AgentRequest {

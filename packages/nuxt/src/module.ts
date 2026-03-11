@@ -21,7 +21,7 @@ import type { AgentFriendlyConfig } from "@agentfriendly/core";
  * })
  * ```
  */
-export interface ModuleOptions extends AgentFriendlyConfig {}
+export type ModuleOptions = AgentFriendlyConfig;
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {

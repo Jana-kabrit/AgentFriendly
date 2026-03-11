@@ -1,10 +1,11 @@
-import type { Context, MiddlewareHandler } from "hono";
 
 import {
   AgentFriendlyMiddleware,
   convertResponseToMarkdown,
 } from "@agentfriendly/core";
+
 import type { AgentFriendlyConfig, AgentRequest, AgentContext } from "@agentfriendly/core";
+import type { Context, MiddlewareHandler } from "hono";
 
 /**
  * @agentfriendly/hono — Hono Middleware Adapter
@@ -51,16 +52,16 @@ export function getAgentContext(c: Context): AgentContext | null {
  */
 function toAgentRequest(c: Context): AgentRequest {
   const headers: Record<string, string> = {};
-  c.req.raw.headers.forEach((value: string, key: string) => {
+  for (const [key, value] of c.req.raw.headers.entries()) {
     headers[key.toLowerCase()] = value;
-  });
+  }
 
   const url = c.req.url;
   const parsed = new URL(url);
   const query: Record<string, string> = {};
-  parsed.searchParams.forEach((value: string, key: string) => {
+  for (const [key, value] of parsed.searchParams.entries()) {
     query[key] = value;
-  });
+  }
 
   const rawPath = parsed.pathname;
   const path = rawPath.length > 1 && rawPath.endsWith("/")

@@ -105,7 +105,7 @@ async function readabilityConvert(
 ): Promise<MarkdownConversionResult> {
   // Dynamic imports — these are optional dependencies. If not installed, the
   // simpleFallbackConvert is used instead. The try/catch in the caller handles this.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const [jsdomMod, readabilityMod, turndownMod] = await Promise.all([
     import("jsdom") as Promise<unknown>,
     import("@mozilla/readability") as Promise<unknown>,
@@ -117,9 +117,9 @@ async function readabilityConvert(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { Readability } = readabilityMod as any;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dom = new JSDOM(html, { url }) as any;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+   
   const document = dom.window.document;
 
   // Strip noise selectors before Readability runs
@@ -135,7 +135,7 @@ async function readabilityConvert(
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+   
   const reader = new Readability(document) as { parse(): { title: string; content: string } | null };
   const article = reader.parse();
 
@@ -145,9 +145,9 @@ async function readabilityConvert(
   // Handle both ESM default export and CommonJS module.exports patterns for turndown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const TdMod = turndownMod as any;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+   
   const TurndownServiceClass = TdMod?.default ?? TdMod;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+   
   const turndown = new TurndownServiceClass({
     headingStyle: "atx",
     bulletListMarker: "-",
@@ -177,7 +177,7 @@ async function readabilityConvert(
  * Less accurate than Readability but works in any JavaScript environment.
  */
 function simpleFallbackConvert(html: string): MarkdownConversionResult {
-  let text = html
+  const text = html
     // Remove complete tags and their content for noise elements
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")

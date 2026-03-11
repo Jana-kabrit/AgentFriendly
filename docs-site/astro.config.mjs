@@ -1,10 +1,12 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://jana-kabrit.github.io",
   base: "/AgentFriendly/",
   integrations: [
+    sitemap(),
     starlight({
       title: "AgentFriendly",
       description:

@@ -1,8 +1,8 @@
 import micromatch from "micromatch";
 
 import type { AgentContext } from "../types/agent-context.js";
-import type { MonetizationConfig, X402RouteConfig } from "../types/config.js";
 import type { HandledResponse } from "../types/agent-response.js";
+import type { MonetizationConfig, X402RouteConfig } from "../types/config.js";
 
 /**
  * Layer 7 — x402 Payment Middleware
@@ -97,7 +97,7 @@ export function findMatchingPricing(
 export function generate402Response(
   config: MonetizationConfig,
   pricing: X402RouteConfig,
-  path: string,
+  _path: string,
 ): HandledResponse {
   const walletAddress = pricing.to ?? config.walletAddress ?? "";
   const network = pricing.network ?? config.network ?? "base-mainnet";

@@ -1,4 +1,4 @@
-import type { AgentFriendlyConfig, LlmsTxtConfig, ContentSignalsConfig } from "../types/config.js";
+import type { LlmsTxtConfig, ContentSignalsConfig } from "../types/config.js";
 import type { ToolDefinition } from "../types/tool-definition.js";
 
 /**

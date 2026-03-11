@@ -46,9 +46,7 @@ function denyResult(reason: string): PolicyEvaluationResult {
   return { decision: "deny", reason, statusCode: 403 };
 }
 
-function rateLimitResult(reason: string): PolicyEvaluationResult {
-  return { decision: "rate-limit", reason, statusCode: 429 };
-}
+// Reserved for rate-limit policy: return { decision: "rate-limit", reason, statusCode: 429 };
 
 /**
  * Evaluate the access policy for an incoming agent request.

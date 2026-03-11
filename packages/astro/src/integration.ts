@@ -1,6 +1,6 @@
+import type { AgentFriendlyConfig } from "@agentfriendly/core";
 import type { AstroIntegration } from "astro";
 
-import type { AgentFriendlyConfig } from "@agentfriendly/core";
 
 /**
  * @agentfriendly/astro — Astro Integration

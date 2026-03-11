@@ -7,7 +7,9 @@
  * - Valid payment → HTTP 200 passthrough
  */
 import { describe, it, expect } from "vitest";
+
 import { AgentFriendlyMiddleware } from "../../src/middleware.js";
+
 import type { AgentRequest } from "../../src/types/agent-request.js";
 
 const WALLET = "0xAbCd1234567890abcdef1234567890abcdef1234";

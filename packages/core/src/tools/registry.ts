@@ -1,8 +1,9 @@
-import type { ToolDefinition } from "../types/tool-definition.js";
+import { meetsMinimumTier } from "../access/policy-engine.js";
+
 import type { AgentContext } from "../types/agent-context.js";
+import type { ToolDefinition } from "../types/tool-definition.js";
 import type { TrustTier } from "../types/trust-tier.js";
 
-import { meetsMinimumTier } from "../access/policy-engine.js";
 
 /**
  * Layer 6 — Tool Registry

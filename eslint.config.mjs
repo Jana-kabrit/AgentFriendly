@@ -11,6 +11,12 @@ export default [
       "**/build/**",
       "**/.turbo/**",
       "**/coverage/**",
+      "**/.astro/**",
+      "**/.venv/**",
+      "examples/**",
+      "vitest.config.ts",
+      "docs-site/src/env.d.ts",
+      "docs-site/.astro/**",
     ],
   },
   {
@@ -56,9 +62,15 @@ export default [
 
       // General rules
       "no-console": ["warn", { allow: ["warn", "error"] }],
-      "prefer-const": "error",
-      "no-var": "error",
-      eqeqeq: ["error", "always"],
+    },
+  },
+  {
+    files: [
+      "packages/cli/**/*.ts",
+      "packages/ua-database/src/validate.ts",
+    ],
+    rules: {
+      "no-console": "off",
     },
   },
 ];

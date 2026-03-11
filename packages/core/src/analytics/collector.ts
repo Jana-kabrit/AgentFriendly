@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
+import type { AnalyticsAdapter } from "./adapter.js";
 import type { AgentContext } from "../types/agent-context.js";
-import type { AnalyticsConfig } from "../types/config.js";
 import type {
   AnalyticsEvent,
   PageViewEvent,
@@ -12,9 +12,9 @@ import type {
   LlmReferralEvent,
   RateLimitedEvent,
 } from "../types/analytics-event.js";
+import type { AnalyticsConfig } from "../types/config.js";
 import type { TrustTier } from "../types/trust-tier.js";
 
-import type { AnalyticsAdapter } from "./adapter.js";
 
 /**
  * Layer 3 — Analytics Collector

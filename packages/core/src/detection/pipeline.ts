@@ -1,15 +1,16 @@
 import { randomUUID } from "node:crypto";
 
+import { analyzeAcceptHeader } from "./signal-accept-header.js";
+import { runHeaderHeuristics } from "./signal-header-heuristics.js";
+import { checkUaDatabase } from "./signal-ua-database.js";
+import { verifyClawdentityToken } from "./verifier-clawdentity.js";
+import { verifyRfc9421Signature } from "./verifier-rfc9421.js";
+
 import type { AgentContext, AgentContextBuilder } from "../types/agent-context.js";
 import type { AgentRequest } from "../types/agent-request.js";
 import type { DetectionConfig } from "../types/config.js";
 import type { DetectionSignal, TrustTier } from "../types/trust-tier.js";
 
-import { analyzeAcceptHeader } from "./signal-accept-header.js";
-import { checkUaDatabase } from "./signal-ua-database.js";
-import { runHeaderHeuristics } from "./signal-header-heuristics.js";
-import { verifyRfc9421Signature } from "./verifier-rfc9421.js";
-import { verifyClawdentityToken } from "./verifier-clawdentity.js";
 
 /**
  * Layer 0 — Detection Pipeline

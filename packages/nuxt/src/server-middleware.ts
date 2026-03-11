@@ -1,4 +1,8 @@
-import type { H3Event } from "h3";
+import {
+  AgentFriendlyMiddleware,
+  agentContextStorage,
+  convertResponseToMarkdown,
+} from "@agentfriendly/core";
 import {
   defineEventHandler,
   getRequestHeader,
@@ -8,12 +12,8 @@ import {
   setResponseStatus,
 } from "h3";
 
-import {
-  AgentFriendlyMiddleware,
-  agentContextStorage,
-  convertResponseToMarkdown,
-} from "@agentfriendly/core";
 import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
+import type { EventHandler, H3Event } from "h3";
 
 /**
  * @agentfriendly/nuxt — Nuxt 3 Server Middleware
@@ -63,9 +63,9 @@ function toAgentRequest(event: H3Event): AgentRequest {
   }
 
   const query: Record<string, string> = {};
-  url.searchParams.forEach((value: string, key: string) => {
+  for (const [key, value] of url.searchParams.entries()) {
     query[key] = value;
-  });
+  }
 
   const rawPath = url.pathname;
   const path =
@@ -89,7 +89,7 @@ function toAgentRequest(event: H3Event): AgentRequest {
  * Create an h3 event handler that runs the AgentFriendly pipeline.
  * Attach this as a server middleware in Nuxt via the module.
  */
-export function createH3Middleware(config: AgentFriendlyConfig = {}) {
+export function createH3Middleware(config: AgentFriendlyConfig = {}): EventHandler {
   const sdk = new AgentFriendlyMiddleware(config);
 
   return defineEventHandler(async (event: H3Event) => {
@@ -140,7 +140,7 @@ export function createH3Middleware(config: AgentFriendlyConfig = {}) {
  */
 export function defineAgentFriendlyHandler(
   handler: (event: H3Event) => Promise<string | Record<string, unknown>>,
-) {
+): EventHandler {
   return defineEventHandler(async (event: H3Event) => {
     const result = await handler(event);
 

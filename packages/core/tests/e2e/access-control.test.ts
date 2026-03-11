@@ -4,7 +4,9 @@
  * Verifies route deny, allow, per-operator policies, and rate limiting.
  */
 import { describe, it, expect, beforeEach } from "vitest";
+
 import { AgentFriendlyMiddleware } from "../../src/middleware.js";
+
 import type { AgentRequest } from "../../src/types/agent-request.js";
 
 function agentRequest(path: string, ua = "GPTBot/1.0"): AgentRequest {

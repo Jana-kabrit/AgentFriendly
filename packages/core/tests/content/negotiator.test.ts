@@ -5,8 +5,8 @@ import {
   shouldServeMarkdown,
   isExcludedFromMarkdown,
 } from "../../src/content/negotiator.js";
+
 import type { AgentContext } from "../../src/types/agent-context.js";
-import type { ContentConfig } from "../../src/types/config.js";
 
 function makeContext(overrides: Partial<AgentContext>): AgentContext {
   return {

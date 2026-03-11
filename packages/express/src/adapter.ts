@@ -1,11 +1,12 @@
-import type { Request, Response, NextFunction, RequestHandler } from "express";
 
 import {
   AgentFriendlyMiddleware,
   agentContextStorage,
   convertResponseToMarkdown,
 } from "@agentfriendly/core";
+
 import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
+import type { Request, Response, NextFunction, RequestHandler } from "express";
 
 /**
  * @agentfriendly/express — Express Middleware Adapter

@@ -5,6 +5,7 @@
  * tenant context injection, and session revocation.
  */
 import { describe, it, expect } from "vitest";
+
 import {
   AgentFriendlyMiddleware,
 } from "../../src/middleware.js";
@@ -12,6 +13,7 @@ import {
   issueDelegationToken,
   revokeSession as revokeDelegationSession,
 } from "../../src/multitenancy/token-issuer.js";
+
 import type { AgentRequest } from "../../src/types/agent-request.js";
 
 const SECRET = "super-secret-test-key-32chars-min-1234";

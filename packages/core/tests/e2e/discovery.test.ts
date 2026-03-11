@@ -5,7 +5,9 @@
  * the correct paths, with correct Content-Type headers.
  */
 import { describe, it, expect } from "vitest";
+
 import { AgentFriendlyMiddleware } from "../../src/middleware.js";
+
 import type { AgentRequest } from "../../src/types/agent-request.js";
 
 function makeRequest(path: string, extraHeaders: Record<string, string> = {}): AgentRequest {

@@ -9,15 +9,16 @@
  *   preview [url]    Preview what an agent sees on a URL
  */
 
-import { parseArgs } from "node:util";
 import { resolve } from "node:path";
+import { parseArgs } from "node:util";
 
 import pc from "picocolors";
-import { header, divider, info } from "../utils/output.js";
+
 import { runInit } from "../commands/init.js";
-import { runValidate } from "../commands/validate.js";
-import { runTestDetection } from "../commands/test_detection.js";
 import { runPreview } from "../commands/preview.js";
+import { runTestDetection } from "../commands/test_detection.js";
+import { runValidate } from "../commands/validate.js";
+import { header, divider, info } from "../utils/output.js";
 
 const VERSION = "0.1.0";
 

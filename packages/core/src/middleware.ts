@@ -1,11 +1,14 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 
-import type { AgentContext } from "./types/agent-context.js";
-import type { AgentRequest } from "./types/agent-request.js";
-import type { AgentResponse } from "./types/agent-response.js";
-import type { AgentFriendlyConfig, ResolvedConfig } from "./types/config.js";
-import type { ToolDefinition } from "./types/tool-definition.js";
-
+import { evaluatePolicy } from "./access/policy-engine.js";
+import { InMemoryRateLimiter, getRateLimitKey } from "./access/rate-limiter.js";
+import { resolveConfig } from "./config.js";
+import {
+  shouldServeMarkdown,
+  isExcludedFromMarkdown,
+  buildContentSignalHeader,
+  buildAgentResponseHeaders,
+} from "./content/negotiator.js";
 import { runDetectionPipeline } from "./detection/pipeline.js";
 import {
   generateLlmsTxt,
@@ -15,20 +18,17 @@ import {
   isDiscoveryPath,
   serveDiscoveryFile,
 } from "./discovery/index.js";
-import type { DiscoveryFiles } from "./discovery/router.js";
-import {
-  shouldServeMarkdown,
-  isExcludedFromMarkdown,
-  buildContentSignalHeader,
-  buildAgentResponseHeaders,
-} from "./content/negotiator.js";
-import { evaluatePolicy } from "./access/policy-engine.js";
-import { InMemoryRateLimiter, getRateLimitKey } from "./access/rate-limiter.js";
 import { checkMonetization } from "./monetization/x402.js";
 import { validateDelegationToken } from "./multitenancy/token-issuer.js";
-import { resolveConfig } from "./config.js";
 import { ToolRegistry } from "./tools/registry.js";
 import { InMemoryTaskQueue } from "./tools/task-queue.js";
+
+import type { DiscoveryFiles } from "./discovery/router.js";
+import type { AgentContext } from "./types/agent-context.js";
+import type { AgentRequest } from "./types/agent-request.js";
+import type { AgentResponse } from "./types/agent-response.js";
+import type { AgentFriendlyConfig, ResolvedConfig } from "./types/config.js";
+import type { ToolDefinition } from "./types/tool-definition.js";
 
 /**
  * Core Middleware Orchestrator
