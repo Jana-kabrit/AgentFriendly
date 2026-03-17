@@ -27,8 +27,8 @@ Access context in views:
 
 from __future__ import annotations
 
-from django.http import HttpRequest, HttpResponse  # type: ignore[import-untyped]
 from django.conf import settings  # type: ignore[import-untyped]
+from django.http import HttpRequest, HttpResponse  # type: ignore[import-untyped]
 
 from ..config import AgentFriendlyConfig
 from ..content.html_to_markdown import html_to_markdown
@@ -46,9 +46,15 @@ def _load_config_from_settings() -> AgentFriendlyConfig:
 def _dict_to_config(raw: dict) -> AgentFriendlyConfig:
     """Convert a plain settings dict to AgentFriendlyConfig."""
     from ..config import (
-        DetectionConfig, ContentConfig, AccessConfig, AnalyticsConfig,
-        PrivacyConfig, ToolsConfig, MonetizationConfig, MultiTenancyConfig,
+        AccessConfig,
+        AnalyticsConfig,
+        ContentConfig,
+        DetectionConfig,
         DiscoveryConfig,
+        MonetizationConfig,
+        MultiTenancyConfig,
+        PrivacyConfig,
+        ToolsConfig,
     )
 
     def section(name: str, cls):  # type: ignore[no-untyped-def]

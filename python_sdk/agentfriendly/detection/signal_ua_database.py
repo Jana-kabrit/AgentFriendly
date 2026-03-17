@@ -15,7 +15,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..types import AgentEntry, AgentCategory, MatchType, UaMatch
+from ..types import AgentEntry, UaMatch
 
 # ---------------------------------------------------------------------------
 # Load agents.json from the shared data directory

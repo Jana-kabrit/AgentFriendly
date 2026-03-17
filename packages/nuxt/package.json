@@ -30,6 +30,7 @@
     "@nuxt/kit": "^3.21.1",
     "@nuxt/schema": "^3.21.1",
     "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
     "h3": "^1.15.5",
     "nuxt": "^3.0.0",
     "typescript": "^5.5.0",

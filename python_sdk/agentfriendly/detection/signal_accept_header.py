@@ -6,6 +6,7 @@ Mirrors packages/core/src/detection/signal-accept-header.ts
 
 from __future__ import annotations
 
+import contextlib
 from dataclasses import dataclass
 
 
@@ -30,10 +31,8 @@ def parse_accept_header(accept_header: str) -> list[tuple[str, float]]:
         for seg in segments[1:]:
             seg = seg.strip()
             if seg.lower().startswith("q="):
-                try:
+                with contextlib.suppress(ValueError):
                     quality = float(seg[2:])
-                except ValueError:
-                    pass
         if mime_type:
             entries.append((mime_type, quality))
 

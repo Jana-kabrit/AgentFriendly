@@ -62,8 +62,8 @@ def _bs4_convert(
     additional_selectors: list[str],
 ) -> MarkdownConversionResult:
     """Full conversion using BeautifulSoup4 + markdownify."""
-    from bs4 import BeautifulSoup  # type: ignore[import-untyped]
     import markdownify  # type: ignore[import-untyped]
+    from bs4 import BeautifulSoup  # type: ignore[import-untyped]
 
     soup = BeautifulSoup(html, "lxml")
 

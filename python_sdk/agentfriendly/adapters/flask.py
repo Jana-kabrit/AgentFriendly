@@ -30,7 +30,8 @@ from __future__ import annotations
 
 import asyncio
 
-from flask import Flask, g, request as flask_request, Response, make_response  # type: ignore[import-untyped]
+from flask import Flask, Response, g, make_response  # type: ignore[import-untyped]
+from flask import request as flask_request
 
 from ..config import AgentFriendlyConfig
 from ..content.html_to_markdown import html_to_markdown

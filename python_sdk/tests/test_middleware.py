@@ -1,6 +1,7 @@
 """Tests for the core middleware orchestrator"""
 
 import pytest
+
 from agentfriendly import AgentFriendlyConfig, AgentFriendlyMiddleware, DetectionConfig
 from agentfriendly.config import AccessConfig
 

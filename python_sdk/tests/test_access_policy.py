@@ -1,6 +1,5 @@
 """Tests for Layer 4 — Access Control Policy Engine"""
 
-import pytest
 from agentfriendly.access.policy_engine import evaluate_policy, generate_robots_txt_ai_section
 from agentfriendly.config import AccessConfig
 from agentfriendly.types import AgentContext

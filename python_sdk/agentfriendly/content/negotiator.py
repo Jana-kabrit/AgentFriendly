@@ -49,23 +49,18 @@ def should_serve_markdown(
         return True
 
     tier = context.tier
-    if proactive_markdown == "verified":
-        return tier == "verified-agent"
-    elif proactive_markdown == "known":
-        return tier in ("known-agent", "verified-agent")
-    elif proactive_markdown == "suspected":
-        return tier in ("suspected-agent", "known-agent", "verified-agent")
-    else:
-        return False
+    tiers_by_level: dict[str, tuple[str, ...]] = {
+        "verified": ("verified-agent",),
+        "known": ("known-agent", "verified-agent"),
+        "suspected": ("suspected-agent", "known-agent", "verified-agent"),
+    }
+    return tier in tiers_by_level.get(proactive_markdown, ())
 
 
 def is_excluded_from_markdown(path: str, user_excluded: list[str] | None = None) -> bool:
     """Check whether a path should be excluded from markdown conversion."""
     all_patterns = ALWAYS_EXCLUDE_PATTERNS + (user_excluded or [])
-    for pattern in all_patterns:
-        if fnmatch.fnmatch(path, pattern):
-            return True
-    return False
+    return any(fnmatch.fnmatch(path, pattern) for pattern in all_patterns)
 
 
 def build_passthrough_headers(

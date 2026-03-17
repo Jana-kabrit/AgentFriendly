@@ -1,8 +1,7 @@
 """Tests for Layer 5 — PII Masking"""
 
-import pytest
 from agentfriendly.config import PrivacyConfig
-from agentfriendly.privacy.masker import mask_text_content, mask_json_fields
+from agentfriendly.privacy.masker import mask_json_fields, mask_text_content
 from agentfriendly.types import AgentContext
 
 

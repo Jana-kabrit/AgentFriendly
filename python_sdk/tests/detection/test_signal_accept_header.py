@@ -1,6 +1,5 @@
 """Tests for Layer 0 — Accept Header Signal"""
 
-import pytest
 from agentfriendly.detection.signal_accept_header import analyze_accept_header
 
 

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import jwt
@@ -49,7 +49,7 @@ def issue_delegation_token(
         raise ValueError("MultiTenancyConfig.token_secret must be set to issue tokens")
 
     session_id = str(uuid.uuid4())
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     expires_at = now + timedelta(seconds=config.session_ttl_seconds)
 
     payload: dict[str, Any] = {
@@ -107,7 +107,7 @@ async def validate_delegation_token(
     user_id = act.get("sub", "")
     scopes = payload.get("scope", "").split()
     exp = payload.get("exp", 0)
-    expires_at = datetime.fromtimestamp(exp, tz=timezone.utc).isoformat()
+    expires_at = datetime.fromtimestamp(exp, tz=UTC).isoformat()
 
     tenant_context = TenantContext(
         tenant_id=tenant_id,

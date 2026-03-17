@@ -10,16 +10,16 @@ from __future__ import annotations
 from contextvars import ContextVar
 from dataclasses import dataclass
 
+from .access.policy_engine import evaluate_policy
+from .access.rate_limiter import InMemoryRateLimiter, get_rate_limit_key
 from .config import AgentFriendlyConfig
-from .detection.pipeline import run_detection_pipeline
 from .content.negotiator import (
+    build_content_signal_header,
     build_passthrough_headers,
     is_excluded_from_markdown,
     should_serve_markdown,
-    build_content_signal_header,
 )
-from .access.policy_engine import evaluate_policy
-from .access.rate_limiter import InMemoryRateLimiter, get_rate_limit_key
+from .detection.pipeline import run_detection_pipeline
 from .types import AgentContext
 
 # ---------------------------------------------------------------------------

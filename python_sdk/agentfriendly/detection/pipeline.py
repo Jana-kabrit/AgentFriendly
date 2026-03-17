@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import time
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from ..config import DetectionConfig
-from ..types import AgentContext, AgentEntry, TraceEntry, TrustTier, DetectionSignal
+from ..types import AgentContext, AgentEntry, TraceEntry, TrustTier
 from .signal_accept_header import analyze_accept_header
 from .signal_header_heuristics import run_header_heuristics
 from .signal_ua_database import check_ua_database
@@ -134,7 +134,7 @@ async def run_detection_pipeline(
 
     context = AgentContext(
         request_id=str(uuid.uuid4()),
-        received_at=datetime.now(timezone.utc).isoformat(),
+        received_at=datetime.now(UTC).isoformat(),
         tier=tier,
         signals=list(all_signals),  # type: ignore[arg-type]
         is_agent=is_agent,

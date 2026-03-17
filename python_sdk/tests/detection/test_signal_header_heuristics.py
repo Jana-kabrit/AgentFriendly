@@ -1,6 +1,5 @@
 """Tests for Layer 0 — Header Heuristics Signal"""
 
-import pytest
 from agentfriendly.detection.signal_header_heuristics import run_header_heuristics
 
 

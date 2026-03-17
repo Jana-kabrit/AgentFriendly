@@ -1,7 +1,6 @@
 """Tests for Layer 2 — Content Negotiation"""
 
-import pytest
-from agentfriendly.config import ContentConfig, DetectionConfig
+from agentfriendly.config import ContentConfig
 from agentfriendly.content.negotiator import (
     build_content_signal_header,
     is_excluded_from_markdown,

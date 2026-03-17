@@ -5,10 +5,10 @@ Mirrors packages/core/src/discovery/ in the TypeScript SDK.
 """
 
 from .generators import (
-    generate_llms_txt,
     generate_agent_json,
-    generate_webagents_md,
     generate_agent_tools_json,
+    generate_llms_txt,
+    generate_webagents_md,
 )
 from .router import serve_discovery_file
 

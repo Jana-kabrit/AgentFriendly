@@ -8,7 +8,7 @@ Mirrors packages/core/src/discovery/generators.ts
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from ..config import AgentFriendlyConfig
 
@@ -96,7 +96,7 @@ def generate_agent_tools_json(config: AgentFriendlyConfig, site_domain: str = "l
     manifest = {
         "$schema": "https://agentfriendly.dev/schemas/agent-tools.json",
         "version": "1.0.0",
-        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "generatedAt": datetime.now(UTC).isoformat(),
         "site": f"https://{site_domain}",
         "tools": {},
     }

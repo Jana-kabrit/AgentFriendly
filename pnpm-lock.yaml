@@ -118,6 +118,9 @@ importers:
       "@types/node":
         specifier: ^22.0.0
         version: 22.19.15
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       astro:
         specifier: ^4.16.19
         version: 4.16.19(@types/node@22.19.15)(rollup@4.59.0)(terser@5.46.0)(typescript@5.9.3)
@@ -146,6 +149,9 @@ importers:
       "@types/node":
         specifier: ^22.19.15
         version: 22.19.15
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -217,6 +223,9 @@ importers:
       "@types/supertest":
         specifier: ^6.0.0
         version: 6.0.3
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       express:
         specifier: ^5.0.0
         version: 5.2.1
@@ -239,6 +248,9 @@ importers:
       "@types/node":
         specifier: ^22.19.15
         version: 22.19.15
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       hono:
         specifier: ^4.0.0
         version: 4.12.5
@@ -258,6 +270,9 @@ importers:
       "@types/node":
         specifier: ^22.19.15
         version: 22.19.15
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       next:
         specifier: ^15.0.0
         version: 15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -283,6 +298,9 @@ importers:
       "@types/node":
         specifier: ^22.0.0
         version: 22.19.15
+      "@vitest/coverage-v8":
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0))
       h3:
         specifier: ^1.15.5
         version: 1.15.5
@@ -297,6 +315,10 @@ importers:
         version: 2.1.9(@types/node@22.19.15)(jsdom@28.1.0(@noble/hashes@1.8.0))(terser@5.46.0)
 
   packages/test-fixtures:
+    dependencies:
+      "@agentfriendly/core":
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       "@types/node":
         specifier: ^22.0.0

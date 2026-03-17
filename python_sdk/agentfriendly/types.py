@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
+from datetime import UTC
 from typing import Any, Literal
 
 # ---------------------------------------------------------------------------
@@ -162,7 +163,7 @@ class AgentContext:
         method: str,
         path: str,
         headers: dict[str, str],
-    ) -> "AgentContext":
+    ) -> AgentContext:
         """Create a minimal human-classified AgentContext for a request."""
         return cls(
             request_id=str(uuid.uuid4()),
@@ -184,6 +185,6 @@ class AgentContext:
 
 def _now_iso() -> str:
     """Return the current UTC time as an ISO 8601 string."""
-    from datetime import datetime, timezone
+    from datetime import datetime
 
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
