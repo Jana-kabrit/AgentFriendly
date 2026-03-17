@@ -74,6 +74,7 @@
     "@types/micromatch": "^4.0.9",
     "@types/node": "^22.19.15",
     "@types/turndown": "^5.0.4",
+    "@vitest/coverage-v8": "^2.0.0",
     "jsdom": "^28.1.0",
     "turndown": "^7.2.0",
     "typescript": "^5.5.0",

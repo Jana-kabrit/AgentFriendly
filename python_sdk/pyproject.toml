@@ -67,6 +67,9 @@ Homepage = "https://agentfriendly.dev"
 Repository = "https://github.com/Jana-kabrit/AgentFriendly"
 Documentation = "https://docs.agentfriendly.dev"
 
+[tool.hatch.envs.default]
+features = ["dev"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["agentfriendly"]
 
