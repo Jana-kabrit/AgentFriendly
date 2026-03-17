@@ -90,10 +90,10 @@ jobs:
           hatch env create
       - name: Lint (ruff)
         working-directory: python_sdk
-        run: hatch run lint:ruff check .
+        run: hatch run ruff check .
       - name: Type check (mypy)
         working-directory: python_sdk
-        run: hatch run lint:mypy agentfriendly
+        run: hatch run mypy agentfriendly
       - name: Run tests
         working-directory: python_sdk
-        run: hatch run test:pytest --cov=agentfriendly --cov-report=xml
+        run: hatch run pytest --cov=agentfriendly --cov-report=xml
