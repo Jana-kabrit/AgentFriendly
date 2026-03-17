@@ -35,5 +35,10 @@
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"
   },
-  "packageManager": "pnpm@10.30.3"
+  "packageManager": "pnpm@10.30.3",
+  "pnpm": {
+    "patchedDependencies": {
+      "@astrojs/sitemap@3.7.1": "patches/@astrojs__sitemap@3.7.1.patch"
+    }
+  }
 }

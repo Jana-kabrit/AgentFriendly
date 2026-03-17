@@ -1,5 +1,8 @@
 packages:
-  - "packages/*"
-  - "examples/*"
-  - "docs-site"
-  - "python_sdk"
+  - packages/*
+  - examples/*
+  - docs-site
+  - python_sdk
+
+patchedDependencies:
+  '@astrojs/sitemap@3.7.1': patches/@astrojs__sitemap@3.7.1.patch

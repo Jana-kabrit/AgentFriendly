@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index 593b5cc8c537428d4b333e2c88205cdd5e4ede63..fe311038dbab164e5bd8b00ae505a527136cd869 100644
+--- a/dist/index.js	
++++ b/dist/index.js	
+@@ -66,7 +66,7 @@ const createPlugin = (options) => {
+             const fullPath = finalSiteUrl.pathname + p.pathname;
+             return new URL(fullPath, finalSiteUrl).href;
+           });
+-          const routeUrls = _routes.reduce((urls, r) => {
++          const routeUrls = (_routes ?? []).reduce((urls, r) => {
+             if (r.type !== "page") return urls;
+             if (r.pathname) {
+               if (shouldIgnoreStatus(r.pathname ?? r.pattern)) return urls;

@@ -2,50 +2,12 @@
  * Example API route demonstrating:
  * 1. Reading AgentContext from the middleware-injected header
  * 2. Serving different responses to agents vs humans
- * 3. Tool definition via agentMeta export (auto-registered in the tool manifest)
+ *
+ * Note: Next.js 15 rejects custom route exports (e.g. agentMeta for tool registration).
+ * Tool manifests would require config-based registration (see SDK docs).
  */
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
-import type { ToolDefinition } from "@agentfriendly/next";
-
-/**
- * Exports the tool definition for this route.
- * @agentfriendly picks this up and includes it in the tool manifest at
- * /.well-known/agent-tools.json, /webagents.md, and /.well-known/agent.json.
- */
-export const agentMeta: ToolDefinition = {
-  tool: "searchProducts",
-  description:
-    "Search the product catalog by keyword and optional category filter. " +
-    "Returns a list of matching products with name, price, and stock status.",
-  version: "1.0.0",
-  schema: {
-    type: "object",
-    properties: {
-      q: {
-        type: "string",
-        description: "Search keyword (required)",
-        minLength: 1,
-        maxLength: 200,
-      },
-      category: {
-        type: "string",
-        description: "Filter by category (optional)",
-        enum: ["electronics", "clothing", "books", "home"],
-      },
-      limit: {
-        type: "integer",
-        description: "Maximum number of results (default: 10, max: 100)",
-        minimum: 1,
-        maximum: 100,
-        default: 10,
-      },
-    },
-    required: ["q"],
-  },
-  tags: ["catalog", "search", "public"],
-};
 
 // Minimal fake product data
 const PRODUCTS = [
