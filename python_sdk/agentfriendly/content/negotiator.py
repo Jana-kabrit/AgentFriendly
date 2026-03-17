@@ -48,6 +48,8 @@ def should_serve_markdown(
     if context.requested_markdown:
         return True
 
+    if not isinstance(proactive_markdown, str):
+        return False
     tier = context.tier
     tiers_by_level: dict[str, tuple[str, ...]] = {
         "verified": ("verified-agent",),

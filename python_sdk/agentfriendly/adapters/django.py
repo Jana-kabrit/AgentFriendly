@@ -43,7 +43,7 @@ def _load_config_from_settings() -> AgentFriendlyConfig:
     return _dict_to_config(raw)
 
 
-def _dict_to_config(raw: dict) -> AgentFriendlyConfig:
+def _dict_to_config(raw: dict[str, object]) -> AgentFriendlyConfig:
     """Convert a plain settings dict to AgentFriendlyConfig."""
     from ..config import (
         AccessConfig,
@@ -118,7 +118,7 @@ class AgentFriendlyMiddleware:
             return response
 
         # Let Django handle the request
-        response: HttpResponse = self.get_response(request)
+        response = self.get_response(request)
 
         # Inject agent headers
         for key, value in result.content_instructions.agent_headers.items():
