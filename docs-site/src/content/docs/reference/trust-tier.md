@@ -10,11 +10,7 @@ The `TrustTier` type represents the classification assigned to every incoming re
 ## Type Definition
 
 ```typescript
-type TrustTier =
-  | "human"
-  | "suspected-agent"
-  | "known-agent"
-  | "verified-agent";
+type TrustTier = "human" | "suspected-agent" | "known-agent" | "verified-agent";
 ```
 
 ## Tier Hierarchy
@@ -39,6 +35,7 @@ No agent signals detected. The request has a complete set of browser-like header
 Header heuristics triggered (score ≥ 3) or the request has unusual Accept headers, but no confirmed UA match.
 
 **Processing**: Depends on `proactiveMarkdown` config:
+
 - `proactiveMarkdown: "suspected"` → serve markdown
 - Otherwise → passthrough, but agent context is available in route handlers
 
@@ -56,13 +53,13 @@ Cryptographic identity verified via RFC 9421 HTTP Message Signatures or Clawdent
 
 ## Detection Signals
 
-| Signal | Description | Contributes to |
-|--------|-------------|----------------|
-| `accept-header` | `Accept: text/markdown` or `application/agent+json` | ≥ suspected |
-| `ua-database` | UA matched agent database | known |
-| `header-heuristics` | Score ≥ 3 from header analysis | suspected |
-| `rfc9421-signature` | Ed25519 HTTP signature verified | verified |
-| `clawdentity-ait` | Clawdentity JWT verified | verified |
+| Signal              | Description                                         | Contributes to |
+| ------------------- | --------------------------------------------------- | -------------- |
+| `accept-header`     | `Accept: text/markdown` or `application/agent+json` | ≥ suspected    |
+| `ua-database`       | UA matched agent database                           | known          |
+| `header-heuristics` | Score ≥ 3 from header analysis                      | suspected      |
+| `rfc9421-signature` | Ed25519 HTTP signature verified                     | verified       |
+| `clawdentity-ait`   | Clawdentity JWT verified                            | verified       |
 
 ## Using TrustTier in Route Handlers
 

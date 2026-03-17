@@ -82,11 +82,17 @@ export class InMemoryRateLimiter {
  */
 export function getRateLimitKey(
   context: AgentContext,
-  keyBy: AccessConfig["rateLimit"] extends undefined ? never : NonNullable<AccessConfig["rateLimit"]>["keyBy"],
+  keyBy: AccessConfig["rateLimit"] extends undefined
+    ? never
+    : NonNullable<AccessConfig["rateLimit"]>["keyBy"],
 ): string {
   switch (keyBy) {
     case "ip":
-      return context.headers["x-forwarded-for"]?.split(",")[0]?.trim() ?? context.headers["x-real-ip"] ?? "unknown-ip";
+      return (
+        context.headers["x-forwarded-for"]?.split(",")[0]?.trim() ??
+        context.headers["x-real-ip"] ??
+        "unknown-ip"
+      );
     case "ua":
       return context.userAgent || "no-ua";
     case "identity":

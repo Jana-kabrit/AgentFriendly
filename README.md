@@ -26,10 +26,10 @@ When an AI agent visits your website today, it receives the exact same response 
 
 A documentation page measured by Checkly:
 
-| Format | Size | Tokens | Cost at GPT-5.3 |
-|--------|------|--------|-----------------|
-| Raw HTML | 615 KB | 180,573 | $0.32 |
-| Markdown | 2.3 KB | 478 | $0.0008 |
+| Format   | Size   | Tokens  | Cost at GPT-5.3 |
+| -------- | ------ | ------- | --------------- |
+| Raw HTML | 615 KB | 180,573 | $0.32           |
+| Markdown | 2.3 KB | 478     | $0.0008         |
 
 **That is a 99.7% token reduction** — and this is just one page. Agents browsing dozens of pages per task can cost $5–16+ per session in raw HTML. With AgentFriendly, they pay fractions of a cent.
 
@@ -46,17 +46,17 @@ Human request   → pipeline skipped entirely, zero impact
 Agent request   → 8-layer pipeline activates
 ```
 
-| Layer | What it does |
-|-------|-------------|
-| **0 — Detection** | Classifies every request as `human`, `suspected-agent`, `known-agent`, or `verified-agent` using 4 signals: Accept header, UA database (34+ agents), header heuristics, and RFC 9421 cryptographic signatures |
-| **1 — Discovery** | Auto-generates and serves `/llms.txt`, `/.well-known/agent.json`, `/webagents.md`, and `/.well-known/agent-tools.json` |
-| **2 — Content** | Converts HTML → clean Markdown using Mozilla Readability + Turndown. Injects `Content-Signal` and `x-markdown-tokens` headers |
-| **3 — Analytics** | Tracks agent page views, tool calls, access denials, payments, and LLM referrals — off the critical path, zero latency impact |
-| **4 — Access Control** | Route-level `allow`/`deny` rules, per-agent-type policies, per-operator policies, and a sliding-window rate limiter |
-| **5 — Privacy** | Masks PII (email, phone, SSN, credit cards, …) from agent responses by default. Scoped unmasking via delegation tokens |
-| **6 — Tool Registry** | Register callable functions agents can invoke via `POST /agent/tools/:name`. Supports semantic versioning, async tasks, and per-tool pricing |
-| **7 — Monetization** | x402 micropayments (USDC on Base/Solana) with TollBit as a non-crypto fallback. Agents pay autonomously — no accounts, no human intervention |
-| **8 — Multi-Tenancy** | RFC 8693-inspired delegation tokens that scope agent sessions to specific users and tenants, with per-scope PII reveal |
+| Layer                  | What it does                                                                                                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0 — Detection**      | Classifies every request as `human`, `suspected-agent`, `known-agent`, or `verified-agent` using 4 signals: Accept header, UA database (34+ agents), header heuristics, and RFC 9421 cryptographic signatures |
+| **1 — Discovery**      | Auto-generates and serves `/llms.txt`, `/.well-known/agent.json`, `/webagents.md`, and `/.well-known/agent-tools.json`                                                                                        |
+| **2 — Content**        | Converts HTML → clean Markdown using Mozilla Readability + Turndown. Injects `Content-Signal` and `x-markdown-tokens` headers                                                                                 |
+| **3 — Analytics**      | Tracks agent page views, tool calls, access denials, payments, and LLM referrals — off the critical path, zero latency impact                                                                                 |
+| **4 — Access Control** | Route-level `allow`/`deny` rules, per-agent-type policies, per-operator policies, and a sliding-window rate limiter                                                                                           |
+| **5 — Privacy**        | Masks PII (email, phone, SSN, credit cards, …) from agent responses by default. Scoped unmasking via delegation tokens                                                                                        |
+| **6 — Tool Registry**  | Register callable functions agents can invoke via `POST /agent/tools/:name`. Supports semantic versioning, async tasks, and per-tool pricing                                                                  |
+| **7 — Monetization**   | x402 micropayments (USDC on Base/Solana) with TollBit as a non-crypto fallback. Agents pay autonomously — no accounts, no human intervention                                                                  |
+| **8 — Multi-Tenancy**  | RFC 8693-inspired delegation tokens that scope agent sessions to specific users and tenants, with per-scope PII reveal                                                                                        |
 
 ---
 
@@ -104,10 +104,12 @@ import { createAgentFriendlyMiddleware } from "@agentfriendly/express";
 
 const app = express();
 
-app.use(createAgentFriendlyMiddleware({
-  discovery: { siteName: "My API" },
-  content: { markdown: true },
-}));
+app.use(
+  createAgentFriendlyMiddleware({
+    discovery: { siteName: "My API" },
+    content: { markdown: true },
+  }),
+);
 
 app.get("/docs", (req, res) => {
   res.send("<html>...your existing handler, unchanged...</html>");
@@ -126,10 +128,13 @@ import { createAgentFriendlyMiddleware } from "@agentfriendly/hono";
 
 const app = new Hono();
 
-app.use("*", createAgentFriendlyMiddleware({
-  discovery: { siteName: "My Worker" },
-  content: { markdown: true },
-}));
+app.use(
+  "*",
+  createAgentFriendlyMiddleware({
+    discovery: { siteName: "My Worker" },
+    content: { markdown: true },
+  }),
+);
 ```
 
 ### Python — FastAPI
@@ -180,10 +185,10 @@ import { getAgentContext } from "@agentfriendly/core";
 // Anywhere in your async call stack, after the middleware runs:
 const ctx = getAgentContext();
 
-ctx.tier          // "human" | "suspected-agent" | "known-agent" | "verified-agent"
-ctx.agentOperator // "openai" | "anthropic" | null
-ctx.agentType     // "crawler" | "assistant" | "automation" | null
-ctx.isAgent       // boolean shorthand
+ctx.tier; // "human" | "suspected-agent" | "known-agent" | "verified-agent"
+ctx.agentOperator; // "openai" | "anthropic" | null
+ctx.agentType; // "crawler" | "assistant" | "automation" | null
+ctx.isAgent; // boolean shorthand
 ```
 
 ### Registering Tools
@@ -198,7 +203,7 @@ registerTool({
   schema: {
     type: "object",
     properties: {
-      query:    { type: "string" },
+      query: { type: "string" },
       category: { type: "string", enum: ["software", "ebooks", "courses"] },
     },
     required: ["query"],
@@ -255,10 +260,10 @@ import { issueDelegationToken } from "@agentfriendly/core";
 
 // In your "Connect Agent" endpoint:
 const token = await issueDelegationToken(
-  req.user.id,   // userId
+  req.user.id, // userId
   req.user.orgId, // tenantId
   ["read:projects", "write:tasks", "reveal:email"],
-  config.multitenancy
+  config.multitenancy,
 );
 
 // Agent attaches: X-Agent-Session: <token>
@@ -271,25 +276,25 @@ const token = await issueDelegationToken(
 
 ### TypeScript
 
-| Package | Description |
-|---------|-------------|
-| [`@agentfriendly/core`](./packages/core) | Framework-agnostic core — all 8 layers |
-| [`@agentfriendly/next`](./packages/next) | Next.js / Edge Runtime adapter |
-| [`@agentfriendly/express`](./packages/express) | Express 4/5 adapter |
-| [`@agentfriendly/hono`](./packages/hono) | Hono / Cloudflare Workers adapter |
-| [`@agentfriendly/nuxt`](./packages/nuxt) | Nuxt 3 module |
-| [`@agentfriendly/astro`](./packages/astro) | Astro SSR integration |
-| [`@agentfriendly/cli`](./packages/cli) | CLI: `init`, `validate`, `test-detection`, `preview` |
-| [`@agentfriendly/ua-database`](./packages/ua-database) | Shared UA database (JSON) |
+| Package                                                | Description                                          |
+| ------------------------------------------------------ | ---------------------------------------------------- |
+| [`@agentfriendly/core`](./packages/core)               | Framework-agnostic core — all 8 layers               |
+| [`@agentfriendly/next`](./packages/next)               | Next.js / Edge Runtime adapter                       |
+| [`@agentfriendly/express`](./packages/express)         | Express 4/5 adapter                                  |
+| [`@agentfriendly/hono`](./packages/hono)               | Hono / Cloudflare Workers adapter                    |
+| [`@agentfriendly/nuxt`](./packages/nuxt)               | Nuxt 3 module                                        |
+| [`@agentfriendly/astro`](./packages/astro)             | Astro SSR integration                                |
+| [`@agentfriendly/cli`](./packages/cli)                 | CLI: `init`, `validate`, `test-detection`, `preview` |
+| [`@agentfriendly/ua-database`](./packages/ua-database) | Shared UA database (JSON)                            |
 
 ### Python
 
-| Package | Description |
-|---------|-------------|
-| [`agentfriendly`](./python_sdk) | Full Python SDK — all 8 layers |
-| Adapter: FastAPI | `agentfriendly.adapters.fastapi` |
-| Adapter: Django | `agentfriendly.adapters.django` |
-| Adapter: Flask | `agentfriendly.adapters.flask` |
+| Package                         | Description                      |
+| ------------------------------- | -------------------------------- |
+| [`agentfriendly`](./python_sdk) | Full Python SDK — all 8 layers   |
+| Adapter: FastAPI                | `agentfriendly.adapters.fastapi` |
+| Adapter: Django                 | `agentfriendly.adapters.django`  |
+| Adapter: Flask                  | `agentfriendly.adapters.flask`   |
 
 ---
 
@@ -379,16 +384,16 @@ Layers 3 (analytics), 5 (PII masking), and 6 (tools) operate outside the main re
 
 ## Standards Implemented
 
-| Standard | Layer | Status |
-|----------|-------|--------|
-| [RFC 9421 HTTP Message Signatures](https://www.rfc-editor.org/rfc/rfc9421) | Detection | Finalized RFC |
-| [RFC 8693 Token Exchange](https://www.rfc-editor.org/rfc/rfc8693) | Multi-Tenancy | Finalized RFC |
-| [x402 Protocol](https://x402.org) | Monetization | Production (100M+ flows) |
-| [llms.txt](https://llmstxt.org) | Discovery | Emerging standard |
-| [Agent Handshake Protocol](https://github.com/agent-handshake-protocol/ahp) | Discovery | Draft 0.1 |
-| [webagents.md](https://github.com/browser-use/webagents-md) | Discovery | Draft |
-| [Cloudflare Content Signals](https://developers.cloudflare.com/content-signals/) | Content | Production |
-| [Clawdentity AIT](https://github.com/vrknetha/clawdentity) | Detection | IETF Draft |
+| Standard                                                                         | Layer         | Status                   |
+| -------------------------------------------------------------------------------- | ------------- | ------------------------ |
+| [RFC 9421 HTTP Message Signatures](https://www.rfc-editor.org/rfc/rfc9421)       | Detection     | Finalized RFC            |
+| [RFC 8693 Token Exchange](https://www.rfc-editor.org/rfc/rfc8693)                | Multi-Tenancy | Finalized RFC            |
+| [x402 Protocol](https://x402.org)                                                | Monetization  | Production (100M+ flows) |
+| [llms.txt](https://llmstxt.org)                                                  | Discovery     | Emerging standard        |
+| [Agent Handshake Protocol](https://github.com/agent-handshake-protocol/ahp)      | Discovery     | Draft 0.1                |
+| [webagents.md](https://github.com/browser-use/webagents-md)                      | Discovery     | Draft                    |
+| [Cloudflare Content Signals](https://developers.cloudflare.com/content-signals/) | Content       | Production               |
+| [Clawdentity AIT](https://github.com/vrknetha/clawdentity)                       | Detection     | IETF Draft               |
 
 ---
 

@@ -15,8 +15,8 @@ agentfriendly validate [--url <url>]
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
+| Option        | Default                 | Description              |
+| ------------- | ----------------------- | ------------------------ |
 | `--url <url>` | `http://localhost:3000` | The site URL to validate |
 
 ## Checks Performed

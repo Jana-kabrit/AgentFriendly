@@ -8,7 +8,6 @@ import { NextResponse } from "next/server";
 import type { AgentFriendlyConfig, AgentRequest } from "@agentfriendly/core";
 import type { NextRequest, NextMiddleware } from "next/server";
 
-
 /**
  * @agentfriendly/next — Next.js Middleware Adapter
  *
@@ -75,9 +74,7 @@ function toAgentRequest(req: NextRequest): AgentRequest {
 
   // Normalize path: lowercase, strip trailing slash (except root)
   const rawPath = parsed.pathname;
-  const path = rawPath.length > 1 && rawPath.endsWith("/")
-    ? rawPath.slice(0, -1)
-    : rawPath;
+  const path = rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
   return {
     method: req.method,
@@ -109,9 +106,7 @@ function toNextResponse(
  * Create a Next.js middleware function from an AgentFriendly configuration.
  * The returned middleware is compatible with Next.js 14+ (App Router and Pages Router).
  */
-export function createAgentFriendlyMiddleware(
-  config: AgentFriendlyConfig = {},
-): NextMiddleware {
+export function createAgentFriendlyMiddleware(config: AgentFriendlyConfig = {}): NextMiddleware {
   const sdk = new AgentFriendlyMiddleware(config);
 
   return async function agentFriendlyMiddleware(

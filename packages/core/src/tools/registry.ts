@@ -4,7 +4,6 @@ import type { AgentContext } from "../types/agent-context.js";
 import type { ToolDefinition } from "../types/tool-definition.js";
 import type { TrustTier } from "../types/trust-tier.js";
 
-
 /**
  * Layer 6 — Tool Registry
  *
@@ -148,7 +147,10 @@ export class ToolRegistry {
     input: Record<string, unknown>,
     context: AgentContext,
     version?: string,
-  ): Promise<{ success: true; output: unknown } | { success: false; error: string; statusCode: 400 | 403 | 404 }> {
+  ): Promise<
+    | { success: true; output: unknown }
+    | { success: false; error: string; statusCode: 400 | 403 | 404 }
+  > {
     const tool = this.getTool(name, version);
 
     if (!tool) {
@@ -199,8 +201,7 @@ export class ToolRegistry {
  * Returns negative if a < b, 0 if equal, positive if a > b.
  */
 function compareSemver(a: string, b: string): number {
-  const parseParts = (v: string): number[] =>
-    v.split(".").map((p) => Number.parseInt(p, 10));
+  const parseParts = (v: string): number[] => v.split(".").map((p) => Number.parseInt(p, 10));
 
   const [aMajor = 0, aMinor = 0, aPatch = 0] = parseParts(a);
   const [bMajor = 0, bMinor = 0, bPatch = 0] = parseParts(b);

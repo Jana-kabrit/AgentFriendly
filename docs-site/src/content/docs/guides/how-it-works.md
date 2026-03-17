@@ -85,24 +85,24 @@ Incoming Request
 
 ## Detection Signals
 
-| Signal | How | Resolves to |
-|--------|-----|-------------|
-| `accept-header` | `Accept: text/markdown` or `Accept: application/agent+json` | ≥ suspected-agent |
-| `ua-database` | Known UA pattern (GPTBot, ClaudeBot, etc.) | known-agent |
-| `header-heuristics` | Missing `Accept-Language`, `Sec-Fetch-*`, `Cookie`, etc. | suspected-agent |
-| `rfc9421-signature` | Ed25519 HTTP signature verified against operator JWKS | verified-agent |
-| `clawdentity-ait` | Clawdentity Agent Identity Token (JWT) verified | verified-agent |
+| Signal              | How                                                         | Resolves to       |
+| ------------------- | ----------------------------------------------------------- | ----------------- |
+| `accept-header`     | `Accept: text/markdown` or `Accept: application/agent+json` | ≥ suspected-agent |
+| `ua-database`       | Known UA pattern (GPTBot, ClaudeBot, etc.)                  | known-agent       |
+| `header-heuristics` | Missing `Accept-Language`, `Sec-Fetch-*`, `Cookie`, etc.    | suspected-agent   |
+| `rfc9421-signature` | Ed25519 HTTP signature verified against operator JWKS       | verified-agent    |
+| `clawdentity-ait`   | Clawdentity Agent Identity Token (JWT) verified             | verified-agent    |
 
 ## Proactive Markdown Strategy
 
-The `proactiveMarkdown` setting controls when markdown is served *without* an explicit `Accept: text/markdown` header:
+The `proactiveMarkdown` setting controls when markdown is served _without_ an explicit `Accept: text/markdown` header:
 
-| Setting | Serves markdown for |
-|---------|---------------------|
-| `"known"` | `known-agent` and `verified-agent` tiers |
-| `"suspected"` | All agent tiers including `suspected-agent` |
-| `"verified"` | Only `verified-agent` tier |
-| `false` | Never — only when agent explicitly requests it |
+| Setting       | Serves markdown for                            |
+| ------------- | ---------------------------------------------- |
+| `"known"`     | `known-agent` and `verified-agent` tiers       |
+| `"suspected"` | All agent tiers including `suspected-agent`    |
+| `"verified"`  | Only `verified-agent` tier                     |
+| `false`       | Never — only when agent explicitly requests it |
 
 ## Content-Signal Header
 
@@ -113,6 +113,7 @@ Content-Signal: ai-train=no, ai-input=yes, search=yes
 ```
 
 This is inspired by the Cloudflare Content Signals standard and informs agents about:
+
 - `ai-train`: whether content may be used for LLM training.
 - `ai-input`: whether content may be used as LLM input (inference).
 - `search`: whether content may be indexed by AI search engines.
@@ -122,10 +123,11 @@ This is inspired by the Cloudflare Content Signals standard and informs agents a
 Enable `debug: true` to add `X-AgentFriendly-*` headers to every response and activate the `/agent-debug` endpoint:
 
 ```typescript
-createAgentFriendlyMiddleware({ debug: true })
+createAgentFriendlyMiddleware({ debug: true });
 ```
 
 Response headers in debug mode:
+
 ```
 X-AgentFriendly-Tier: known-agent
 X-AgentFriendly-Request-Id: 6ba7b810-9dad-11d1-80b4-00c04fd430c8

@@ -35,7 +35,7 @@ export function divider(): void {
 
 export function badge(tier: string): string {
   const colors: Record<string, (s: string) => string> = {
-    "human": pc.dim,
+    human: pc.dim,
     "suspected-agent": pc.yellow,
     "known-agent": pc.cyan,
     "verified-agent": pc.green,

@@ -1,7 +1,6 @@
 import type { AgentFriendlyConfig } from "@agentfriendly/core";
 import type { AstroIntegration } from "astro";
 
-
 /**
  * @agentfriendly/astro — Astro Integration
  *
@@ -31,9 +30,7 @@ import type { AstroIntegration } from "astro";
  * Note: Only effective in SSR mode (output: "server" or output: "hybrid").
  * Static pages (output: "static") are pre-rendered at build time.
  */
-export function agentFriendlyIntegration(
-  config: AgentFriendlyConfig = {},
-): AstroIntegration {
+export function agentFriendlyIntegration(config: AgentFriendlyConfig = {}): AstroIntegration {
   return {
     name: "@agentfriendly/astro",
     hooks: {

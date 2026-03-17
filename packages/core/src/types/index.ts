@@ -4,11 +4,7 @@
  */
 export type { AgentEntry, AgentCategory, UaMatch } from "@agentfriendly/ua-database";
 
-export type {
-  TrustTier,
-  DetectionSignal,
-  TierResolution,
-} from "./trust-tier.js";
+export type { TrustTier, DetectionSignal, TierResolution } from "./trust-tier.js";
 
 export type {
   AgentContext,
@@ -70,4 +66,8 @@ export type { ToolHandler, RegisteredTool, TaskHandlerDefinition } from "../tool
 export type { Task, TaskStatus } from "../tools/task-queue.js";
 
 // Analytics adapter interface
-export type { AnalyticsAdapter, AnalyticsQueryOptions, AnalyticsQueryResult } from "../analytics/adapter.js";
+export type {
+  AnalyticsAdapter,
+  AnalyticsQueryOptions,
+  AnalyticsQueryResult,
+} from "../analytics/adapter.js";

@@ -11,7 +11,6 @@ import type { AgentRequest } from "../types/agent-request.js";
 import type { DetectionConfig } from "../types/config.js";
 import type { DetectionSignal, TrustTier } from "../types/trust-tier.js";
 
-
 /**
  * Layer 0 — Detection Pipeline
  *

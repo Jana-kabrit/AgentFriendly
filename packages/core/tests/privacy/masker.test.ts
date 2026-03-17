@@ -19,7 +19,10 @@ const makeContext = (grantedScopes: string[] = []): AgentContext =>
     agentCategory: null,
     signals: [],
     verifiedIdentity: null,
-    tenantContext: grantedScopes.length > 0 ? { tenantId: "t1", userId: "u1", sessionId: "s1", grantedScopes, expiresAt: "" } : null,
+    tenantContext:
+      grantedScopes.length > 0
+        ? { tenantId: "t1", userId: "u1", sessionId: "s1", grantedScopes, expiresAt: "" }
+        : null,
     requestedMarkdown: false,
     path: "/",
     method: "GET",

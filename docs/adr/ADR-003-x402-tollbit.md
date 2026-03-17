@@ -6,6 +6,7 @@
 ## Context
 
 Site owners want to monetize agent traffic. Three categories of solution exist:
+
 1. **Protocol-level**: x402 (HTTP 402 + stablecoin micropayments)
 2. **SaaS-level**: TollBit, Agentis, Paywalls.ai (external services handling billing)
 3. **Traditional**: Stripe, PayPal (designed for human payment flows)
@@ -31,6 +32,7 @@ Covers both crypto-native and traditional publishers. x402 handles the agent-nat
 ## Rationale
 
 **Why x402**:
+
 - The only open, internet-native, agent-native payment protocol. Zero protocol fees. Zero KYC. Zero account setup for agents.
 - USDC is a stablecoin (pegged to USD). Price volatility is not a concern.
 - By January 2026: 100M+ payment flows, $600M volume. Backers include Cloudflare, Google, AWS, Anthropic, and Circle. This is not speculative — it is in production at scale.
@@ -38,6 +40,7 @@ Covers both crypto-native and traditional publishers. x402 handles the agent-nat
 - One middleware line to add: `app.use(paymentMiddleware({ "GET /premium/**": { amount: "0.001", currency: "USDC" } }))`.
 
 **Why TollBit as fallback (not Stripe)**:
+
 - TollBit requires zero crypto from the publisher. Revenue is in USD, paid out via bank transfer.
 - TollBit uses CDN-level user-agent routing — it does not require modifying your app code, only DNS configuration. The SDK emits TollBit-compatible headers when `monetization.fallback: "tollbit"` is set.
 - Stripe cannot be used for autonomous agent micropayments. The payment initiation flow requires a human to complete.

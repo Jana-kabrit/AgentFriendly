@@ -29,7 +29,9 @@ function printHelp(): void {
   divider();
   console.log(`  ${pc.bold("Commands:")}`);
   info(`${pc.cyan("init")}                         Interactive setup wizard`);
-  info(`${pc.cyan("validate")} [--url <url>]        Validate a site's agent-friendly implementation`);
+  info(
+    `${pc.cyan("validate")} [--url <url>]        Validate a site's agent-friendly implementation`,
+  );
   info(`${pc.cyan("test-detection")} [--ua <ua>]    Simulate detection pipeline`);
   info(`${pc.cyan("preview")} [--url <url>]         Preview what an agent sees`);
   divider();

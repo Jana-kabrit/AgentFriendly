@@ -27,6 +27,7 @@ A manifest at `/.well-known/agent.json` that points visiting agents to your cont
 **Required**: Zero server logic. Works with static sites.
 
 **Example `/.well-known/agent.json`**:
+
 ```json
 {
   "ahp": "0.1",
@@ -51,6 +52,7 @@ A manifest at `/.well-known/agent.json` that points visiting agents to your cont
 Visiting agents ask questions. Your site answers from its content. A `POST /agent/converse` endpoint backed by a knowledge base returns precise, sourced answers.
 
 **Example request**:
+
 ```json
 POST /agent/converse
 {
@@ -60,6 +62,7 @@ POST /agent/converse
 ```
 
 **Example response**:
+
 ```json
 {
   "answer": "To set up a Playwright check in Checkly, navigate to Checks → New Check → Browser Check. You can then write Playwright test code directly in the editor...",
@@ -77,6 +80,7 @@ POST /agent/converse
 Your site's agent has tools. Visiting agents delegate tasks; your agent handles them and delivers results synchronously or asynchronously.
 
 **The `/.well-known/agent.json` for MODE3**:
+
 ```json
 {
   "ahp": "0.1",
@@ -105,6 +109,7 @@ Your site's agent has tools. Visiting agents delegate tasks; your agent handles 
 ```
 
 **Task delegation flow**:
+
 ```
 POST /agent/task
 {
@@ -134,20 +139,20 @@ POST /agent/task
 
 AHP meets agents wherever they arrive:
 
-| Method | How it works |
-|--------|-------------|
-| Well-known URI | `GET /.well-known/agent.json` — direct path for agents that know to look |
-| Accept header | Server responds to `Accept: application/agent+json` with the manifest or a redirect |
+| Method         | How it works                                                                             |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| Well-known URI | `GET /.well-known/agent.json` — direct path for agents that know to look                 |
+| Accept header  | Server responds to `Accept: application/agent+json` with the manifest or a redirect      |
 | In-page notice | `<section class="ahp-notice" aria-label="AI Agent Notice">` visible to headless browsers |
 
 ## Relationship to Other Standards
 
-| Standard | What it does | AHP relationship |
-|----------|-------------|-----------------|
-| `robots.txt` | Access control for crawlers | AHP MODE1 includes `content_signals` that complement robots.txt |
-| `llms.txt` | Lists key pages for agents | AHP MODE1 references `llms.txt` as its content endpoint |
-| `webagents.md` | Lists JavaScript functions for browser agents | AHP MODE3 is the server-side equivalent |
-| WebMCP | Chrome-native tool registration | AHP MODE3 covers the same use case for all HTTP clients |
+| Standard       | What it does                                  | AHP relationship                                                |
+| -------------- | --------------------------------------------- | --------------------------------------------------------------- |
+| `robots.txt`   | Access control for crawlers                   | AHP MODE1 includes `content_signals` that complement robots.txt |
+| `llms.txt`     | Lists key pages for agents                    | AHP MODE1 references `llms.txt` as its content endpoint         |
+| `webagents.md` | Lists JavaScript functions for browser agents | AHP MODE3 is the server-side equivalent                         |
+| WebMCP         | Chrome-native tool registration               | AHP MODE3 covers the same use case for all HTTP clients         |
 
 ## How `@agentfriendly` Implements AHP
 

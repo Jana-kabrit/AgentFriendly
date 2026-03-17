@@ -174,7 +174,7 @@ export async function runInit(options: InitOptions, cwd: string): Promise<void> 
   const proactiveMarkdown = await select<string>({
     message: "When should markdown be served proactively (without explicit Accept header)?",
     choices: [
-      { value: "known", name: 'Known agents (GPTBot, Claude, etc.) — recommended' },
+      { value: "known", name: "Known agents (GPTBot, Claude, etc.) — recommended" },
       { value: "suspected", name: "Suspected agents too (based on header heuristics)" },
       { value: "verified", name: "Cryptographically verified agents only" },
       { value: "false", name: "Only when agent explicitly requests markdown" },

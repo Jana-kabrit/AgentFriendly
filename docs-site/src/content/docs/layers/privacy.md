@@ -9,15 +9,15 @@ Layer 5 prevents sensitive information from leaking to AI agents. It masks PII i
 
 ## Built-in PII Patterns
 
-| Pattern | Placeholder | Example |
-|---------|------------|---------|
-| Email addresses | `[EMAIL]` | `user@example.com` |
-| US phone numbers | `[PHONE]` | `555-123-4567` |
-| Social Security Numbers | `[SSN]` | `123-45-6789` |
-| Credit card numbers | `[CREDIT_CARD]` | `4111 1111 1111 1111` |
-| IPv4 addresses | `[IP_ADDRESS]` | `192.168.1.100` |
-| Dates of birth | `[DATE_OF_BIRTH]` | `01/15/1990` |
-| US ZIP codes | `[ZIP_CODE]` | `94105` |
+| Pattern                 | Placeholder       | Example               |
+| ----------------------- | ----------------- | --------------------- |
+| Email addresses         | `[EMAIL]`         | `user@example.com`    |
+| US phone numbers        | `[PHONE]`         | `555-123-4567`        |
+| Social Security Numbers | `[SSN]`           | `123-45-6789`         |
+| Credit card numbers     | `[CREDIT_CARD]`   | `4111 1111 1111 1111` |
+| IPv4 addresses          | `[IP_ADDRESS]`    | `192.168.1.100`       |
+| Dates of birth          | `[DATE_OF_BIRTH]` | `01/15/1990`          |
+| US ZIP codes            | `[ZIP_CODE]`      | `94105`               |
 
 ## Configuration
 
@@ -28,13 +28,13 @@ createAgentFriendlyMiddleware({
 
     // Add custom regex patterns
     additionalPatterns: [
-      /ACC-\d{8}/g,          // Internal account numbers
-      /KEY-[A-Z0-9]{16}/g,   // API key pattern
+      /ACC-\d{8}/g, // Internal account numbers
+      /KEY-[A-Z0-9]{16}/g, // API key pattern
     ],
 
     // Routes to apply masking to
-    applyToRoutes: ["**"],           // All routes (default)
-    excludeRoutes: ["/admin/**"],    // Exclude admin routes
+    applyToRoutes: ["**"], // All routes (default)
+    excludeRoutes: ["/admin/**"], // Exclude admin routes
 
     // Enable Named Entity Recognition (when NLP library is available)
     nerEnabled: false,
@@ -73,7 +73,7 @@ export async function GET() {
   // Mask PII fields (respects reveal: scopes from delegation tokens)
   const safeUser = maskJsonFields(
     user,
-    ["email", "phone", "ssn", "address.street"],  // dot notation for nested
+    ["email", "phone", "ssn", "address.street"], // dot notation for nested
     ctx!,
   );
 
@@ -87,10 +87,15 @@ When using [multi-tenancy](/layers/multi-tenancy), agents with explicit `reveal:
 
 ```typescript
 // Issue delegation token with reveal scope
-await issueDelegationToken(userId, tenantId, [
-  "read:profile",
-  "reveal:email",   // This agent is allowed to see the email
-], config.multiTenancy);
+await issueDelegationToken(
+  userId,
+  tenantId,
+  [
+    "read:profile",
+    "reveal:email", // This agent is allowed to see the email
+  ],
+  config.multiTenancy,
+);
 
 // In your route handler:
 const safeUser = maskJsonFields(user, ["email", "phone"], ctx!);

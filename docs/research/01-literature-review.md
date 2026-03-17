@@ -12,11 +12,11 @@ The web was built for humans. When an AI agent visits a website today, it receiv
 
 Independent measurements from three companies in February 2026 confirm the scale:
 
-| Company | HTML size | Markdown size | Reduction |
-|---------|-----------|---------------|-----------|
-| Vercel  | 500 KB    | 2 KB          | 99.6%     |
-| Cloudflare | (measured by token count) | (measured by token count) | 80% |
-| Checkly | 615 KB / 180,573 tokens | 2.3 KB / 478 tokens | 99.7% |
+| Company    | HTML size                 | Markdown size             | Reduction |
+| ---------- | ------------------------- | ------------------------- | --------- |
+| Vercel     | 500 KB                    | 2 KB                      | 99.6%     |
+| Cloudflare | (measured by token count) | (measured by token count) | 80%       |
+| Checkly    | 615 KB / 180,573 tokens   | 2.3 KB / 478 tokens       | 99.7%     |
 
 At current API pricing (GPT-5.3: $1.75/M input, $14/M output), a 50-page agent browsing session costs ~$0.04 in clean markdown vs. ~$16 processing raw HTML. Unconstrained agent tasks that browse dozens of pages hit $5–8+ per session in HTML. This is a real, measurable cost that is growing as agent usage scales.
 

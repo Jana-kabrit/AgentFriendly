@@ -9,7 +9,8 @@ Layer 6 lets you expose structured, callable tools to AI agents — turning your
 
 ## Why Tools?
 
-Without tools, agents can only *read* your site. With tools, they can:
+Without tools, agents can only _read_ your site. With tools, they can:
+
 - Search your product catalog
 - Place orders
 - Submit support tickets
@@ -26,7 +27,7 @@ import { AgentFriendlyMiddleware } from "@agentfriendly/core";
 const sdk = new AgentFriendlyMiddleware({
   tools: {
     enabled: true,
-    basePath: "/agent",  // Tools served at /agent/tools/:tool
+    basePath: "/agent", // Tools served at /agent/tools/:tool
     taskTimeoutSeconds: 300,
   },
 });
@@ -49,7 +50,11 @@ sdk.registerTool(
     rateLimit: { maxRequests: 20, windowSeconds: 60 },
   },
   async (input, context) => {
-    const { query, category, limit = 10 } = input as {
+    const {
+      query,
+      category,
+      limit = 10,
+    } = input as {
       query: string;
       category?: string;
       limit?: number;
@@ -63,15 +68,15 @@ sdk.registerTool(
 
 ## Tool Definition Schema
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `tool` | `string` | ✓ | Tool identifier (slug format) |
-| `version` | `string` | | Semver version (default: `1.0.0`) |
-| `description` | `string` | ✓ | Human-readable description for agents |
-| `inputSchema` | `JSON Schema` | ✓ | JSON Schema v7 defining input shape |
-| `requiredTier` | `TrustTier` | | Minimum trust tier to call this tool |
-| `rateLimit` | `object` | | Per-tool rate limit override |
-| `pricing` | `object` | | x402 pricing for this specific tool |
+| Field          | Type          | Required | Description                           |
+| -------------- | ------------- | -------- | ------------------------------------- |
+| `tool`         | `string`      | ✓        | Tool identifier (slug format)         |
+| `version`      | `string`      |          | Semver version (default: `1.0.0`)     |
+| `description`  | `string`      | ✓        | Human-readable description for agents |
+| `inputSchema`  | `JSON Schema` | ✓        | JSON Schema v7 defining input shape   |
+| `requiredTier` | `TrustTier`   |          | Minimum trust tier to call this tool  |
+| `rateLimit`    | `object`      |          | Per-tool rate limit override          |
+| `pricing`      | `object`      |          | x402 pricing for this specific tool   |
 
 ## Tool Manifest
 
@@ -105,6 +110,7 @@ sdk.registerTool({ tool: "search-products", version: "2.0.0", ... }, handlerV2);
 ```
 
 Agents can pin to a version:
+
 ```
 GET /.well-known/agent-tools/v1.json  → v1 tool schemas
 GET /.well-known/agent-tools/v2.json  → v2 tool schemas
@@ -118,7 +124,9 @@ For long-running operations, register an async task handler:
 sdk.toolRegistry.registerTask({
   name: "generate-report",
   description: "Generate a custom analytics report (may take 30-60 seconds)",
-  schema: { /* input schema */ },
+  schema: {
+    /* input schema */
+  },
   handler: async (payload, context) => {
     const report = await analytics.generateReport(payload);
     return { reportUrl: report.url, generatedAt: new Date().toISOString() };
@@ -127,6 +135,7 @@ sdk.toolRegistry.registerTask({
 ```
 
 Tasks use the AHP MODE3 polling pattern:
+
 1. Agent submits task → receives `taskId`.
 2. Agent polls `GET /agent/tasks/:taskId` for status.
 3. When complete, agent retrieves the result.

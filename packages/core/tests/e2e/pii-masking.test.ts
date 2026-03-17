@@ -22,13 +22,16 @@ function makeAgentContext(scopes: string[] = []): AgentContext {
     matchedAgent: null,
     agentCategory: null,
     verifiedIdentity: null,
-    tenantContext: scopes.length > 0 ? {
-      tenantId: "t1",
-      userId: "u1",
-      sessionId: "s1",
-      grantedScopes: scopes,
-      expiresAt: new Date(Date.now() + 3600000).toISOString(),
-    } : null,
+    tenantContext:
+      scopes.length > 0
+        ? {
+            tenantId: "t1",
+            userId: "u1",
+            sessionId: "s1",
+            grantedScopes: scopes,
+            expiresAt: new Date(Date.now() + 3600000).toISOString(),
+          }
+        : null,
     requestedMarkdown: true,
     tierResolution: { tier: "known-agent", signals: ["ua-database"], reason: "UA matched" },
     path: "/",
@@ -64,10 +67,7 @@ describe("E2E: PII Masking — text content", () => {
   });
 
   it("masks US phone numbers", () => {
-    const result = maskTextContent(
-      "Call us at 555-123-4567 or (800) 555-0100.",
-      config,
-    );
+    const result = maskTextContent("Call us at 555-123-4567 or (800) 555-0100.", config);
     expect(result).not.toContain("555-123-4567");
     expect(result).toContain("[PHONE]");
   });

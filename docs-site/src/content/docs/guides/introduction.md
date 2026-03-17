@@ -28,7 +28,7 @@ AgentFriendly is a middleware layer that intercepts every incoming request and:
 5. **Masks PII** — strip sensitive fields from agent responses automatically.
 6. **Exposes tools** — let agents call structured APIs via your website's own toolset.
 7. **Charges agents** — use the x402 protocol to require micropayments for premium content.
-8. **Scopes sessions** — issue delegation tokens so agents act *on behalf of* specific users.
+8. **Scopes sessions** — issue delegation tokens so agents act _on behalf of_ specific users.
 
 ## Who Uses This?
 
@@ -43,12 +43,12 @@ AgentFriendly is a middleware layer that intercepts every incoming request and:
 
 Every request resolves to one of four tiers:
 
-| Tier | Description |
-|------|-------------|
-| `human` | A real browser — no agent handling applied |
-| `suspected-agent` | Heuristics suggest an agent, but no confirmation |
-| `known-agent` | UA matched the agent database (GPTBot, Claude, etc.) |
-| `verified-agent` | Cryptographically verified identity (RFC 9421 / Clawdentity) |
+| Tier              | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| `human`           | A real browser — no agent handling applied                   |
+| `suspected-agent` | Heuristics suggest an agent, but no confirmation             |
+| `known-agent`     | UA matched the agent database (GPTBot, Claude, etc.)         |
+| `verified-agent`  | Cryptographically verified identity (RFC 9421 / Clawdentity) |
 
 ### 8 Processing Layers
 

@@ -1,7 +1,6 @@
 import type { TrustTier, TierResolution, DetectionSignal } from "./trust-tier.js";
 import type { AgentEntry, AgentCategory } from "@agentfriendly/ua-database";
 
-
 /**
  * Verified identity of an agent, available only when the trust tier is "verified-agent".
  * Populated from either an RFC 9421 HTTP Message Signature or a Clawdentity AIT.

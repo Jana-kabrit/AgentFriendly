@@ -14,7 +14,6 @@ import { createH3Middleware } from "../server-middleware.js";
 
 import type { AgentFriendlyConfig } from "@agentfriendly/core";
 
-
 // `useRuntimeConfig` is globally available in the Nitro runtime
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const useRuntimeConfig: () => Record<string, any>;

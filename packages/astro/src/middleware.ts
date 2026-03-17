@@ -1,4 +1,3 @@
-
 import {
   AgentFriendlyMiddleware,
   agentContextStorage,
@@ -57,8 +56,7 @@ function toAgentRequest(context: APIContext): AgentRequest {
   }
 
   const rawPath = url.pathname;
-  const path =
-    rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
+  const path = rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
   return {
     method: context.request.method,
@@ -80,10 +78,7 @@ function toAgentRequest(context: APIContext): AgentRequest {
 export function createAgentFriendlyMiddleware(config: AgentFriendlyConfig = {}) {
   const sdk = new AgentFriendlyMiddleware(config);
 
-  return async function onRequest(
-    context: APIContext,
-    next: MiddlewareNext,
-  ): Promise<Response> {
+  return async function onRequest(context: APIContext, next: MiddlewareNext): Promise<Response> {
     const agentRequest = toAgentRequest(context);
     const result = await sdk.process(agentRequest);
     const { context: agentContext } = result;
@@ -108,9 +103,7 @@ export function createAgentFriendlyMiddleware(config: AgentFriendlyConfig = {}) 
 
       // Inject agent headers into the response
       const mutableHeaders = new Headers(response.headers);
-      for (const [key, value] of Object.entries(
-        result.contentInstructions.agentHeaders,
-      )) {
+      for (const [key, value] of Object.entries(result.contentInstructions.agentHeaders)) {
         mutableHeaders.set(key, value);
       }
 

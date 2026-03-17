@@ -36,7 +36,7 @@ Site owners choose their threshold. `"known"` default covers the vast majority o
 ```typescript
 // agentfriendly.config.ts
 detection: {
-  proactiveMarkdown: "known"   // default
+  proactiveMarkdown: "known"; // default
   // proactiveMarkdown: "suspected"  // also serve suspected-agent tier
   // proactiveMarkdown: "verified"   // only serve verified-agent tier
   // proactiveMarkdown: false         // only serve when Accept: text/markdown sent

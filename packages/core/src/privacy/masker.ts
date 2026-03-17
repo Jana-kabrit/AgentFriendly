@@ -3,7 +3,6 @@ import { BUILT_IN_PII_PATTERNS } from "./pii-patterns.js";
 import type { AgentContext } from "../types/agent-context.js";
 import type { PrivacyConfig } from "../types/config.js";
 
-
 /**
  * Layer 5 — PII Masker
  *
@@ -34,10 +33,7 @@ import type { PrivacyConfig } from "../types/config.js";
  * Mask all PII in a plaintext/markdown string.
  * Used for the HTML→markdown layer output.
  */
-export function maskTextContent(
-  text: string,
-  config: PrivacyConfig,
-): string {
+export function maskTextContent(text: string, config: PrivacyConfig): string {
   if (!config.enabled) return text;
 
   const patterns = [
@@ -79,9 +75,7 @@ export function maskJsonFields(
   // Determine which fields are allowed by the tenant's granted scopes
   const grantedScopes = context.tenantContext?.grantedScopes ?? [];
   const unmaskedFields = new Set(
-    grantedScopes
-      .filter((s) => s.startsWith("reveal:"))
-      .map((s) => s.replace("reveal:", "")),
+    grantedScopes.filter((s) => s.startsWith("reveal:")).map((s) => s.replace("reveal:", "")),
   );
 
   // Deep-clone the object so we do not mutate the original response
@@ -96,10 +90,7 @@ export function maskJsonFields(
 }
 
 /** Recursively mask a field at a dot-notation path. */
-function maskFieldPath(
-  obj: Record<string, unknown>,
-  pathParts: string[],
-): void {
+function maskFieldPath(obj: Record<string, unknown>, pathParts: string[]): void {
   if (pathParts.length === 0 || typeof obj !== "object" || obj === null) return;
 
   const [head, ...rest] = pathParts;

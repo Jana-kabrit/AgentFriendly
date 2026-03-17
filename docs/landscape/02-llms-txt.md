@@ -30,10 +30,12 @@ what the project does, who it is for, and key features.
 ```
 
 **Required**:
+
 - H1 header (the project name)
 - A blockquote immediately after the H1 (short summary of the project)
 
 **Optional**:
+
 - Additional paragraphs
 - H2-headed sections with lists of links
 - An "Optional" section for content that is useful but large enough to skip if context is limited
@@ -48,6 +50,7 @@ https://example.com/docs/getting-started.md   → Markdown for agents
 ```
 
 URLs without a file extension append `index.html.md`:
+
 ```
 https://example.com/docs/       → HTML
 https://example.com/docs/index.html.md  → Markdown
@@ -62,6 +65,7 @@ The `llms_txt2ctx` command-line tool (available via `npx`) generates this file a
 ## Real Examples
 
 **Cloudflare** (`https://developers.cloudflare.com/llms.txt`):
+
 ```markdown
 # Cloudflare Developer Platform
 
@@ -71,15 +75,16 @@ The `llms_txt2ctx` command-line tool (available via `npx`) generates this file a
 
 - [Workers](https://developers.cloudflare.com/workers/llms-full.txt): Serverless code execution at Cloudflare's edge
 - [R2](https://developers.cloudflare.com/r2/llms-full.txt): Object storage
-...
+  ...
 ```
 
 **FastHTML** (`https://docs.fastht.ml/llms.txt`):
+
 ```markdown
 # FastHTML
 
 > FastHTML is a Python web framework designed for building web applications.
-...
+> ...
 ```
 
 ## Adoption Status (March 2026)
@@ -103,12 +108,10 @@ export default {
     llmsTxt: {
       title: "My SaaS Platform",
       description: "A platform for managing...",
-      manualEntries: [
-        { url: "/blog/getting-started", description: "Quick start guide" }
-      ]
-    }
-  }
-}
+      manualEntries: [{ url: "/blog/getting-started", description: "Quick start guide" }],
+    },
+  },
+};
 ```
 
 The generated `llms.txt` is served at `/llms.txt` and updated automatically when routes or annotations change.

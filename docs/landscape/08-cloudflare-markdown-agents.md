@@ -14,6 +14,7 @@ The key insight: instead of site owners writing custom middleware, Cloudflare do
 4. Cloudflare responds to the agent with `Content-Type: text/markdown`
 
 Two additional headers are added to the response:
+
 - `x-markdown-tokens: 478` — estimated token count of the markdown content
 - `content-signal: ai-train=yes, search=yes, ai-input=yes` — default content usage signals (configurable)
 
@@ -34,6 +35,7 @@ content-signal: ai-train=no, ai-input=yes, search=yes
 ```
 
 Three signals:
+
 - **`ai-train`**: May this content be used for training or fine-tuning LLMs?
 - **`ai-input`**: May this content be used for real-time retrieval (RAG, context injection)?
 - **`search`**: May this content be used for traditional search indexing?
@@ -64,6 +66,7 @@ No code changes required. No npm packages. No middleware.
 ## Technical Detail: How the Conversion Works
 
 Cloudflare's conversion pipeline:
+
 1. Origin serves HTML (200 OK, Content-Type: text/html)
 2. Cloudflare intercepts at edge, runs an HTML parser
 3. Strips `<nav>`, `<footer>`, `<aside>`, `<script>`, `<style>`, cookie banners (heuristic-based)
@@ -78,6 +81,7 @@ The `x-markdown-tokens` header allows agents to be informed about the expected c
 Cloudflare Markdown for Agents solves the content format problem. `@agentfriendly` solves the entire agent lifecycle problem.
 
 Specifically, `@agentfriendly`:
+
 - Works on **any infrastructure** (no Cloudflare required)
 - **Proactively serves markdown** to known agents even without the Accept header
 - Adds **access control** (deny training crawlers, require verified identity for premium content)

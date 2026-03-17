@@ -42,21 +42,12 @@ export function generateLlmsTxt(options: LlmsTxtGeneratorOptions): string {
   const { siteDomain, llmsTxtConfig, toolEntries } = options;
   const title = llmsTxtConfig.title ?? siteDomain;
   const description =
-    llmsTxtConfig.description ??
-    `${siteDomain} — an agent-friendly web application.`;
+    llmsTxtConfig.description ?? `${siteDomain} — an agent-friendly web application.`;
 
-  const lines: string[] = [
-    `# ${title}`,
-    ``,
-    `> ${description}`,
-    ``,
-  ];
+  const lines: string[] = [`# ${title}`, ``, `> ${description}`, ``];
 
   // Group manual entries and auto-discovered tool entries by section
-  const allEntries = [
-    ...(llmsTxtConfig.manualEntries ?? []),
-    ...toolEntries,
-  ];
+  const allEntries = [...(llmsTxtConfig.manualEntries ?? []), ...toolEntries];
 
   const sections = new Map<string, LlmsTxtEntry[]>();
   const defaultSection = "API & Tools";
@@ -240,7 +231,9 @@ function buildTypescriptParams(
 ): string {
   const params = Object.entries(properties).map(([name, prop]) => {
     const isRequired = required?.includes(name) ?? false;
-    const tsType = jsonTypeToTs(Array.isArray(prop.type) ? prop.type[0] ?? "unknown" : (prop.type ?? "unknown"));
+    const tsType = jsonTypeToTs(
+      Array.isArray(prop.type) ? (prop.type[0] ?? "unknown") : (prop.type ?? "unknown"),
+    );
     return `${name}${isRequired ? "" : "?"}: ${tsType}`;
   });
 
@@ -253,14 +246,21 @@ function buildTypescriptParams(
 
 function jsonTypeToTs(jsonType: string): string {
   switch (jsonType) {
-    case "string": return "string";
+    case "string":
+      return "string";
     case "number":
-    case "integer": return "number";
-    case "boolean": return "boolean";
-    case "array": return "unknown[]";
-    case "object": return "Record<string, unknown>";
-    case "null": return "null";
-    default: return "unknown";
+    case "integer":
+      return "number";
+    case "boolean":
+      return "boolean";
+    case "array":
+      return "unknown[]";
+    case "object":
+      return "Record<string, unknown>";
+    case "null":
+      return "null";
+    default:
+      return "unknown";
   }
 }
 

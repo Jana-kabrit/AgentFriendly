@@ -11,13 +11,13 @@ Discovery files are the "front door" for AI agents — they describe what your s
 
 AgentFriendly automatically serves the following endpoints for all requestors (including humans):
 
-| Path | Content-Type | Purpose |
-|------|-------------|---------|
-| `/llms.txt` | `text/markdown` | AI sitemap — key pages, tools, and context |
-| `/.well-known/agent.json` | `application/json` | AHP manifest — modes, endpoints, signals |
-| `/webagents.md` | `text/markdown` | In-browser tool manifest (webagents.md spec) |
-| `/.well-known/agent-tools.json` | `application/json` | Full JSON Schema tool definitions |
-| `/agent-debug` | `application/json` | Pipeline trace (debug mode only) |
+| Path                            | Content-Type       | Purpose                                      |
+| ------------------------------- | ------------------ | -------------------------------------------- |
+| `/llms.txt`                     | `text/markdown`    | AI sitemap — key pages, tools, and context   |
+| `/.well-known/agent.json`       | `application/json` | AHP manifest — modes, endpoints, signals     |
+| `/webagents.md`                 | `text/markdown`    | In-browser tool manifest (webagents.md spec) |
+| `/.well-known/agent-tools.json` | `application/json` | Full JSON Schema tool definitions            |
+| `/agent-debug`                  | `application/json` | Pipeline trace (debug mode only)             |
 
 ## /llms.txt
 
@@ -80,6 +80,7 @@ The AHP (Agent Handshake Protocol) manifest:
 ```
 
 **AHP Modes**:
+
 - `MODE1` — read-only content access
 - `MODE2` — synchronous tool calls
 - `MODE3` — asynchronous task execution

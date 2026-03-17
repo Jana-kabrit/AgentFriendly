@@ -163,9 +163,7 @@ export function validateDatabase(): void {
 
   // Report results
   if (errors.length === 0) {
-    console.log(
-      `✅ Validation passed: ${agents.length} agents, ${warnings} warning(s)\n`,
-    );
+    console.log(`✅ Validation passed: ${agents.length} agents, ${warnings} warning(s)\n`);
   } else {
     console.error(`❌ Validation failed: ${errors.length} error(s), ${warnings} warning(s)\n`);
     for (const err of errors) {

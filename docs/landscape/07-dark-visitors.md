@@ -29,11 +29,11 @@ Dark Visitors analyzes the raw HTTP request logs — every request that hits you
 ### Node.js SDK
 
 ```typescript
-import DarkVisitors from "@darkvisitors/node-sdk"
+import DarkVisitors from "@darkvisitors/node-sdk";
 
 const darkVisitors = new DarkVisitors({
-  accessToken: process.env.DARK_VISITORS_ACCESS_TOKEN
-})
+  accessToken: process.env.DARK_VISITORS_ACCESS_TOKEN,
+});
 
 // Express middleware
 app.use(async (req, res, next) => {
@@ -41,14 +41,15 @@ app.use(async (req, res, next) => {
     requestPath: req.path,
     requestMethod: req.method,
     requestHeaders: req.headers,
-  })
-  next()
-})
+  });
+  next();
+});
 ```
 
 ### Analytics Dashboard
 
 The dashboard shows:
+
 - Which agents are visiting, how often, and which pages
 - Verification status (verified bots vs. suspected scrapers)
 - LLM referral conversion rates (how many humans from AI-cited links become customers)
@@ -73,6 +74,7 @@ This is valuable because it shows the real impact of agent-friendly content: not
 Dark Visitors is a SaaS — all your data goes to their servers. `@agentfriendly` analytics (Layer 3) are **self-hosted**. Your agent traffic data stays in your own SQLite database, Postgres, or ClickHouse.
 
 Additionally, Dark Visitors only provides analytics and `robots.txt` management. `@agentfriendly` provides:
+
 - The same analytics (self-hosted)
 - The same LLM referral tracking
 - The same `robots.txt` auto-generation

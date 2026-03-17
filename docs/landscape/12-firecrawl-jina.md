@@ -17,6 +17,7 @@ They are fundamentally different from `@agentfriendly`: instead of helping a sit
 ### What Firecrawl Does
 
 Firecrawl converts any URL to clean Markdown or structured JSON. It handles:
+
 - JavaScript-rendered SPAs (it runs a real Chromium browser)
 - Pagination (automatically crawls "next" buttons)
 - Authentication (can handle login flows)
@@ -45,14 +46,14 @@ crawl_result = app.crawl_url("https://docs.example.com", {
 
 ### Firecrawl vs. Jina Reader
 
-| Feature | Firecrawl | Jina Reader |
-|---------|-----------|-------------|
-| Approach | Chromium browser + LLM-assisted extraction | Rule-based + ReaderLM-v2 (1.5B model) |
-| JavaScript | Full Chromium rendering | Headless Chrome with wait-for selectors |
-| Speed | 2–100 concurrent browsers | 20–5,000 RPM throughput |
-| Pricing | Per page (non-rolling credits) | Per token (rolling 6 months) |
-| CLI/API | REST API, Python SDK, TypeScript SDK | Prefix URL with `r.jina.ai/` |
-| Schema extraction | Yes — JSON schemas without selectors | Limited |
+| Feature           | Firecrawl                                  | Jina Reader                             |
+| ----------------- | ------------------------------------------ | --------------------------------------- |
+| Approach          | Chromium browser + LLM-assisted extraction | Rule-based + ReaderLM-v2 (1.5B model)   |
+| JavaScript        | Full Chromium rendering                    | Headless Chrome with wait-for selectors |
+| Speed             | 2–100 concurrent browsers                  | 20–5,000 RPM throughput                 |
+| Pricing           | Per page (non-rolling credits)             | Per token (rolling 6 months)            |
+| CLI/API           | REST API, Python SDK, TypeScript SDK       | Prefix URL with `r.jina.ai/`            |
+| Schema extraction | Yes — JSON schemas without selectors       | Limited                                 |
 
 ---
 
@@ -104,17 +105,20 @@ Both tools extract content **after the fact** — they are applied by agent deve
 ## When To Use Them
 
 As an **agent developer** (not a site owner):
+
 - You need to scrape a site that has no agent-friendly features
 - You need to crawl a large site for RAG pipeline ingestion
 - You need to extract structured data from an HTML-only source
 - You need anti-bot bypass for a site using Cloudflare protection
 
 As a **site owner**:
+
 - You do not need Firecrawl or Jina Reader — you need `@agentfriendly`
 
 ## How `@agentfriendly` Makes These Unnecessary
 
 When a site implements `@agentfriendly`, agents no longer need Firecrawl or Jina Reader to get clean content from that site:
+
 - Content is served as markdown natively (Layer 2)
 - Discovery files tell agents exactly what content exists (Layer 1)
 - Tools are callable directly via the tool manifest (Layer 6)

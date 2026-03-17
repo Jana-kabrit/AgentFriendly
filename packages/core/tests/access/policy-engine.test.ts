@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
 
-import { evaluatePolicy, meetsMinimumTier, generateRobotsTxtAiSection } from "../../src/access/policy-engine.js";
+import {
+  evaluatePolicy,
+  meetsMinimumTier,
+  generateRobotsTxtAiSection,
+} from "../../src/access/policy-engine.js";
 
 import type { AgentContext } from "../../src/types/agent-context.js";
 import type { AccessConfig } from "../../src/types/config.js";

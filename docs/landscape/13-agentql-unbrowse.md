@@ -81,6 +81,7 @@ This query finds the search bar, all products with their titles, prices, stock s
 ### What It Is
 
 Unbrowse automatically reverse-engineers websites into APIs. You point it at a website, and it:
+
 1. Crawls the site
 2. Identifies the underlying API calls the site makes to its backend
 3. Captures authentication flows
@@ -93,6 +94,7 @@ Unbrowse also learns "skills" — reusable task sequences shared in a marketplac
 ### How It Works (Technically)
 
 Unbrowse instruments a browser session (likely using Chrome DevTools Protocol) to intercept all XHR/fetch calls the website makes. It records:
+
 - API endpoint URLs
 - Request parameters
 - Authentication headers (sanitized)
@@ -108,16 +110,17 @@ Both AgentQL and Unbrowse target **agent developers** who need to interact with 
 
 They are solving the problem from the **consumption side** (the agent's perspective). `@agentfriendly` solves the problem from the **production side** (the site owner's perspective).
 
-| Perspective | Tool | Approach |
-|------------|------|---------|
-| Agent developer | AgentQL | Query the DOM with AI-powered selectors |
-| Agent developer | Unbrowse | Discover and call the site's real API |
-| Agent developer | Firecrawl/Jina | Extract clean text content from HTML |
-| Site owner | **@agentfriendly** | Expose native agent-friendly interfaces |
+| Perspective     | Tool               | Approach                                |
+| --------------- | ------------------ | --------------------------------------- |
+| Agent developer | AgentQL            | Query the DOM with AI-powered selectors |
+| Agent developer | Unbrowse           | Discover and call the site's real API   |
+| Agent developer | Firecrawl/Jina     | Extract clean text content from HTML    |
+| Site owner      | **@agentfriendly** | Expose native agent-friendly interfaces |
 
 ## The Key Limitation
 
 Both AgentQL and Unbrowse require a browser session or reverse-engineering to function. They are:
+
 - **Slower**: Browser startup, page load, rendering
 - **Fragile**: Sites can detect and block automated browsers; Unbrowse-discovered APIs may not be public
 - **Uncooperative**: The site has not consented to being accessed this way
@@ -126,6 +129,7 @@ Both AgentQL and Unbrowse require a browser session or reverse-engineering to fu
 ## How `@agentfriendly` Makes Them Unnecessary
 
 When a site implements `@agentfriendly`:
+
 - **AgentQL is unnecessary** — tools are declared with clean JSON Schema v7 definitions. No DOM querying needed.
 - **Unbrowse is unnecessary** — the site explicitly exposes its tool interface at `/.well-known/agent-tools.json`. There is nothing to reverse-engineer.
 - **Both are unnecessary** — the site welcomes agent access, declares what agents can do, and provides structured interfaces for doing it.

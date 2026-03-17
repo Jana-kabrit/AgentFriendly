@@ -74,11 +74,7 @@ export {
 } from "./access/index.js";
 
 // Layer 5: Privacy
-export {
-  maskTextContent,
-  maskJsonFields,
-  BUILT_IN_PII_PATTERNS,
-} from "./privacy/index.js";
+export { maskTextContent, maskJsonFields, BUILT_IN_PII_PATTERNS } from "./privacy/index.js";
 
 // Layer 6: Tools
 export { ToolRegistry, InMemoryTaskQueue } from "./tools/index.js";

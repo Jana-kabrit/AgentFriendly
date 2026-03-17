@@ -1,8 +1,4 @@
-export {
-  evaluatePolicy,
-  meetsMinimumTier,
-  generateRobotsTxtAiSection,
-} from "./policy-engine.js";
+export { evaluatePolicy, meetsMinimumTier, generateRobotsTxtAiSection } from "./policy-engine.js";
 
 export { InMemoryRateLimiter, getRateLimitKey } from "./rate-limiter.js";
 

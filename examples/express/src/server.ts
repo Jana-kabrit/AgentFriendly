@@ -25,7 +25,7 @@ app.use(
     },
     content: {
       markdown: true,
-      signals: { "ai-train": false, "ai-input": true, "search": true },
+      signals: { "ai-train": false, "ai-input": true, search: true },
     },
     analytics: {
       enabled: true,

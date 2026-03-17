@@ -16,7 +16,7 @@ export const middleware = createAgentFriendlyMiddleware({
     signals: {
       "ai-train": false,
       "ai-input": true,
-      "search": true,
+      search: true,
     },
   },
   analytics: {

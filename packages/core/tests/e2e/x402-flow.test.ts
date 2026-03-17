@@ -15,10 +15,7 @@ import type { AgentRequest } from "../../src/types/agent-request.js";
 const WALLET = "0xAbCd1234567890abcdef1234567890abcdef1234";
 const PRICE = "0.001";
 
-function agentRequest(
-  path: string,
-  paymentHeader?: string,
-): AgentRequest {
+function agentRequest(path: string, paymentHeader?: string): AgentRequest {
   const headers: Record<string, string> = { "user-agent": "GPTBot/1.0" };
   if (paymentHeader) headers["x-payment"] = paymentHeader;
   return {
@@ -32,11 +29,7 @@ function agentRequest(
   };
 }
 
-function makePaymentToken(options: {
-  to: string;
-  amount: number;
-  network: string;
-}): string {
+function makePaymentToken(options: { to: string; amount: number; network: string }): string {
   return Buffer.from(JSON.stringify(options)).toString("base64");
 }
 
@@ -59,9 +52,7 @@ describe("E2E: x402 Monetization — payment challenge", () => {
     expect(result.earlyResponse!.status).toBe(402);
     expect(result.earlyResponse!.headers["Accept-Payment"]).toBe("x402/v1");
     expect(result.earlyResponse!.headers["X-Payment-Required"]).toBeTruthy();
-    const paymentTerms = JSON.parse(
-      result.earlyResponse!.headers["X-Payment-Required"],
-    );
+    const paymentTerms = JSON.parse(result.earlyResponse!.headers["X-Payment-Required"]);
     expect(paymentTerms.accepts[0].network).toBe("base-mainnet");
   });
 

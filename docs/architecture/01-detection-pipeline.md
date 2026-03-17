@@ -24,14 +24,15 @@ Signals run in priority order. Each populates a `DetectionSignal[]` on the resul
 
 Parses the `Accept` HTTP header for agent-specific MIME types.
 
-| MIME type | Indicates |
-|-----------|-----------|
-| `text/markdown` | Agent is capable of consuming markdown; may be a browser extension or an LLM-driven agent |
-| `application/agent+json` (explicit) | Agent explicitly identifies as an AI agent using the AHP standard |
+| MIME type                           | Indicates                                                                                 |
+| ----------------------------------- | ----------------------------------------------------------------------------------------- |
+| `text/markdown`                     | Agent is capable of consuming markdown; may be a browser extension or an LLM-driven agent |
+| `application/agent+json` (explicit) | Agent explicitly identifies as an AI agent using the AHP standard                         |
 
 Wildcard `*/*` entries never trigger a positive signal — only explicit mentions.
 
 **What it produces:**
+
 - `prefersMarkdown: boolean`
 - `prefersAgentJson: boolean`
 
@@ -58,6 +59,7 @@ Accept: */*
 Loads `@agentfriendly/ua-database/data/agents.json` and performs normalized prefix matching against the User-Agent string.
 
 The database stores entries as:
+
 ```json
 {
   "prefix": "gptbot",
@@ -80,15 +82,15 @@ If matched, the tier is set to at least `"known-agent"`, and `agentOperator` and
 
 Analyzes the presence or absence of typical browser vs. agent patterns in request headers.
 
-| Check | Description |
-|-------|-------------|
-| Missing `Accept-Language` | Browsers always send this; agents frequently omit it |
-| Missing `Cookie` on stateful routes | Real user sessions usually have session cookies |
-| Missing `Sec-Fetch-*` headers | Fetch Metadata headers are browser-specific (added by Blink/WebKit) |
-| Minimal `Accept` header | Browsers send 5+ MIME types; minimal accept headers suggest non-browser |
-| `Authorization` header present | Suggests API-style call pattern |
-| `X-Agent-*` custom headers | Many agent frameworks inject these |
-| UA string starts with known script patterns | e.g., `python-requests`, `axios`, `curl/` |
+| Check                                       | Description                                                             |
+| ------------------------------------------- | ----------------------------------------------------------------------- |
+| Missing `Accept-Language`                   | Browsers always send this; agents frequently omit it                    |
+| Missing `Cookie` on stateful routes         | Real user sessions usually have session cookies                         |
+| Missing `Sec-Fetch-*` headers               | Fetch Metadata headers are browser-specific (added by Blink/WebKit)     |
+| Minimal `Accept` header                     | Browsers send 5+ MIME types; minimal accept headers suggest non-browser |
+| `Authorization` header present              | Suggests API-style call pattern                                         |
+| `X-Agent-*` custom headers                  | Many agent frameworks inject these                                      |
+| UA string starts with known script patterns | e.g., `python-requests`, `axios`, `curl/`                               |
 
 A score of 2 or more suspicious patterns raises the tier to `"suspected-agent"`. This is conservative by design to avoid false positives on API clients.
 
@@ -108,6 +110,7 @@ Validates `Signature` and `Signature-Input` headers according to [RFC 9421](http
 Uses Ed25519 signature verification via the Web Crypto API.
 
 If valid, the tier becomes `"verified-agent"` and `verifiedIdentity` is set on `AgentContext`:
+
 ```typescript
 verifiedIdentity: {
   agentId: "gptbot-prod-1",
@@ -125,6 +128,7 @@ verifiedIdentity: {
 Validates Agent Identity Tokens (AITs) — JWTs signed by the agent's operator — carried in the `X-Agent-Identity-Token` header. Uses `jose` for JWT verification.
 
 Expected claims:
+
 ```json
 {
   "sub": "agent-id",
@@ -149,10 +153,11 @@ The pipeline runs all four signals concurrently (where safe) and merges results:
 export async function runDetectionPipeline(
   request: AgentRequest,
   config: DetectionConfig,
-): Promise<AgentContext>
+): Promise<AgentContext>;
 ```
 
 Resolution logic:
+
 1. Run Accept header and Header Heuristics synchronously.
 2. Run UA Database lookup.
 3. If `enableVerification`, run identity verifiers.
@@ -167,15 +172,15 @@ Resolution logic:
 
 ```typescript
 interface AgentContext {
-  readonly requestId: string;      // UUID generated per request
+  readonly requestId: string; // UUID generated per request
   readonly timestamp: Date;
   readonly tier: TrustTier;
   readonly signals: DetectionSignal[];
   readonly userAgent: string | null;
-  readonly agentOperator: string | null;   // e.g. "openai"
-  readonly agentType: string | null;       // e.g. "crawler" | "assistant"
+  readonly agentOperator: string | null; // e.g. "openai"
+  readonly agentType: string | null; // e.g. "crawler" | "assistant"
   readonly verifiedIdentity: VerifiedIdentity | null;
-  readonly tenantContext: TenantContext | null;  // populated by Layer 8
+  readonly tenantContext: TenantContext | null; // populated by Layer 8
 }
 ```
 
@@ -194,11 +199,11 @@ detection: {
 
 ## Performance Characteristics
 
-| Scenario | Typical latency |
-|----------|----------------|
-| Human request (all signals = negative) | < 1ms |
-| Known bot (UA database hit) | < 1ms |
-| Suspected agent (heuristics) | < 1ms |
-| RFC 9421 verification (cache hit) | < 5ms |
-| RFC 9421 verification (first request, key fetch) | 20–80ms |
-| Clawdentity AIT (JWT verify) | < 5ms |
+| Scenario                                         | Typical latency |
+| ------------------------------------------------ | --------------- |
+| Human request (all signals = negative)           | < 1ms           |
+| Known bot (UA database hit)                      | < 1ms           |
+| Suspected agent (heuristics)                     | < 1ms           |
+| RFC 9421 verification (cache hit)                | < 5ms           |
+| RFC 9421 verification (first request, key fetch) | 20–80ms         |
+| Clawdentity AIT (JWT verify)                     | < 5ms           |

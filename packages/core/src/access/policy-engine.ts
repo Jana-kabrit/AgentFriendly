@@ -81,11 +81,7 @@ export function evaluatePolicy(
 
   // 3. Suspected-agent policy (default: allow-public, which means check route rules)
   if (context.tier === "suspected-agent" && config.agentTypes?.["suspected-agent"]) {
-    const result = applyAgentPolicy(
-      config.agentTypes["suspected-agent"],
-      path,
-      config.allow ?? [],
-    );
+    const result = applyAgentPolicy(config.agentTypes["suspected-agent"], path, config.allow ?? []);
     if (result) return result;
   }
 
@@ -136,10 +132,7 @@ function applyAgentPolicy(
  * Check whether a request meets the minimum trust tier requirement for a route.
  * Used by the tool registry to enforce `minTier: "verified-agent"` on tools.
  */
-export function meetsMinimumTier(
-  actualTier: TrustTier,
-  requiredTier: TrustTier,
-): boolean {
+export function meetsMinimumTier(actualTier: TrustTier, requiredTier: TrustTier): boolean {
   const tierOrder: Record<TrustTier, number> = {
     human: 0,
     "suspected-agent": 1,
@@ -171,18 +164,8 @@ const CATEGORY_UA_REPRESENTATIVES: Record<string, string[]> = {
     "cohere-ai",
     "AI2Bot",
   ],
-  "search-bot": [
-    "OAI-SearchBot",
-    "ChatGPT-User",
-    "PerplexityBot",
-    "YouBot",
-    "DuckAssistBot",
-  ],
-  "interactive-agent": [
-    "GoogleAgent-URLContext",
-    "Claude-Web",
-    "Claude-SearchBot",
-  ],
+  "search-bot": ["OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "YouBot", "DuckAssistBot"],
+  "interactive-agent": ["GoogleAgent-URLContext", "Claude-Web", "Claude-SearchBot"],
 };
 
 /**

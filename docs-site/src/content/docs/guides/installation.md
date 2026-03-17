@@ -79,11 +79,11 @@ pnpm add jose
 
 ## Peer Requirements
 
-| Package | Required Peer |
-|---------|--------------|
-| `@agentfriendly/next` | `next >= 14.0` |
+| Package                  | Required Peer    |
+| ------------------------ | ---------------- |
+| `@agentfriendly/next`    | `next >= 14.0`   |
 | `@agentfriendly/express` | `express >= 4.0` |
-| `@agentfriendly/hono` | `hono >= 3.0` |
-| `@agentfriendly/nuxt` | `nuxt >= 3.0` |
-| `@agentfriendly/astro` | `astro >= 4.0` |
-| Python | `python >= 3.11` |
+| `@agentfriendly/hono`    | `hono >= 3.0`    |
+| `@agentfriendly/nuxt`    | `nuxt >= 3.0`    |
+| `@agentfriendly/astro`   | `astro >= 4.0`   |
+| Python                   | `python >= 3.11` |

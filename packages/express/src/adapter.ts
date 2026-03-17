@@ -1,4 +1,3 @@
-
 import {
   AgentFriendlyMiddleware,
   agentContextStorage,
@@ -64,16 +63,14 @@ function toAgentRequest(req: Request): AgentRequest {
 
   // Normalize path: strip trailing slash (except root)
   const rawPath = req.path;
-  const path = rawPath.length > 1 && rawPath.endsWith("/")
-    ? rawPath.slice(0, -1)
-    : rawPath;
+  const path = rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
   return {
     method: req.method,
     url: `${req.protocol}://${req.get("host") ?? "localhost"}${req.originalUrl}`,
     path,
     headers,
-    body: typeof req.body === "string" ? req.body : (req.body ? JSON.stringify(req.body) : null),
+    body: typeof req.body === "string" ? req.body : req.body ? JSON.stringify(req.body) : null,
     query,
     ip: req.ip ?? null,
   };
@@ -82,9 +79,7 @@ function toAgentRequest(req: Request): AgentRequest {
 /**
  * Create an Express middleware function from an AgentFriendly configuration.
  */
-export function createAgentFriendlyMiddleware(
-  config: AgentFriendlyConfig = {},
-): RequestHandler {
+export function createAgentFriendlyMiddleware(config: AgentFriendlyConfig = {}): RequestHandler {
   const sdk = new AgentFriendlyMiddleware(config);
 
   return async function agentFriendlyMiddleware(
@@ -124,11 +119,8 @@ export function createAgentFriendlyMiddleware(
         const originalSend = res.send.bind(res);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         res.send = function patchedSend(body?: any): Response {
-          const contentType = res.getHeader("Content-Type") as string ?? "";
-          if (
-            typeof body === "string" &&
-            contentType.includes("text/html")
-          ) {
+          const contentType = (res.getHeader("Content-Type") as string) ?? "";
+          if (typeof body === "string" && contentType.includes("text/html")) {
             // Convert asynchronously — Express doesn't support async send natively,
             // so we convert and immediately call the original send
             convertResponseToMarkdown(

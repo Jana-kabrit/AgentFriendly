@@ -49,7 +49,9 @@ async function fetchCheck(url: string, expectedContentType?: string): Promise<Ch
   }
 }
 
-async function fetchJson(url: string): Promise<{ ok: boolean; data?: Record<string, unknown>; error?: string }> {
+async function fetchJson(
+  url: string,
+): Promise<{ ok: boolean; data?: Record<string, unknown>; error?: string }> {
   try {
     const res = await fetch(url, {
       headers: { Accept: "application/json", "User-Agent": "AgentFriendlyCLI/0.1.0" },
@@ -64,9 +66,7 @@ async function fetchJson(url: string): Promise<{ ok: boolean; data?: Record<stri
 }
 
 export async function runValidate(options: ValidateOptions): Promise<void> {
-  const baseUrl = options.url
-    ? options.url.replace(/\/$/, "")
-    : "http://localhost:3000";
+  const baseUrl = options.url ? options.url.replace(/\/$/, "") : "http://localhost:3000";
 
   header(`Validating: ${baseUrl}`);
   divider();

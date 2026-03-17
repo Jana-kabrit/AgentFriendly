@@ -60,26 +60,26 @@ A simpler approach used by some sites: requesting `https://example.com/docs/gett
 
 ## Who Has Implemented It
 
-| Organization | Implementation | Status |
-|---|---|---|
-| Vercel | Next.js middleware + Contentful | Feb 2026, live |
-| Checkly | Documentation site | Feb 2026, live |
-| Cloudflare | CDN-level (see Explainer 08) | Feb 2026, 3.8M+ domains |
-| Anthropic | llms.txt + .md suffix | Active |
+| Organization | Implementation                  | Status                  |
+| ------------ | ------------------------------- | ----------------------- |
+| Vercel       | Next.js middleware + Contentful | Feb 2026, live          |
+| Checkly      | Documentation site              | Feb 2026, live          |
+| Cloudflare   | CDN-level (see Explainer 08)    | Feb 2026, 3.8M+ domains |
+| Anthropic    | llms.txt + .md suffix           | Active                  |
 
 ## Which Agents Send It
 
 As of February 2026 (source: Checkly's live study):
 
-| Agent | Sends Accept: text/markdown | Accept Header Value |
-|-------|---------------------------|---------------------|
-| Claude Code (v2.1.38) | ✅ Yes | `text/markdown, text/html, */*` |
-| Cursor (2.4.28) | ✅ Yes | With quality factors |
-| OpenCode (1.2.5) | ✅ Yes | With quality factors |
-| OpenAI Codex | ❌ No | Standard browser Accept |
-| Gemini CLI (0.28.2) | ❌ No | `*/*` |
-| GitHub Copilot | ❌ No | Standard browser Accept |
-| Windsurf (1.9552.21) | ❌ No | `*/*` |
+| Agent                 | Sends Accept: text/markdown | Accept Header Value             |
+| --------------------- | --------------------------- | ------------------------------- |
+| Claude Code (v2.1.38) | ✅ Yes                      | `text/markdown, text/html, */*` |
+| Cursor (2.4.28)       | ✅ Yes                      | With quality factors            |
+| OpenCode (1.2.5)      | ✅ Yes                      | With quality factors            |
+| OpenAI Codex          | ❌ No                       | Standard browser Accept         |
+| Gemini CLI (0.28.2)   | ❌ No                       | `*/*`                           |
+| GitHub Copilot        | ❌ No                       | Standard browser Accept         |
+| Windsurf (1.9552.21)  | ❌ No                       | `*/*`                           |
 
 **Only 3 of 7 major agents send this header.** This is the "text/markdown adoption problem" — the reason `@agentfriendly` uses a multi-signal detection pipeline (UA database, header heuristics) rather than relying on this header alone.
 
@@ -97,24 +97,24 @@ Content negotiation is Layer 2 of the SDK. The difference:
 
 ```typescript
 // Minimal implementation without the SDK (for reference)
-import { Readability } from "@mozilla/readability"
-import { JSDOM } from "jsdom"
-import TurndownService from "turndown"
+import { Readability } from "@mozilla/readability";
+import { JSDOM } from "jsdom";
+import TurndownService from "turndown";
 
 function acceptsMarkdown(acceptHeader: string | undefined): boolean {
-  if (!acceptHeader) return false
-  const parts = acceptHeader.split(",").map((p) => p.trim())
-  const mdPart = parts.find((p) => p.startsWith("text/markdown"))
-  const htmlPart = parts.find((p) => p.startsWith("text/html"))
-  if (!mdPart) return false
-  const mdQ = parseQ(mdPart)
-  const htmlQ = htmlPart ? parseQ(htmlPart) : 0.9
-  return mdQ >= htmlQ
+  if (!acceptHeader) return false;
+  const parts = acceptHeader.split(",").map((p) => p.trim());
+  const mdPart = parts.find((p) => p.startsWith("text/markdown"));
+  const htmlPart = parts.find((p) => p.startsWith("text/html"));
+  if (!mdPart) return false;
+  const mdQ = parseQ(mdPart);
+  const htmlQ = htmlPart ? parseQ(htmlPart) : 0.9;
+  return mdQ >= htmlQ;
 }
 
 function parseQ(part: string): number {
-  const match = /;q=([\d.]+)/.exec(part)
-  return match ? Number(match[1]) : 1.0
+  const match = /;q=([\d.]+)/.exec(part);
+  return match ? Number(match[1]) : 1.0;
 }
 
 // In your Express middleware:
@@ -122,6 +122,6 @@ app.use((req, res, next) => {
   if (acceptsMarkdown(req.headers.accept)) {
     // Intercept response, convert HTML to markdown
   }
-  next()
-})
+  next();
+});
 ```

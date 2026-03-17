@@ -15,11 +15,11 @@ agentfriendly test-detection [options]
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--ua <string>` | Chrome UA | User-Agent string to simulate |
-| `--accept <string>` | `text/html,*/*` | Accept header to simulate |
-| `--verbose` | false | Show full pipeline trace |
+| Option              | Default         | Description                   |
+| ------------------- | --------------- | ----------------------------- |
+| `--ua <string>`     | Chrome UA       | User-Agent string to simulate |
+| `--accept <string>` | `text/html,*/*` | Accept header to simulate     |
+| `--verbose`         | false           | Show full pipeline trace      |
 
 ## Examples
 

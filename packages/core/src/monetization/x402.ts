@@ -102,7 +102,8 @@ export function generate402Response(
   const walletAddress = pricing.to ?? config.walletAddress ?? "";
   const network = pricing.network ?? config.network ?? "base-mainnet";
   const amountMicroUsdc = parsePriceToMicroUsdc(pricing.price);
-  const usdcContract = USDC_CONTRACTS[network as keyof typeof USDC_CONTRACTS] ?? USDC_CONTRACTS["base-mainnet"];
+  const usdcContract =
+    USDC_CONTRACTS[network as keyof typeof USDC_CONTRACTS] ?? USDC_CONTRACTS["base-mainnet"];
 
   const paymentTerms = {
     version: "1",
@@ -186,8 +187,8 @@ export async function verifyPaymentProof(
     const decodedJson = Buffer.from(paymentHeader, "base64").toString("utf-8");
     const proof = JSON.parse(decodedJson) as Record<string, unknown>;
 
-    const network = proof["network"] as string ?? "";
-    const to = proof["to"] as string ?? "";
+    const network = (proof["network"] as string) ?? "";
+    const to = (proof["to"] as string) ?? "";
     const amount = Number(proof["amount"] ?? 0);
     const amountUsdc = amount / Math.pow(10, USDC_DECIMALS);
 
@@ -197,10 +198,22 @@ export async function verifyPaymentProof(
     const requiredNetwork = requiredPricing.network ?? "base-mainnet";
 
     if (to.toLowerCase() !== requiredTo) {
-      return { valid: false, amountUsdc: 0, network: "", proofHash: "", errorReason: "wrong-recipient" };
+      return {
+        valid: false,
+        amountUsdc: 0,
+        network: "",
+        proofHash: "",
+        errorReason: "wrong-recipient",
+      };
     }
     if (amount < requiredAmount) {
-      return { valid: false, amountUsdc, network, proofHash: "", errorReason: "insufficient-amount" };
+      return {
+        valid: false,
+        amountUsdc,
+        network,
+        proofHash: "",
+        errorReason: "insufficient-amount",
+      };
     }
     if (network !== requiredNetwork) {
       return { valid: false, amountUsdc, network, proofHash: "", errorReason: "wrong-network" };

@@ -28,9 +28,10 @@ When an AI agent visits a website today, it receives the same response a browser
 
 ## 2. What Is a Web Agent?
 
-An **AI agent** is a program that uses a large language model (LLM, like GPT-5.3 or Claude) as its "brain" to make decisions and take actions autonomously. Unlike a chatbot that just answers questions, an agent can also *do things* — it can browse websites, fill out forms, write code, call APIs, and complete multi-step tasks without a human guiding each step.
+An **AI agent** is a program that uses a large language model (LLM, like GPT-5.3 or Claude) as its "brain" to make decisions and take actions autonomously. Unlike a chatbot that just answers questions, an agent can also _do things_ — it can browse websites, fill out forms, write code, call APIs, and complete multi-step tasks without a human guiding each step.
 
 **Examples of web agents you have probably encountered:**
+
 - **Claude Code / Cursor / GitHub Copilot** — AI coding assistants that browse documentation sites while helping you write code.
 - **ChatGPT with web browsing** — ChatGPT can visit websites to answer questions with up-to-date information.
 - **Perplexity.ai** — An AI search engine that visits many websites to synthesize an answer.
@@ -43,9 +44,10 @@ An **AI agent** is a program that uses a large language model (LLM, like GPT-5.3
 
 ## 3. The Problem: Websites Were Built for Human Eyes
 
-When you visit a website in Chrome, the server sends back an HTML file. That file contains the raw page content *plus* instructions for how to display it visually — colors, fonts, layout, animations, navigation menus, footers, sidebar widgets, ads, and so on. For a human, all of this makes the page easy and pleasant to read. For an AI agent, none of it matters.
+When you visit a website in Chrome, the server sends back an HTML file. That file contains the raw page content _plus_ instructions for how to display it visually — colors, fonts, layout, animations, navigation menus, footers, sidebar widgets, ads, and so on. For a human, all of this makes the page easy and pleasant to read. For an AI agent, none of it matters.
 
 Here is a concrete example. The Checkly documentation site has a page about monitoring. That page:
+
 - As **HTML** (what the browser gets): **615 KB**, **180,573 tokens**
 - As **Markdown** (just the content): **2.3 KB**, **478 tokens**
 
@@ -62,6 +64,7 @@ LLMs like GPT-5.3 do not read text the way a human reads it. They process text i
 **Current pricing (GPT-5.3, March 2026):** $1.75 per million input tokens, $14 per million output tokens.
 
 Reading one 615 KB HTML page costs approximately:
+
 - **$0.32** if processed as raw HTML (180,573 tokens × $1.75/M)
 - **$0.0008** if processed as Markdown (478 tokens × $1.75/M)
 
@@ -86,6 +89,7 @@ The web-agent space exploded in January–March 2026. Here is everything that ha
 **Limitation**: Not widely adopted by agents yet. Anthropic, Perplexity, and a few others check for it. Most agents still ignore it.
 
 **Example:**
+
 ```
 # Acme Corp
 
@@ -108,8 +112,9 @@ The web-agent space exploded in January–March 2026. Here is everything that ha
 **How it works**: You add specific AI user-agent names to your `robots.txt` with `Disallow` rules.
 
 **Important distinction**: There are two types of AI crawlers:
+
 - **Training crawlers** (GPTBot, ClaudeBot, Google-Extended): These visit your site to absorb content into a model's training data. They do not send traffic back to you — they just take your content.
-- **Citation/browsing bots** (ChatGPT-User, PerplexityBot): These visit your site when an AI assistant is answering a question, and they often *cite* your site, which can drive referral traffic to you.
+- **Citation/browsing bots** (ChatGPT-User, PerplexityBot): These visit your site when an AI assistant is answering a question, and they often _cite_ your site, which can drive referral traffic to you.
 
 Most site owners want to block training crawlers but allow citation bots.
 
@@ -122,9 +127,11 @@ Most site owners want to block training crawlers but allow citation bots.
 **What it is**: A standard mechanism (built into HTTP since 1997) where a client tells the server what format it prefers.
 
 **How it works**: The agent adds an `Accept` header to its request:
+
 ```
 Accept: text/markdown, text/html, */*
 ```
+
 The server checks this header and — if it supports it — returns the same content as Markdown instead of HTML.
 
 **The problem**: Only 3 out of 7 major agents actually send this header (Claude Code, Cursor, OpenCode). Gemini CLI, Windsurf, GitHub Copilot, and OpenAI Codex do not. So relying only on this header misses the majority of agent traffic.
@@ -133,7 +140,7 @@ The server checks this header and — if it supports it — returns the same con
 
 ### 5.4 Cloudflare "Markdown for Agents" — CDN-Level Conversion
 
-**What it is**: Cloudflare is the company that powers the network layer for roughly 20% of all websites. They built a feature (February 2026) that automatically converts your HTML to Markdown *at their servers*, before sending it to any agent.
+**What it is**: Cloudflare is the company that powers the network layer for roughly 20% of all websites. They built a feature (February 2026) that automatically converts your HTML to Markdown _at their servers_, before sending it to any agent.
 
 **How it works**: When an agent visits a site on Cloudflare, Cloudflare detects the agent's User-Agent, converts the HTML to Markdown on the fly, and returns the Markdown version. It also adds an `x-markdown-tokens` header with the estimated token count.
 
@@ -146,9 +153,11 @@ The server checks this header and — if it supports it — returns the same con
 **What it is**: A new HTTP response header format (February 2026) that lets websites declare whether their content can be used for AI training, real-time retrieval, or search indexing.
 
 **How it works**: Your server adds a `Content-Signal` header:
+
 ```
 Content-Signal: ai-train=no, ai-input=yes, search=yes
 ```
+
 This tells crawlers: "You can use my content to answer real-time queries (AI input), and you can index it for search — but you cannot use it to train a new model."
 
 **Who cares**: AI companies have legally committed to respecting these signals under EU law (EU Directive 2019/790). Setting `ai-train=no` gives you legal recourse if a company uses your content for training despite the signal.
@@ -157,9 +166,10 @@ This tells crawlers: "You can use my content to answer real-time queries (AI inp
 
 ### 5.6 `webagents.md` — JavaScript Functions for Agents
 
-**What it is**: A proposal by the browser-use project. Instead of just reading your website, agents can *call functions* you publish in a special manifest file.
+**What it is**: A proposal by the browser-use project. Instead of just reading your website, agents can _call functions_ you publish in a special manifest file.
 
 **How it works**:
+
 1. You add a `<meta>` tag to your site: `<meta name="webagents-md" content="/webagents.md">`
 2. You create a `/webagents.md` file that lists JavaScript functions available on your site, like a menu
 3. An agent framework reads the manifest, sees you have a `searchProducts(query, filters)` function, and calls it directly
@@ -174,6 +184,7 @@ This tells crawlers: "You can use my content to answer real-time queries (AI inp
 **What it is**: An emerging standard for how agents discover and interact with websites. It defines a `/.well-known/agent.json` file that describes what your site can do.
 
 **How it works**: Agents look for `/.well-known/agent.json` on your domain. The file describes three interaction modes:
+
 - **MODE1**: Read-only. Agent reads content as markdown (most basic).
 - **MODE2**: Q&A. Agent can POST questions to an endpoint, get structured answers back.
 - **MODE3**: Task delegation. Agent submits a full task, your site's own AI handles it and reports back when done.
@@ -182,17 +193,18 @@ This tells crawlers: "You can use my content to answer real-time queries (AI inp
 
 ### 5.8 Agent Identity Verification — Proving Who Is Calling
 
-**What it is**: Because any HTTP client can lie about its User-Agent header (e.g., anyone can add `User-Agent: GPTBot/1.0` and pretend to be OpenAI), a system was needed to *cryptographically prove* an agent's identity.
+**What it is**: Because any HTTP client can lie about its User-Agent header (e.g., anyone can add `User-Agent: GPTBot/1.0` and pretend to be OpenAI), a system was needed to _cryptographically prove_ an agent's identity.
 
 **How it works (RFC 9421 — the main standard)**:
+
 - The agent operator (e.g., OpenAI) generates a cryptographic key pair — a public key and a private key.
 - They publish the public key at a known URL on their domain.
-- Every request their agent sends includes a *digital signature* — a mathematical proof that was created using their private key.
+- Every request their agent sends includes a _digital signature_ — a mathematical proof that was created using their private key.
 - Your server can verify that signature against their public key. If it matches, the request is genuinely from that operator. It is impossible to forge without the private key.
 
 > **Analogy**: Think of it like a wax seal on a letter. Only the sender has the unique seal stamp. When you receive a letter with that seal, you can be confident it came from them — it cannot be faked.
 
-**Clawdentity**: A newer system (IETF draft, February 2026) that adds a *registry* layer. Instead of agents self-asserting their identity, a neutral third party vouches for them by issuing a signed "Agent Identity Token" (AIT) — similar to how a notary certifies a document.
+**Clawdentity**: A newer system (IETF draft, February 2026) that adds a _registry_ layer. Instead of agents self-asserting their identity, a neutral third party vouches for them by issuing a signed "Agent Identity Token" (AIT) — similar to how a notary certifies a document.
 
 ---
 
@@ -201,6 +213,7 @@ This tells crawlers: "You can use my content to answer real-time queries (AI inp
 **What it is**: An open protocol (launched by Coinbase, May 2025) that allows websites to charge AI agents per-request using stablecoin micropayments, with no accounts, no human intervention, and no minimum charge floor.
 
 **How it works**:
+
 1. Agent requests a resource.
 2. Server responds with HTTP 402 ("Payment Required") and a machine-readable description of the price, the wallet address to pay, and which currency.
 3. Agent pays automatically — typically $0.001 in USDC.
@@ -237,13 +250,13 @@ This tells crawlers: "You can use my content to answer real-time queries (AI inp
 
 ### 5.12 Firecrawl, Jina, AgentQL — External Conversion Services
 
-These are services that *agent developers* use (not site owners). Instead of building markdown conversion into your site, agent developers route their requests through these services which fetch the URL and convert it.
+These are services that _agent developers_ use (not site owners). Instead of building markdown conversion into your site, agent developers route their requests through these services which fetch the URL and convert it.
 
 - **Firecrawl**: SaaS. Takes a URL, returns clean Markdown or structured JSON. $16/month for 3,000 pages.
 - **Jina Reader**: Prepend `r.jina.ai/` to any URL and get Markdown back. Uses a 1.5B parameter model.
 - **AgentQL**: AI-powered web automation. Writes self-healing selectors that work even when the site's HTML changes.
 
-**Why these do not replace our SDK**: They are *external* to the site. The site owner has no control over them, cannot restrict what they extract, cannot track who is using them, cannot charge for access, and cannot serve specialized agent responses. They are tools for *agent developers*, not *website owners*.
+**Why these do not replace our SDK**: They are _external_ to the site. The site owner has no control over them, cannot restrict what they extract, cannot track who is using them, cannot charge for access, and cannot serve specialized agent responses. They are tools for _agent developers_, not _website owners_.
 
 ---
 
@@ -253,17 +266,17 @@ After surveying everything in Section 5, one thing is missing: **a single librar
 
 Here is what exists individually but not together:
 
-| What You Need | What Exists | Problem |
-|---|---|---|
-| Serve Markdown to agents | Cloudflare feature | Only if you're on Cloudflare |
-| Serve Markdown to agents | Vercel approach | Only if you're on Next.js + Contentful |
-| Agent traffic analytics | Dark Visitors | External SaaS, no code changes |
-| Block specific crawlers | `robots.txt` | No per-route control, no content control |
-| Charge agents for access | x402 library | No agent detection, no integration with the above |
-| Verify agent identity | RFC 9421 libraries | Standalone, not integrated with access control |
-| Expose tools to agents | `webagents.md` SDK | Browser-only, no server-side layer |
-| Protect PII from agents | Nothing | No solution exists |
-| Multi-tenant agent sessions | Nothing | No solution exists |
+| What You Need               | What Exists        | Problem                                           |
+| --------------------------- | ------------------ | ------------------------------------------------- |
+| Serve Markdown to agents    | Cloudflare feature | Only if you're on Cloudflare                      |
+| Serve Markdown to agents    | Vercel approach    | Only if you're on Next.js + Contentful            |
+| Agent traffic analytics     | Dark Visitors      | External SaaS, no code changes                    |
+| Block specific crawlers     | `robots.txt`       | No per-route control, no content control          |
+| Charge agents for access    | x402 library       | No agent detection, no integration with the above |
+| Verify agent identity       | RFC 9421 libraries | Standalone, not integrated with access control    |
+| Expose tools to agents      | `webagents.md` SDK | Browser-only, no server-side layer                |
+| Protect PII from agents     | Nothing            | No solution exists                                |
+| Multi-tenant agent sessions | Nothing            | No solution exists                                |
 
 **AgentFriendly fills this gap** — a single middleware library that does all 11 of the above, for any web framework (Next.js, Express, Hono, Nuxt, Astro in TypeScript; FastAPI, Django, Flask in Python).
 
@@ -319,6 +332,7 @@ This is the most important layer. All other layers use this result to make decis
 **Signal 4 — Cryptographic Verification**: If the request includes an RFC 9421 digital signature or a Clawdentity identity token, verify it cryptographically. If valid, the agent's identity is confirmed with certainty.
 
 **The output — Trust Tiers**: Every request ends up classified as one of four levels:
+
 - `human` → A real browser. Skip all further processing.
 - `suspected-agent` → Looks like an agent but not confirmed.
 - `known-agent` → Confirmed via UA database or strong headers.
@@ -340,13 +354,13 @@ This only runs for SaaS platforms where agents act on behalf of specific users. 
 
 If the request is for any of these paths, the layer intercepts and serves the file immediately:
 
-| Path | What It Is |
-|------|-----------|
-| `/llms.txt` | Plain-text description of your site for LLMs |
-| `/.well-known/agent.json` | Machine-readable list of your site's capabilities |
-| `/webagents.md` | Markdown list of JavaScript tools agents can call |
+| Path                            | What It Is                                            |
+| ------------------------------- | ----------------------------------------------------- |
+| `/llms.txt`                     | Plain-text description of your site for LLMs          |
+| `/.well-known/agent.json`       | Machine-readable list of your site's capabilities     |
+| `/webagents.md`                 | Markdown list of JavaScript tools agents can call     |
 | `/.well-known/agent-tools.json` | Full JSON Schema definitions for all registered tools |
-| `/agent-debug` | Debug info (only in development mode) |
+| `/agent-debug`                  | Debug info (only in development mode)                 |
 
 These files are generated once when the server starts and kept in memory. Every subsequent request for them is just a memory lookup — extremely fast.
 
@@ -357,6 +371,7 @@ These files are generated once when the server starts and kept in memory. Every 
 **Job**: Block agents from routes they are not allowed to access, and enforce rate limits.
 
 You configure rules like:
+
 ```
 Block all agents from /admin/**
 Require verified identity for /api/premium/**
@@ -374,6 +389,7 @@ Human requests are not affected by any of these rules.
 **Job**: Enforce payment for specific routes using the x402 protocol.
 
 You configure which routes cost money:
+
 ```
 GET /premium-report → $0.001 USDC per request
 POST /api/search   → $0.0001 USDC per request
@@ -390,6 +406,7 @@ Human visitors are never affected by this layer (they were already exited in Lay
 **Job**: Decide whether to convert the response body from HTML to Markdown for this request, and build the appropriate response headers.
 
 The decision is based on:
+
 1. Does the `Accept` header explicitly request `text/markdown`? → Always convert.
 2. What is the trust tier? Compared against the `proactiveMarkdown` setting:
    - `"known"` (default) → Convert for `known-agent` and `verified-agent` tiers.
@@ -397,9 +414,10 @@ The decision is based on:
    - `false` → Only convert if explicitly requested via `Accept` header.
 3. Is this path excluded? (e.g., JSON API endpoints should never be converted)
 
-This layer only *decides* and *prepares headers*. The actual HTML→Markdown conversion happens afterward in the framework adapter.
+This layer only _decides_ and _prepares headers_. The actual HTML→Markdown conversion happens afterward in the framework adapter.
 
 **The Conversion Pipeline** (when it runs):
+
 1. **jsdom**: Parses the HTML into a DOM tree (like what a browser builds)
 2. **@mozilla/readability**: Mozilla's content extraction library — the same one Firefox uses for Reader Mode. Identifies the main article content and strips navigation, ads, sidebars, footers.
 3. **turndown**: Converts the remaining HTML to clean Markdown.
@@ -413,11 +431,12 @@ In Cloudflare Workers and Next.js Edge Runtime environments (which do not have N
 **Job**: Emit analytics events for agent activity, silently in the background.
 
 Events tracked:
+
 - Agent page views (which path, which tier, which operator, token count saved)
 - Tool calls (which tool, how long it took, success/failure)
 - Access denials (which path, which rule blocked it)
 - Payment events (which route, how much was charged)
-- **LLM referrals**: When a *human* arrives from `chat.openai.com`, `claude.ai`, `perplexity.ai`, etc. — meaning an LLM sent them to you. This is valuable marketing attribution data.
+- **LLM referrals**: When a _human_ arrives from `chat.openai.com`, `claude.ai`, `perplexity.ai`, etc. — meaning an LLM sent them to you. This is valuable marketing attribution data.
 
 These events are emitted into an in-memory buffer and flushed to a webhook URL in batches. They never slow down the response — the flush happens asynchronously after the response is sent.
 
@@ -430,13 +449,14 @@ These events are emitted into an in-memory buffer and flushed to a webhook URL i
 **Job**: Automatically redact PII from agent responses so agents cannot read sensitive user data unless they are specifically authorized to.
 
 By default, fields like `email`, `phone`, `ssn`, and `creditCardNumber` are replaced with placeholder tokens:
+
 ```json
 { "email": "[EMAIL]", "phone": "[PHONE]", "ssn": "[SSN]" }
 ```
 
-Agents can still perform their tasks (they know a user *has* an email), but they cannot read the actual value. This protects user privacy and helps with GDPR/CCPA compliance.
+Agents can still perform their tasks (they know a user _has_ an email), but they cannot read the actual value. This protects user privacy and helps with GDPR/CCPA compliance.
 
-If an agent *does* need to see certain fields (for example, an agent acting on behalf of the user to update their email), the multi-tenancy layer (Layer 8) can grant specific "reveal scopes" — see Section 10.4.
+If an agent _does_ need to see certain fields (for example, an agent acting on behalf of the user to update their email), the multi-tenancy layer (Layer 8) can grant specific "reveal scopes" — see Section 10.4.
 
 ---
 
@@ -444,9 +464,10 @@ If an agent *does* need to see certain fields (for example, an agent acting on b
 
 **Job**: Maintain a registry of callable functions ("tools") that agents can invoke, and handle tool invocations.
 
-This is what transforms your website from a place agents can *read* into a platform agents can *use*.
+This is what transforms your website from a place agents can _read_ into a platform agents can _use_.
 
 You register tools like:
+
 ```typescript
 registerTool({
   name: "searchProducts",
@@ -459,6 +480,7 @@ registerTool({
 ```
 
 This tool is then:
+
 - Published at `/.well-known/agent-tools.json` for agents to discover
 - Callable via `POST /agent/tools/searchProducts`
 - Input-validated against the JSON Schema automatically
@@ -496,7 +518,7 @@ No changes to your routes. Just install the middleware.
 
 ### Model B — Action Invocation (Tools)
 
-The agent can call functions that actually *do things* on your server.
+The agent can call functions that actually _do things_ on your server.
 
 ```
 Agent discovers tools at /.well-known/agent-tools.json
@@ -572,7 +594,7 @@ These four problems existed in the landscape but had no good solutions. They wer
 **Solution**: RFC 8693-inspired delegation tokens.
 
 1. **Alice logs into your app** via her normal browser session.
-2. **Your app issues Alice's agent a "delegation token"** — a signed JSON Web Token (JWT) that encodes: *"I am acting on behalf of Alice (user_alice_123) on tenant Acme Corp. I am allowed to read tasks and reveal her email address."*
+2. **Your app issues Alice's agent a "delegation token"** — a signed JSON Web Token (JWT) that encodes: _"I am acting on behalf of Alice (user_alice_123) on tenant Acme Corp. I am allowed to read tasks and reveal her email address."_
 3. **Alice gives this token to her AI assistant**.
 4. **The assistant includes the token** on every request: `X-Agent-Session: <token>`.
 5. **The SDK validates the token** and tells every route handler: "This request is from Alice's agent, on Acme Corp's tenant, with read-task and reveal-email permissions."
@@ -584,7 +606,7 @@ The agent cannot escalate its own permissions — the scopes are set by your ser
 
 ## 11. What We Chose Not to Build (and Why)
 
-Making deliberate decisions about what *not* to build is just as important as what to build. Here are four decisions we made.
+Making deliberate decisions about what _not_ to build is just as important as what to build. Here are four decisions we made.
 
 ---
 
@@ -616,14 +638,14 @@ Making deliberate decisions about what *not* to build is just as important as wh
 
 ## Quick Reference: Mapping Concepts to Layers
 
-| Concept | Layer | What It Does |
-|---------|-------|-------------|
-| Who is this? | Layer 0 | Classifies visitor as human/suspected/known/verified |
-| What's on your site? | Layer 1 | Serves llms.txt, agent.json, tool manifests |
-| Readable content | Layer 2 | Converts HTML → Markdown for agents |
-| Usage tracking | Layer 3 | Tracks agent visits, tool calls, LLM referrals |
-| Who's allowed in? | Layer 4 | Enforces route-level access policies and rate limits |
-| Privacy | Layer 5 | Masks email, phone, SSN, and other PII |
-| Action capabilities | Layer 6 | Registers callable tools agents can invoke |
-| Revenue | Layer 7 | Charges agents per-request via x402 |
-| SaaS user scoping | Layer 8 | Scopes agent sessions to specific users/tenants |
+| Concept              | Layer   | What It Does                                         |
+| -------------------- | ------- | ---------------------------------------------------- |
+| Who is this?         | Layer 0 | Classifies visitor as human/suspected/known/verified |
+| What's on your site? | Layer 1 | Serves llms.txt, agent.json, tool manifests          |
+| Readable content     | Layer 2 | Converts HTML → Markdown for agents                  |
+| Usage tracking       | Layer 3 | Tracks agent visits, tool calls, LLM referrals       |
+| Who's allowed in?    | Layer 4 | Enforces route-level access policies and rate limits |
+| Privacy              | Layer 5 | Masks email, phone, SSN, and other PII               |
+| Action capabilities  | Layer 6 | Registers callable tools agents can invoke           |
+| Revenue              | Layer 7 | Charges agents per-request via x402                  |
+| SaaS user scoping    | Layer 8 | Scopes agent sessions to specific users/tenants      |

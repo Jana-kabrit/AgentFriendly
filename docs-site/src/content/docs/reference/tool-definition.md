@@ -52,16 +52,16 @@ const searchTool: ToolDefinition = {
 
 ## Fields
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `tool` | `string` | ✓ | Tool identifier in slug format (e.g., `search-products`) |
-| `version` | `string` | | Semver version (default: `"1.0.0"`) |
-| `description` | `string` | ✓ | Description shown in tool manifest and to agents |
-| `inputSchema` | `JSON Schema v7` | ✓ | Defines expected input parameters |
-| `requiredTier` | `TrustTier` | | Minimum trust tier required (default: `"known-agent"`) |
-| `rateLimit` | `object` | | Per-tool rate limit (overrides global limit) |
-| `pricing` | `object` | | x402 pricing for this specific tool |
-| `tags` | `string[]` | | Optional categorization tags |
+| Field          | Type             | Required | Description                                              |
+| -------------- | ---------------- | -------- | -------------------------------------------------------- |
+| `tool`         | `string`         | ✓        | Tool identifier in slug format (e.g., `search-products`) |
+| `version`      | `string`         |          | Semver version (default: `"1.0.0"`)                      |
+| `description`  | `string`         | ✓        | Description shown in tool manifest and to agents         |
+| `inputSchema`  | `JSON Schema v7` | ✓        | Defines expected input parameters                        |
+| `requiredTier` | `TrustTier`      |          | Minimum trust tier required (default: `"known-agent"`)   |
+| `rateLimit`    | `object`         |          | Per-tool rate limit (overrides global limit)             |
+| `pricing`      | `object`         |          | x402 pricing for this specific tool                      |
+| `tags`         | `string[]`       |          | Optional categorization tags                             |
 
 ## Registering a Tool
 
@@ -69,7 +69,11 @@ const searchTool: ToolDefinition = {
 const sdk = new AgentFriendlyMiddleware(config);
 
 sdk.registerTool(searchTool, async (input, context) => {
-  const { query, category, limit = 10 } = input as {
+  const {
+    query,
+    category,
+    limit = 10,
+  } = input as {
     query: string;
     category?: string;
     limit?: number;

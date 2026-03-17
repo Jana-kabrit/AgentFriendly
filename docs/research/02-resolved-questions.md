@@ -12,7 +12,7 @@ This document records every open question that arose during the research phase a
 
 ```typescript
 detection: {
-  proactiveMarkdown: "known" | "suspected" | "verified" | false
+  proactiveMarkdown: "known" | "suspected" | "verified" | false;
 }
 ```
 
@@ -32,6 +32,7 @@ detection: {
 **Decision**: TollBit compatibility mode is the first-class fallback for non-stablecoin publishers. Stripe is explicitly excluded.
 
 **Rationale**:
+
 - x402 uses USDC stablecoins (not volatile crypto) on Layer-2 networks. Transaction costs are sub-cent. By January 2026, x402 had 100M+ payment flows and $600M volume, confirming real-world viability.
 - Stripe requires account creation, KYC, webhook setup, and introduces ~2–3% fees plus a minimum charge floor well above x402's per-request micropayments. Autonomous agents cannot complete Stripe's payment flows without human intervention.
 - TollBit routes bot traffic to a paywall subdomain via CDN user-agent detection and handles all payment processing on behalf of the publisher. Zero crypto required. Publishers set rates and collect revenue through TollBit's dashboard.
@@ -48,6 +49,7 @@ detection: {
 **Decision**: WebMCP is excluded from SDK scope entirely until Chrome stable ships. See ADR-002.
 
 **Rationale**:
+
 - WebMCP is available only in Chrome 146 Canary (as of March 2026). Stable release is expected mid-2026.
 - The spec is a W3C Draft Community Group Report — not yet a final standard. It may still change before stable release.
 - WebMCP is Chrome-browser-specific. It does not work with non-browser agents (CLI tools, Playwright, API agents) which make up the majority of agent traffic today.
@@ -63,6 +65,7 @@ detection: {
 **Decision**: Yes. The Python SDK is part of the monorepo from day one.
 
 **Rationale**:
+
 - Python is the dominant language for backend development in the AI/ML ecosystem. FastAPI, Django, and Flask are the three most popular Python web frameworks.
 - The `webagents.md` SDK (browser-use, PyPI) and many AI agent frameworks (LangChain, CrewAI, AutoGen) are Python-first. Site owners building agent-heavy backends are often Python developers.
 - The agent UA database is a language-agnostic JSON file. No data duplication is needed — both TypeScript and Python packages load the same `agents.json`.
@@ -79,11 +82,13 @@ detection: {
 **Decision**: Tool versions are fully independent of SDK package versions.
 
 **Rationale**:
+
 - Coupling tool API versions to SDK versions would force site owners to release a new SDK major version every time they make a breaking change to one tool — even if no other SDK behavior changes. This is incorrect granularity.
 - Agents that have learned to call `searchProducts@1.0` should continue to be able to do so after the site owner adds `searchProducts@2.0` with a different schema.
 - The SDK's own versioning (e.g., `@agentfriendly/core@2.0.0`) follows its own semver based on SDK breaking changes (changed config shape, removed exports, etc.).
 
 **Implementation**:
+
 - Tools in `agentMeta` have an optional `version` field (default: `"1.0.0"`).
 - Breaking changes increment the tool's own semver major (e.g., `"2.0.0"`).
 - Old schemas remain accessible at `/agent-tools/v1.json`; new at `/agent-tools/v2.json`.

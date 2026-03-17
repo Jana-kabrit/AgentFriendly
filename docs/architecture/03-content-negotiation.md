@@ -5,6 +5,7 @@ Content negotiation is the most impactful layer for LLM-driven agents. It conver
 ## What It Solves
 
 A typical HTML blog post:
+
 - HTML: ~15,000 characters, ~3,750 tokens → **$0.0066** at GPT-5.3 input pricing
 - After readability + Markdown: ~2,800 characters, ~700 tokens → **$0.0012** at GPT-5.3 input pricing
 - **Token reduction: ~81%**
@@ -18,26 +19,30 @@ This is not just about size. HTML contains navigation bars, cookie banners, scri
 ## Markdown vs. HTML: What Agents Actually Get
 
 ### Input HTML (simplified)
+
 ```html
 <!DOCTYPE html>
 <html>
-<head><title>Getting Started with Our API</title></head>
-<body>
-  <nav>...navbar with 20 links...</nav>
-  <div class="cookie-banner">Accept cookies...</div>
-  <main>
-    <h1>Getting Started with Our API</h1>
-    <p>Our REST API lets you access all platform features programmatically.</p>
-    <h2>Authentication</h2>
-    <p>All requests must include an <code>Authorization: Bearer &lt;token&gt;</code> header.</p>
-  </main>
-  <footer>...footer with 15 links...</footer>
-  <script src="analytics.js"></script>
-</body>
+  <head>
+    <title>Getting Started with Our API</title>
+  </head>
+  <body>
+    <nav>...navbar with 20 links...</nav>
+    <div class="cookie-banner">Accept cookies...</div>
+    <main>
+      <h1>Getting Started with Our API</h1>
+      <p>Our REST API lets you access all platform features programmatically.</p>
+      <h2>Authentication</h2>
+      <p>All requests must include an <code>Authorization: Bearer &lt;token&gt;</code> header.</p>
+    </main>
+    <footer>...footer with 15 links...</footer>
+    <script src="analytics.js"></script>
+  </body>
 </html>
 ```
 
 ### Output Markdown
+
 ```markdown
 # Getting Started with Our API
 
@@ -58,12 +63,12 @@ Most LLM agents do not yet send `Accept: text/markdown` in their requests (see [
 proactiveMarkdown: "suspected" | "known" | "verified" | false
 ```
 
-| Value | Effect |
-|-------|--------|
-| `false` | Only serve markdown when `Accept: text/markdown` is explicitly requested |
-| `"suspected"` | Serve markdown for all tiers ≥ suspected-agent (catches most traffic) |
-| `"known"` | Serve markdown for known-agent and verified-agent tiers only |
-| `"verified"` | Serve markdown only for cryptographically verified agents |
+| Value         | Effect                                                                   |
+| ------------- | ------------------------------------------------------------------------ |
+| `false`       | Only serve markdown when `Accept: text/markdown` is explicitly requested |
+| `"suspected"` | Serve markdown for all tiers ≥ suspected-agent (catches most traffic)    |
+| `"known"`     | Serve markdown for known-agent and verified-agent tiers only             |
+| `"verified"`  | Serve markdown only for cryptographically verified agents                |
 
 The default is `"known"` — a safe middle ground that avoids false positives from API clients while serving the majority of real LLM agents.
 
@@ -190,9 +195,9 @@ Request arrives
 
 ## Response Headers Injected
 
-| Header | Example | Purpose |
-|--------|---------|---------|
-| `Content-Type` | `text/markdown; charset=utf-8` | Signals markdown body |
-| `x-markdown-tokens` | `742` | Approximate token count |
-| `Content-Signal` | `ai-training=disallowed; ai-inference=allowed` | AI usage rights |
-| `Vary` | `Accept` | Ensures correct CDN caching when serving both HTML and markdown |
+| Header              | Example                                        | Purpose                                                         |
+| ------------------- | ---------------------------------------------- | --------------------------------------------------------------- |
+| `Content-Type`      | `text/markdown; charset=utf-8`                 | Signals markdown body                                           |
+| `x-markdown-tokens` | `742`                                          | Approximate token count                                         |
+| `Content-Signal`    | `ai-training=disallowed; ai-inference=allowed` | AI usage rights                                                 |
+| `Vary`              | `Accept`                                       | Ensures correct CDN caching when serving both HTML and markdown |

@@ -87,9 +87,7 @@
       "description": "Older Anthropic training crawler user-agent string",
       "verificationSupport": false,
       "firstSeen": "2023-01-01",
-      "sources": [
-        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
-      ]
+      "sources": ["https://privacychecker.pro/blog/ai-crawlers-robots-txt"]
     },
     {
       "pattern": "Claude-SearchBot",
@@ -101,9 +99,7 @@
       "description": "Anthropic's search bot for Claude web search citations",
       "verificationSupport": false,
       "firstSeen": "2024-06-01",
-      "sources": [
-        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
-      ]
+      "sources": ["https://privacychecker.pro/blog/ai-crawlers-robots-txt"]
     },
     {
       "pattern": "PerplexityBot",
@@ -145,9 +141,7 @@
       "description": "Gemini CLI tool's web fetching user-agent. Does NOT send Accept: text/markdown.",
       "verificationSupport": false,
       "firstSeen": "2025-05-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "Google-CloudVertexBot",
@@ -159,9 +153,7 @@
       "description": "Google Cloud Vertex AI agent web access",
       "verificationSupport": false,
       "firstSeen": "2024-01-01",
-      "sources": [
-        "https://developers.cloudflare.com/ai-crawl-control/reference/bots/"
-      ]
+      "sources": ["https://developers.cloudflare.com/ai-crawl-control/reference/bots/"]
     },
     {
       "pattern": "Googlebot",
@@ -173,9 +165,7 @@
       "description": "Google's main search crawler. Also used for Gemini's real-time answers.",
       "verificationSupport": true,
       "firstSeen": "1998-01-01",
-      "sources": [
-        "https://developers.google.com/search/docs/crawling-indexing/googlebot"
-      ]
+      "sources": ["https://developers.google.com/search/docs/crawling-indexing/googlebot"]
     },
     {
       "pattern": "Bingbot",
@@ -187,9 +177,7 @@
       "description": "Microsoft Bing's crawler. Used by Copilot for search-grounded answers.",
       "verificationSupport": true,
       "firstSeen": "2010-01-01",
-      "sources": [
-        "https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0"
-      ]
+      "sources": ["https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0"]
     },
     {
       "pattern": "Applebot",
@@ -201,9 +189,7 @@
       "description": "Apple's web crawler for Siri, Spotlight, and Safari suggestions",
       "verificationSupport": false,
       "firstSeen": "2015-01-01",
-      "sources": [
-        "https://support.apple.com/en-us/111898"
-      ]
+      "sources": ["https://support.apple.com/en-us/111898"]
     },
     {
       "pattern": "Applebot-Extended",
@@ -215,9 +201,7 @@
       "description": "Apple's AI training data crawler for Apple Intelligence features",
       "verificationSupport": false,
       "firstSeen": "2024-07-01",
-      "sources": [
-        "https://support.apple.com/en-us/111898"
-      ]
+      "sources": ["https://support.apple.com/en-us/111898"]
     },
     {
       "pattern": "CCBot",
@@ -229,9 +213,7 @@
       "description": "Common Crawl's bot. Provides training data used by many AI models including GPT, Claude, Llama.",
       "verificationSupport": false,
       "firstSeen": "2012-01-01",
-      "sources": [
-        "https://commoncrawl.org/big-picture/frequently-asked-questions"
-      ]
+      "sources": ["https://commoncrawl.org/big-picture/frequently-asked-questions"]
     },
     {
       "pattern": "Bytespider",
@@ -243,9 +225,7 @@
       "description": "ByteDance's crawler for AI training data (TikTok/Douyin AI features)",
       "verificationSupport": false,
       "firstSeen": "2023-01-01",
-      "sources": [
-        "https://darkvisitors.com/agents/bytespider"
-      ]
+      "sources": ["https://darkvisitors.com/agents/bytespider"]
     },
     {
       "pattern": "Meta-ExternalAgent",
@@ -257,9 +237,7 @@
       "description": "Meta's crawler for Llama model training data",
       "verificationSupport": false,
       "firstSeen": "2023-07-01",
-      "sources": [
-        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
-      ]
+      "sources": ["https://privacychecker.pro/blog/ai-crawlers-robots-txt"]
     },
     {
       "pattern": "Amazonbot",
@@ -271,9 +249,7 @@
       "description": "Amazon's web crawler for Alexa AI and Amazon Titan training",
       "verificationSupport": false,
       "firstSeen": "2023-04-01",
-      "sources": [
-        "https://developer.amazon.com/support/amazonbot"
-      ]
+      "sources": ["https://developer.amazon.com/support/amazonbot"]
     },
     {
       "pattern": "PetalBot",
@@ -285,9 +261,7 @@
       "description": "Huawei's search and AI training crawler",
       "verificationSupport": false,
       "firstSeen": "2020-01-01",
-      "sources": [
-        "https://darkvisitors.com/agents/petalbot"
-      ]
+      "sources": ["https://darkvisitors.com/agents/petalbot"]
     },
     {
       "pattern": "Diffbot",
@@ -299,9 +273,7 @@
       "description": "Diffbot's AI-powered web scraper for knowledge graphs and AI training",
       "verificationSupport": false,
       "firstSeen": "2012-01-01",
-      "sources": [
-        "https://www.diffbot.com/bots"
-      ]
+      "sources": ["https://www.diffbot.com/bots"]
     },
     {
       "pattern": "AI2Bot",
@@ -313,9 +285,7 @@
       "description": "Allen Institute for AI's web crawler for academic AI research datasets",
       "verificationSupport": false,
       "firstSeen": "2023-01-01",
-      "sources": [
-        "https://darkvisitors.com/agents/ai2bot"
-      ]
+      "sources": ["https://darkvisitors.com/agents/ai2bot"]
     },
     {
       "pattern": "cohere-ai",
@@ -327,9 +297,7 @@
       "description": "Cohere's crawler for training their language models",
       "verificationSupport": false,
       "firstSeen": "2023-05-01",
-      "sources": [
-        "https://privacychecker.pro/blog/ai-crawlers-robots-txt"
-      ]
+      "sources": ["https://privacychecker.pro/blog/ai-crawlers-robots-txt"]
     },
     {
       "pattern": "YouBot",
@@ -341,9 +309,7 @@
       "description": "You.com's AI search crawler",
       "verificationSupport": false,
       "firstSeen": "2022-01-01",
-      "sources": [
-        "https://about.you.com/youbot"
-      ]
+      "sources": ["https://about.you.com/youbot"]
     },
     {
       "pattern": "DuckDuckBot",
@@ -355,9 +321,7 @@
       "description": "DuckDuckGo's search crawler. Used by DuckAssist AI answers.",
       "verificationSupport": false,
       "firstSeen": "2010-01-01",
-      "sources": [
-        "https://duckduckgo.com/duckduckbot"
-      ]
+      "sources": ["https://duckduckgo.com/duckduckbot"]
     },
     {
       "pattern": "DuckAssistBot",
@@ -369,9 +333,7 @@
       "description": "DuckDuckGo's DuckAssist AI answer crawler",
       "verificationSupport": false,
       "firstSeen": "2023-03-01",
-      "sources": [
-        "https://help.duckduckgo.com/duckduckgo-help-pages/results/duckassist"
-      ]
+      "sources": ["https://help.duckduckgo.com/duckduckgo-help-pages/results/duckassist"]
     },
     {
       "pattern": "colly - https://github.com/gocolly/colly",
@@ -383,9 +345,7 @@
       "description": "Windsurf's web fetch tool. Uses the colly Go scraping framework. Does NOT send Accept: text/markdown.",
       "verificationSupport": false,
       "firstSeen": "2025-01-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "axios/",
@@ -397,9 +357,7 @@
       "description": "Claude Code's WebFetch tool uses axios. DOES send Accept: text/markdown. Key UA: axios/1.x.x",
       "verificationSupport": false,
       "firstSeen": "2024-10-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/",
@@ -411,9 +369,7 @@
       "description": "Cursor's WebFetch tool. DOES send Accept: text/markdown with quality factors. Uses Chrome-based UA.",
       "verificationSupport": false,
       "firstSeen": "2024-06-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "Mozilla/5.0 (compatible; OpenAI-Codex",
@@ -425,9 +381,7 @@
       "description": "OpenAI Codex agent. Does NOT send Accept: text/markdown. Uses ChatGPT-User UA suffix.",
       "verificationSupport": false,
       "firstSeen": "2025-03-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "Code/",
@@ -439,9 +393,7 @@
       "description": "GitHub Copilot's web fetch tool. Electron-based UA (VS Code). Does NOT send Accept: text/markdown.",
       "verificationSupport": false,
       "firstSeen": "2024-09-01",
-      "sources": [
-        "https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"
-      ]
+      "sources": ["https://www.checklyhq.com/blog/state-of-ai-agent-content-negotation/"]
     },
     {
       "pattern": "python-requests/",
@@ -453,9 +405,7 @@
       "description": "Python requests library. Commonly used in automated agents and LangChain-based tools. Low confidence signal.",
       "verificationSupport": false,
       "firstSeen": "2011-01-01",
-      "sources": [
-        "https://docs.python-requests.org"
-      ]
+      "sources": ["https://docs.python-requests.org"]
     },
     {
       "pattern": "python-httpx/",
@@ -479,9 +429,7 @@
       "description": "Scrapy web scraping framework. Commonly used for content collection pipelines.",
       "verificationSupport": false,
       "firstSeen": "2008-01-01",
-      "sources": [
-        "https://docs.scrapy.org"
-      ]
+      "sources": ["https://docs.scrapy.org"]
     }
   ]
 }

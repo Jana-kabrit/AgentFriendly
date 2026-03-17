@@ -73,7 +73,10 @@ describe("generate402Response", () => {
 
   it("includes machine-readable payment terms in X-Payment-Required", () => {
     const response = generate402Response(config, pricing, "/api/premium/data");
-    const paymentTerms = JSON.parse(response.headers["X-Payment-Required"] ?? "{}") as Record<string, unknown>;
+    const paymentTerms = JSON.parse(response.headers["X-Payment-Required"] ?? "{}") as Record<
+      string,
+      unknown
+    >;
     expect(paymentTerms["version"]).toBe("1");
     expect(Array.isArray(paymentTerms["accepts"])).toBe(true);
   });

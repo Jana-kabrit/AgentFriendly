@@ -46,11 +46,11 @@ createAgentFriendlyMiddleware({
 });
 ```
 
-| Policy | Behavior |
-|--------|----------|
-| `deny-all` | 403 Forbidden for all routes |
+| Policy         | Behavior                                               |
+| -------------- | ------------------------------------------------------ |
+| `deny-all`     | 403 Forbidden for all routes                           |
 | `allow-public` | Allow routes in the `allow` list, deny everything else |
-| `allow-all` | No additional restrictions |
+| `allow-all`    | No additional restrictions                             |
 
 ## Per-Operator Policies
 
@@ -60,9 +60,9 @@ Apply policies to specific operators (companies operating agents):
 createAgentFriendlyMiddleware({
   access: {
     operators: {
-      "OpenAI": "deny-all",       // Block all OpenAI crawlers
-      "Anthropic": "allow-all",   // Allow all Anthropic agents
-      "Bytedance": "deny-all",    // Block Bytespider
+      OpenAI: "deny-all", // Block all OpenAI crawlers
+      Anthropic: "allow-all", // Allow all Anthropic agents
+      Bytedance: "deny-all", // Block Bytespider
     },
   },
 });
@@ -76,15 +76,16 @@ AgentFriendly includes an in-memory sliding window rate limiter:
 createAgentFriendlyMiddleware({
   access: {
     rateLimit: {
-      maxRequests: 100,     // Maximum requests per window
-      windowSeconds: 60,    // Window size in seconds
-      keyBy: "identity",    // "identity" | "ip" | "ua"
+      maxRequests: 100, // Maximum requests per window
+      windowSeconds: 60, // Window size in seconds
+      keyBy: "identity", // "identity" | "ip" | "ua"
     },
   },
 });
 ```
 
 Key strategies:
+
 - `identity`: Rate limit by verified agent ID or UA string (recommended)
 - `ip`: Rate limit by IP address
 - `ua`: Rate limit by User-Agent string
@@ -110,6 +111,7 @@ const aiSection = generateRobotsTxtAiSection({
 ```
 
 This generates:
+
 ```
 # training-crawler — policy: deny-all
 User-agent: GPTBot

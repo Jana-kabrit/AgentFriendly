@@ -155,9 +155,7 @@ export function getDatabaseVersion(): string {
 /**
  * Return all agents of a specific category.
  */
-export function getAgentsByCategory(
-  category: AgentEntry["category"],
-): readonly AgentEntry[] {
+export function getAgentsByCategory(category: AgentEntry["category"]): readonly AgentEntry[] {
   return loadDatabase().agents.filter((a) => a.category === category);
 }
 

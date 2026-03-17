@@ -9,12 +9,12 @@ The detection pipeline runs for every request and resolves a **TrustTier** — t
 
 ## Trust Tiers
 
-| Tier | Badge | Description |
-|------|-------|-------------|
-| `human` | <span class="tier-badge tier-human">human</span> | No agent signals detected. Normal browser request. |
+| Tier              | Badge                                                          | Description                                                            |
+| ----------------- | -------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `human`           | <span class="tier-badge tier-human">human</span>               | No agent signals detected. Normal browser request.                     |
 | `suspected-agent` | <span class="tier-badge tier-suspected">suspected-agent</span> | Heuristic signals suggest an agent, but no UA match or identity proof. |
-| `known-agent` | <span class="tier-badge tier-known">known-agent</span> | UA string matches the agent database. |
-| `verified-agent` | <span class="tier-badge tier-verified">verified-agent</span> | Cryptographic identity verified (RFC 9421 or Clawdentity). |
+| `known-agent`     | <span class="tier-badge tier-known">known-agent</span>         | UA string matches the agent database.                                  |
+| `verified-agent`  | <span class="tier-badge tier-verified">verified-agent</span>   | Cryptographic identity verified (RFC 9421 or Clawdentity).             |
 
 ## Signal 1: Accept Header
 
@@ -28,7 +28,7 @@ Accept: text/markdown, text/html;q=0.5
 Accept: application/agent+json, */*;q=0.5
 ```
 
-**Important**: `*/*` wildcard alone does *not* trigger `application/agent+json` detection. Only an explicit `application/agent+json` entry in the Accept header counts.
+**Important**: `*/*` wildcard alone does _not_ trigger `application/agent+json` detection. Only an explicit `application/agent+json` entry in the Accept header counts.
 
 ## Signal 2: UA Database
 
@@ -40,6 +40,7 @@ AgentFriendly ships with a comprehensive database of known AI agent User-Agent s
 - **Browser agents**: Playwright with common agent overrides
 
 The database supports three match types:
+
 - `exact` — exact UA string match (highest confidence)
 - `prefix` — string prefix match
 - `regex` — regex pattern match (medium confidence)
@@ -58,15 +59,15 @@ createAgentFriendlyMiddleware({
 
 Heuristic analysis scores the request based on missing browser signals. Each missing signal adds to a suspicion score; if the total exceeds the threshold (score ≥ 3), the request is flagged as `suspected-agent`.
 
-| Heuristic | Weight | Reason |
-|-----------|--------|--------|
-| Missing `Accept-Language` | 2 | Real browsers always include this |
-| No `Cookie` header | 1 | Sessions imply a real user |
-| Minimal/wildcard Accept | 2 | Browsers send complex Accept headers |
-| Non-browser UA structure | 1 | No `Mozilla/5.0 AppleWebKit` prefix |
-| No `Sec-Fetch-*` headers | 2 | Browsers always send these |
-| No `Referer` header | 1 | Navigation implies a referrer |
-| Agent custom header | 3 | `x-agent-id`, `x-mcp-session`, etc. |
+| Heuristic                 | Weight | Reason                               |
+| ------------------------- | ------ | ------------------------------------ |
+| Missing `Accept-Language` | 2      | Real browsers always include this    |
+| No `Cookie` header        | 1      | Sessions imply a real user           |
+| Minimal/wildcard Accept   | 2      | Browsers send complex Accept headers |
+| Non-browser UA structure  | 1      | No `Mozilla/5.0 AppleWebKit` prefix  |
+| No `Sec-Fetch-*` headers  | 2      | Browsers always send these           |
+| No `Referer` header       | 1      | Navigation implies a referrer        |
+| Agent custom header       | 3      | `x-agent-id`, `x-mcp-session`, etc.  |
 
 ## Signal 4: Identity Verification
 

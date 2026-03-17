@@ -35,7 +35,8 @@ const CREDIT_CARD_REGEX = /\b(?:\d[ -]?){13,19}\b/g;
  * IPv4 addresses. Note: internal IPs (10.x, 192.168.x) are also masked
  * as they may expose internal network topology.
  */
-const IPV4_REGEX = /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g;
+const IPV4_REGEX =
+  /\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/g;
 
 /** US ZIP codes: 12345 or 12345-6789 */
 const ZIP_CODE_REGEX = /\b\d{5}(?:-\d{4})?\b/g;
@@ -44,7 +45,8 @@ const ZIP_CODE_REGEX = /\b\d{5}(?:-\d{4})?\b/g;
  * Date of birth patterns: MM/DD/YYYY, YYYY-MM-DD, DD.MM.YYYY
  * Note: only matches years 1900-2099 to reduce false positives.
  */
-const DOB_REGEX = /\b(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}\b|\b(19|20)\d{2}-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|[12][0-9]|3[01])\b/g;
+const DOB_REGEX =
+  /\b(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(19|20)\d{2}\b|\b(19|20)\d{2}-(?:0?[1-9]|1[0-2])-(?:0?[1-9]|[12][0-9]|3[01])\b/g;
 
 /**
  * The built-in set of PII patterns applied when privacy.enabled is true.

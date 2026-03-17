@@ -9,14 +9,14 @@ Layer 3 emits structured analytics events for every agent interaction, enabling 
 
 ## Event Types
 
-| Event | When Emitted |
-|-------|-------------|
-| `page-view` | Agent views a page (markdown or HTML) |
-| `tool-call` | Agent calls a registered tool |
-| `access-denied` | Agent is denied by access policy |
-| `payment-challenge` | Agent receives an x402 402 response |
-| `payment-received` | Agent pays and accesses content |
-| `llm-referral` | Visitor arrives from an LLM (ChatGPT, Perplexity, etc.) |
+| Event               | When Emitted                                            |
+| ------------------- | ------------------------------------------------------- |
+| `page-view`         | Agent views a page (markdown or HTML)                   |
+| `tool-call`         | Agent calls a registered tool                           |
+| `access-denied`     | Agent is denied by access policy                        |
+| `payment-challenge` | Agent receives an x402 402 response                     |
+| `payment-received`  | Agent pays and accesses content                         |
+| `llm-referral`      | Visitor arrives from an LLM (ChatGPT, Perplexity, etc.) |
 
 ## Configuration
 
@@ -24,13 +24,13 @@ Layer 3 emits structured analytics events for every agent interaction, enabling 
 createAgentFriendlyMiddleware({
   analytics: {
     enabled: true,
-    storage: "webhook",  // "sqlite" | "postgres" | "clickhouse" | "webhook" | "none"
+    storage: "webhook", // "sqlite" | "postgres" | "clickhouse" | "webhook" | "none"
     trackLlmReferrals: true,
 
     // Webhook adapter
     connectionString: "https://your-analytics-server.com/events",
     webhookHeaders: {
-      "Authorization": "Bearer your-token",
+      Authorization: "Bearer your-token",
     },
 
     // Batching

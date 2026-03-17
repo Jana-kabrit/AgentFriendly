@@ -203,7 +203,12 @@ export class AgentFriendlyMiddleware {
     if (isDiscoveryPath(request.path) && this.config.discovery.agentJson) {
       const tools = this.toolRegistry.getAllTools();
       const files = this.buildDiscoveryFiles(tools);
-      const discoveryResponse = serveDiscoveryFile(request.path, files, enrichedContext, this.config.debug);
+      const discoveryResponse = serveDiscoveryFile(
+        request.path,
+        files,
+        enrichedContext,
+        this.config.debug,
+      );
       if (discoveryResponse) {
         return {
           context: enrichedContext,
@@ -225,7 +230,10 @@ export class AgentFriendlyMiddleware {
     // -----------------------------------------------------------------------
     // Layer 4: Access Control
     // -----------------------------------------------------------------------
-    const policyResult = evaluatePolicy(enrichedContext, this.config.access as Parameters<typeof evaluatePolicy>[1]);
+    const policyResult = evaluatePolicy(
+      enrichedContext,
+      this.config.access as Parameters<typeof evaluatePolicy>[1],
+    );
 
     if (policyResult.decision === "deny") {
       return {
@@ -269,7 +277,10 @@ export class AgentFriendlyMiddleware {
     // Layer 7: Monetization (x402)
     // -----------------------------------------------------------------------
     if (this.config.monetization.enabled) {
-      const monetizationResponse = await checkMonetization(enrichedContext, this.config.monetization as Parameters<typeof checkMonetization>[1]);
+      const monetizationResponse = await checkMonetization(
+        enrichedContext,
+        this.config.monetization as Parameters<typeof checkMonetization>[1],
+      );
       if (monetizationResponse) {
         return {
           context: enrichedContext,
@@ -289,8 +300,11 @@ export class AgentFriendlyMiddleware {
     );
 
     const willConvertMarkdown =
-      shouldServeMarkdown(enrichedContext, this.config.content, this.config.detection.proactiveMarkdown) &&
-      !isExcludedFromMarkdown(request.path, this.config.content.excludeFromMarkdown ?? []);
+      shouldServeMarkdown(
+        enrichedContext,
+        this.config.content,
+        this.config.detection.proactiveMarkdown,
+      ) && !isExcludedFromMarkdown(request.path, this.config.content.excludeFromMarkdown ?? []);
 
     if (this.config.content.tokenHeader && willConvertMarkdown) {
       agentHeaders["x-agentfriendly-will-convert"] = "markdown";

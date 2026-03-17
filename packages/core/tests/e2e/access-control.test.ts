@@ -59,8 +59,7 @@ describe("E2E: Access Control — route deny/allow", () => {
       url: "https://example.com/admin/secret",
       path: "/admin/secret",
       headers: {
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         accept: "text/html,application/xhtml+xml,*/*;q=0.8",
         "accept-language": "en-US",
         "sec-fetch-site": "same-origin",

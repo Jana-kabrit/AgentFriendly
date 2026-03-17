@@ -15,7 +15,6 @@ import type {
 import type { AnalyticsConfig } from "../types/config.js";
 import type { TrustTier } from "../types/trust-tier.js";
 
-
 /**
  * Layer 3 — Analytics Collector
  *
@@ -42,7 +41,7 @@ const LLM_REFERRER_DOMAINS = new Set([
   "chatgpt.com",
   "you.com",
   "phind.com",
-  "bing.com",    // Copilot grounded answers
+  "bing.com", // Copilot grounded answers
   "bard.google.com",
   "gemini.google.com",
   "poe.com",
@@ -98,7 +97,9 @@ function baseFields(
 
 export class AnalyticsCollector {
   private readonly adapter: AnalyticsAdapter;
-  private readonly config: Required<Pick<AnalyticsConfig, "batchSize" | "flushIntervalMs" | "trackLlmReferrals">>;
+  private readonly config: Required<
+    Pick<AnalyticsConfig, "batchSize" | "flushIntervalMs" | "trackLlmReferrals">
+  >;
   private buffer: AnalyticsEvent[] = [];
   private flushTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -201,11 +202,7 @@ export class AnalyticsCollector {
   }
 
   /** Track an access denial. */
-  trackAccessDenied(
-    context: AgentContext,
-    reason: string,
-    requiredTier: TrustTier | null,
-  ): void {
+  trackAccessDenied(context: AgentContext, reason: string, requiredTier: TrustTier | null): void {
     this.push({
       type: "access-denied",
       ...baseFields(context, 403, 0),
@@ -215,11 +212,7 @@ export class AnalyticsCollector {
   }
 
   /** Track an x402 payment challenge being issued. */
-  trackPaymentChallenged(
-    context: AgentContext,
-    amountUsdc: number,
-    network: string,
-  ): void {
+  trackPaymentChallenged(context: AgentContext, amountUsdc: number, network: string): void {
     this.push({
       type: "payment-challenged",
       ...baseFields(context, 402, 0),
@@ -245,11 +238,7 @@ export class AnalyticsCollector {
   }
 
   /** Track a rate limit being hit. */
-  trackRateLimited(
-    context: AgentContext,
-    limitRule: string,
-    requestCount: number,
-  ): void {
+  trackRateLimited(context: AgentContext, limitRule: string, requestCount: number): void {
     this.push({
       type: "rate-limited",
       ...baseFields(context, 429, 0),

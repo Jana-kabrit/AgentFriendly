@@ -6,9 +6,7 @@
  */
 import { describe, it, expect } from "vitest";
 
-import {
-  AgentFriendlyMiddleware,
-} from "../../src/middleware.js";
+import { AgentFriendlyMiddleware } from "../../src/middleware.js";
 import {
   issueDelegationToken,
   revokeSession as revokeDelegationSession,
@@ -57,12 +55,11 @@ describe("E2E: Multi-Tenancy — token issuance", () => {
 
 describe("E2E: Multi-Tenancy — token validation", () => {
   it("injects tenant context for valid X-Agent-Session token", async () => {
-    const { token } = await issueDelegationToken(
-      "user-789",
-      "acme-corp",
-      ["read:docs"],
-      { enabled: true, tokenSecret: SECRET, sessionTtlSeconds: 3600 },
-    );
+    const { token } = await issueDelegationToken("user-789", "acme-corp", ["read:docs"], {
+      enabled: true,
+      tokenSecret: SECRET,
+      sessionTtlSeconds: 3600,
+    });
 
     const result = await sdk.process(agentRequest(token));
     expect(result.context.tenantContext).toBeTruthy();
@@ -84,12 +81,11 @@ describe("E2E: Multi-Tenancy — token validation", () => {
 
 describe("E2E: Multi-Tenancy — session revocation", () => {
   it("revokes a session and subsequent requests are rejected", async () => {
-    const { token, sessionId } = await issueDelegationToken(
-      "user-revoke",
-      "tenant-revoke",
-      [],
-      { enabled: true, tokenSecret: SECRET, sessionTtlSeconds: 3600 },
-    );
+    const { token, sessionId } = await issueDelegationToken("user-revoke", "tenant-revoke", [], {
+      enabled: true,
+      tokenSecret: SECRET,
+      sessionTtlSeconds: 3600,
+    });
 
     // First request: should have tenant context
     const before = await sdk.process(agentRequest(token));
@@ -109,12 +105,11 @@ describe("E2E: Multi-Tenancy — scope-based PII access", () => {
     // This tests the integration between multi-tenancy and privacy layers.
     // The actual masking is done by the route handler, not the middleware.
     // Here we just verify that tenant context carries the scopes correctly.
-    const { token } = await issueDelegationToken(
-      "u1",
-      "t1",
-      ["reveal:email", "read:profile"],
-      { enabled: true, tokenSecret: SECRET, sessionTtlSeconds: 3600 },
-    );
+    const { token } = await issueDelegationToken("u1", "t1", ["reveal:email", "read:profile"], {
+      enabled: true,
+      tokenSecret: SECRET,
+      sessionTtlSeconds: 3600,
+    });
 
     const result = await sdk.process(agentRequest(token));
     expect(result.context.tenantContext!.grantedScopes).toContain("reveal:email");

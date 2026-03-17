@@ -17,11 +17,7 @@
 export { createAgentFriendlyMiddleware } from "./middleware.js";
 export { agentFriendlyIntegration, agentFriendlyIntegration as default } from "./integration.js";
 
-export {
-  getAgentContext,
-  issueDelegationToken,
-  revokeSession,
-} from "@agentfriendly/core";
+export { getAgentContext, issueDelegationToken, revokeSession } from "@agentfriendly/core";
 export type {
   AgentFriendlyConfig,
   AgentContext,

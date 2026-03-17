@@ -105,7 +105,7 @@ async function readabilityConvert(
 ): Promise<MarkdownConversionResult> {
   // Dynamic imports — these are optional dependencies. If not installed, the
   // simpleFallbackConvert is used instead. The try/catch in the caller handles this.
-   
+
   const [jsdomMod, readabilityMod, turndownMod] = await Promise.all([
     import("jsdom") as Promise<unknown>,
     import("@mozilla/readability") as Promise<unknown>,
@@ -119,7 +119,7 @@ async function readabilityConvert(
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dom = new JSDOM(html, { url }) as any;
-   
+
   const document = dom.window.document;
 
   // Strip noise selectors before Readability runs
@@ -135,8 +135,9 @@ async function readabilityConvert(
     }
   }
 
-   
-  const reader = new Readability(document) as { parse(): { title: string; content: string } | null };
+  const reader = new Readability(document) as {
+    parse(): { title: string; content: string } | null;
+  };
   const article = reader.parse();
 
   const title = article?.title ?? document.title ?? "";
@@ -145,9 +146,9 @@ async function readabilityConvert(
   // Handle both ESM default export and CommonJS module.exports patterns for turndown
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const TdMod = turndownMod as any;
-   
+
   const TurndownServiceClass = TdMod?.default ?? TdMod;
-   
+
   const turndown = new TurndownServiceClass({
     headingStyle: "atx",
     bulletListMarker: "-",

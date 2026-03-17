@@ -20,10 +20,7 @@
  */
 export { createAgentFriendlyMiddleware, getAgentContext } from "./adapter.js";
 
-export {
-  issueDelegationToken,
-  revokeSession,
-} from "@agentfriendly/core";
+export { issueDelegationToken, revokeSession } from "@agentfriendly/core";
 export type {
   AgentFriendlyConfig,
   AgentContext,

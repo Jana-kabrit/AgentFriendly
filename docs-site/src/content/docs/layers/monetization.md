@@ -10,6 +10,7 @@ AgentFriendly implements the [x402 protocol](https://x402.org) — an open stand
 ## Why Monetize Agent Access?
 
 AI agents can consume your content at a scale that would be prohibitively expensive for a human:
+
 - A single training run might crawl your entire site millions of times.
 - API agents may call your tools thousands of times per session.
 - Search bots may re-index your content hourly.
@@ -22,8 +23,8 @@ x402 lets you charge a fraction of a cent per request — making agent access ec
 createAgentFriendlyMiddleware({
   monetization: {
     enabled: true,
-    walletAddress: "0xYourWalletAddress",  // USDC receiving address
-    network: "base-mainnet",               // "base-mainnet" | "base-sepolia" | "solana-mainnet"
+    walletAddress: "0xYourWalletAddress", // USDC receiving address
+    network: "base-mainnet", // "base-mainnet" | "base-sepolia" | "solana-mainnet"
     routes: {
       // Charge $0.001 USDC for any /api/** request
       "/api/**": { price: "0.001" },
@@ -67,6 +68,7 @@ createAgentFriendlyMiddleware({
 ## Payment Proof Verification
 
 AgentFriendly verifies the `X-Payment` header by checking:
+
 - The `to` address matches your configured wallet.
 - The `amount` is at least the required price (in USDC micro-units: 1 USDC = 1,000,000).
 - The `network` matches the configured network.
@@ -87,11 +89,11 @@ routes: {
 
 ## Supported Networks
 
-| Network | USDC Contract | Use Case |
-|---------|--------------|----------|
-| `base-mainnet` | `0x833589...` | Production mainnet |
-| `base-sepolia` | `0x036CbD...` | Testing |
-| `solana-mainnet` | `EPjFWdd...` | Solana ecosystem |
+| Network          | USDC Contract | Use Case           |
+| ---------------- | ------------- | ------------------ |
+| `base-mainnet`   | `0x833589...` | Production mainnet |
+| `base-sepolia`   | `0x036CbD...` | Testing            |
+| `solana-mainnet` | `EPjFWdd...`  | Solana ecosystem   |
 
 ## 402 Response Body
 

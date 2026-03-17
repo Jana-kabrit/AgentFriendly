@@ -51,7 +51,10 @@ export class InMemoryTaskQueue {
   async enqueue(
     taskName: string,
     args: Record<string, unknown>,
-    handler: (args: Record<string, unknown>, context: AgentContext) => Promise<Record<string, unknown>>,
+    handler: (
+      args: Record<string, unknown>,
+      context: AgentContext,
+    ) => Promise<Record<string, unknown>>,
     context: AgentContext,
     webhookUrl?: string,
   ): Promise<Task> {
@@ -80,7 +83,10 @@ export class InMemoryTaskQueue {
 
   private async runHandler(
     task: Task,
-    handler: (args: Record<string, unknown>, context: AgentContext) => Promise<Record<string, unknown>>,
+    handler: (
+      args: Record<string, unknown>,
+      context: AgentContext,
+    ) => Promise<Record<string, unknown>>,
     context: AgentContext,
   ): Promise<void> {
     task.status = "running";

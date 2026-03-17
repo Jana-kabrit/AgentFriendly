@@ -17,15 +17,14 @@ WebMCP provides two complementary APIs.
 For simple forms, add `toolname` and `tooldescription` attributes:
 
 ```html
-<form toolname="searchProducts"
-      tooldescription="Search the product catalog by keyword">
-  <input name="query"
-         toolparamdescription="The search term to look for"
-         type="text" />
-  <input name="limit"
-         toolparamdescription="Maximum number of results (default 10)"
-         type="number"
-         value="10" />
+<form toolname="searchProducts" tooldescription="Search the product catalog by keyword">
+  <input name="query" toolparamdescription="The search term to look for" type="text" />
+  <input
+    name="limit"
+    toolparamdescription="Maximum number of results (default 10)"
+    type="number"
+    value="10"
+  />
   <button type="submit">Search</button>
 </form>
 ```
@@ -45,20 +44,20 @@ navigator.modelContext.registerTool({
     properties: {
       shippingAddress: {
         type: "string",
-        description: "Full shipping address including postal code"
+        description: "Full shipping address including postal code",
       },
       paymentToken: {
         type: "string",
-        description: "Payment token from the payment provider"
-      }
+        description: "Payment token from the payment provider",
+      },
     },
-    required: ["shippingAddress", "paymentToken"]
+    required: ["shippingAddress", "paymentToken"],
   },
   execute: async (args) => {
-    const result = await api.checkout(args)
-    return { orderId: result.id, estimatedDelivery: result.eta }
-  }
-})
+    const result = await api.checkout(args);
+    return { orderId: result.id, estimatedDelivery: result.eta };
+  },
+});
 ```
 
 ### Detecting Agent vs. Human Submissions
@@ -69,9 +68,9 @@ In form submit handlers, `e.agentInvoked` tells you whether the submission came 
 form.addEventListener("submit", (e) => {
   if (e.agentInvoked) {
     // This submission came from an AI agent — skip CAPTCHA, log differently, etc.
-    trackAgentCheckout()
+    trackAgentCheckout();
   }
-})
+});
 ```
 
 ### Tool Schema
@@ -98,6 +97,7 @@ Agents can create checkout sessions, add items, update quantities, and complete 
 ## Current Status and Limitations
 
 **As of March 2026**:
+
 - Available in Chrome 146 **Canary only** (behind "Experimental Web Platform Features" flag)
 - Chrome stable release expected mid-2026
 - **Chrome-browser-specific** — does not work with Playwright, curl, CLI agents, API agents, or any non-Chrome browser
@@ -107,6 +107,7 @@ Agents can create checkout sessions, add items, update quantities, and complete 
 ## Why `@agentfriendly` Excludes WebMCP (ADR-002)
 
 The majority of agent traffic today comes from non-Chrome contexts:
+
 - Claude Code, Cursor, OpenCode — CLI tools making HTTP requests
 - Playwright-based agents (browser-use, Agentic) — not limited to Chrome
 - API agents — no browser at all

@@ -4,13 +4,13 @@ The discovery layer serves static, pre-computed files that help AI agents unders
 
 ## Discovery Files
 
-| Path | Purpose | Standard |
-|------|---------|---------|
-| `/llms.txt` | Natural-language description of the site for LLM context | [llms.txt proposal](https://llmstxt.org/) |
-| `/.well-known/agent.json` | Machine-readable site capabilities (AHP discovery document) | Agent Handshake Protocol |
-| `/webagents.md` | Markdown-formatted tool manifest for human-readable agent discovery | webagents.md spec |
-| `/.well-known/agent-tools.json` | Full JSON Schema tool definitions for registered tools | Internal |
-| `/agent-debug` | Pipeline trace dump (only when `debug: true`) | Internal |
+| Path                            | Purpose                                                             | Standard                                  |
+| ------------------------------- | ------------------------------------------------------------------- | ----------------------------------------- |
+| `/llms.txt`                     | Natural-language description of the site for LLM context            | [llms.txt proposal](https://llmstxt.org/) |
+| `/.well-known/agent.json`       | Machine-readable site capabilities (AHP discovery document)         | Agent Handshake Protocol                  |
+| `/webagents.md`                 | Markdown-formatted tool manifest for human-readable agent discovery | webagents.md spec                         |
+| `/.well-known/agent-tools.json` | Full JSON Schema tool definitions for registered tools              | Internal                                  |
+| `/agent-debug`                  | Pipeline trace dump (only when `debug: true`)                       | Internal                                  |
 
 All files are **generated once at startup** from the SDK config and registered tools, then served from memory. There is no disk I/O on subsequent requests.
 
@@ -67,6 +67,7 @@ Generated from `DiscoveryConfig.siteName`, `sitePurpose`, `siteDescription`, and
 ```
 
 The `modes` field maps to Agent Handshake Protocol interaction modes:
+
 - **MODE1**: Read-only. Agent reads content as markdown.
 - **MODE2**: Tool invocation. Agent can call registered tools via POST.
 - **MODE3**: Async task queuing. Agent submits tasks and polls for results.
@@ -170,6 +171,7 @@ const DISCOVERY_PATHS = new Set([
 When the orchestrator receives a request whose `path` is in `DISCOVERY_PATHS`, this layer immediately returns a `HandledResponse` and the pipeline terminates.
 
 The `Content-Type` header is set appropriately:
+
 - `/llms.txt` → `text/plain`
 - `/.well-known/agent.json` → `application/json`
 - `/webagents.md` → `text/markdown`
@@ -183,6 +185,7 @@ The `Content-Type` header is set appropriately:
 The Access Control layer (Layer 4) can generate an AI-specific `robots.txt` section, but this is served separately from the user's own `robots.txt`. See [Layer 4 docs](./04-access-control.md).
 
 The discovery files are complementary:
+
 - `robots.txt` says what crawlers **may not** access.
 - `llms.txt` says what the site **is** and what's most useful.
 - `agent.json` describes **capabilities and modes**.

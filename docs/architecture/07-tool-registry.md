@@ -1,10 +1,11 @@
 # Layer 6: Tool Registry
 
-The tool registry allows websites to expose structured, callable functions to AI agents. This is the mechanism that transforms your SaaS platform from a website agents can *read* into a platform agents can *use*.
+The tool registry allows websites to expose structured, callable functions to AI agents. This is the mechanism that transforms your SaaS platform from a website agents can _read_ into a platform agents can _use_.
 
 ## The Core Problem
 
 Without a tool registry, an agent wanting to "create a new project" in your SaaS must:
+
 1. Navigate to `/projects/new`
 2. Detect the form fields
 3. Fill them in
@@ -12,6 +13,7 @@ Without a tool registry, an agent wanting to "create a new project" in your SaaS
 5. Handle CSRF tokens, JavaScript-rendered forms, redirects
 
 With a registered tool, the agent does:
+
 ```json
 POST /agent/tools/createProject
 { "name": "My Project", "template": "blank" }
@@ -33,9 +35,9 @@ registerTool({
   schema: {
     type: "object",
     properties: {
-      name:     { type: "string", description: "Project name", maxLength: 100 },
+      name: { type: "string", description: "Project name", maxLength: 100 },
       template: { type: "string", enum: ["blank", "starter", "enterprise"] },
-      teamId:   { type: "string", description: "Team to create the project in" },
+      teamId: { type: "string", description: "Team to create the project in" },
     },
     required: ["name"],
   },
@@ -65,6 +67,7 @@ Content-Type: application/json
 ```
 
 The registry:
+
 1. Looks up the tool by name (and optionally version via `?version=1.0.0`).
 2. Validates input against the JSON Schema.
 3. Checks access control (tier requirements, operator allowlist).
@@ -90,6 +93,7 @@ registerTool({ name: "searchProducts", version: "2.0.0", ... }); // adds "priceR
 ```
 
 Version resolution:
+
 - `?version=2.0.0` → exact match.
 - `?version=1` → highest `1.x.x` version.
 - No version → latest registered version.
@@ -131,7 +135,7 @@ registerTool({
 });
 ```
 
-When a priced tool is invoked, the monetization layer intercepts the request *before* the tool handler is called.
+When a priced tool is invoked, the monetization layer intercepts the request _before_ the tool handler is called.
 
 ---
 
@@ -183,11 +187,11 @@ Every tool handler receives the full `AgentContext` as its second argument:
 
 ```typescript
 handler: async (input, context) => {
-  context.tier              // "verified-agent"
-  context.agentOperator     // "openai"
-  context.verifiedIdentity  // { agentId, operator, keyId, verifiedAt }
-  context.tenantContext     // { userId, tenantId, scopes }
-}
+  context.tier; // "verified-agent"
+  context.agentOperator; // "openai"
+  context.verifiedIdentity; // { agentId, operator, keyId, verifiedAt }
+  context.tenantContext; // { userId, tenantId, scopes }
+};
 ```
 
 This enables tools to behave differently based on who is calling them.

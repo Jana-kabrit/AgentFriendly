@@ -6,7 +6,7 @@ The privacy layer ensures that sensitive user data is never exposed to AI agents
 
 AI agents accessing SaaS platforms often need to read user data (account details, transaction history, profile information) as part of their task. However:
 
-- The agent may be operating on behalf of a *different* user than the data owner.
+- The agent may be operating on behalf of a _different_ user than the data owner.
 - The operator may not have a legitimate need to see raw PII.
 - Regulatory requirements (GDPR, CCPA, HIPAA) may prohibit sharing identifiable data with third-party systems.
 
@@ -18,18 +18,19 @@ The privacy layer solves this by **masking PII in all agent responses by default
 
 The SDK ships with regex patterns for common PII types:
 
-| Pattern key | What it matches | Replacement |
-|-------------|----------------|-------------|
-| `email` | Email addresses | `[EMAIL]` |
-| `phone` | US/international phone numbers | `[PHONE]` |
-| `ssn` | US Social Security Numbers | `[SSN]` |
-| `creditCard` | Credit card numbers (with Luhn check) | `[CARD]` |
-| `ipv4` | IPv4 addresses | `[IP]` |
-| `ipv6` | IPv6 addresses | `[IP]` |
-| `dateOfBirth` | Common DOB formats | `[DOB]` |
-| `passport` | US passport numbers | `[PASSPORT]` |
+| Pattern key   | What it matches                       | Replacement  |
+| ------------- | ------------------------------------- | ------------ |
+| `email`       | Email addresses                       | `[EMAIL]`    |
+| `phone`       | US/international phone numbers        | `[PHONE]`    |
+| `ssn`         | US Social Security Numbers            | `[SSN]`      |
+| `creditCard`  | Credit card numbers (with Luhn check) | `[CARD]`     |
+| `ipv4`        | IPv4 addresses                        | `[IP]`       |
+| `ipv6`        | IPv6 addresses                        | `[IP]`       |
+| `dateOfBirth` | Common DOB formats                    | `[DOB]`      |
+| `passport`    | US passport numbers                   | `[PASSPORT]` |
 
 Custom patterns can be added:
+
 ```typescript
 privacy: {
   customPatterns: [

@@ -14,7 +14,13 @@ const PRODUCTS = [
   { id: "1", name: "Laptop Pro 14", price: 1299, category: "electronics", inStock: true },
   { id: "2", name: "Mechanical Keyboard", price: 149, category: "electronics", inStock: true },
   { id: "3", name: "TypeScript Handbook", price: 49, category: "books", inStock: false },
-  { id: "4", name: "Noise-Canceling Headphones", price: 299, category: "electronics", inStock: true },
+  {
+    id: "4",
+    name: "Noise-Canceling Headphones",
+    price: 299,
+    category: "electronics",
+    inStock: true,
+  },
 ];
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -31,7 +37,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   // Read agent context injected by the middleware
   const ctxHeader = request.headers.get("x-agentfriendly-context");
-  const agentContext = ctxHeader ? JSON.parse(ctxHeader) as { isAgent: boolean; tier: string } : null;
+  const agentContext = ctxHeader
+    ? (JSON.parse(ctxHeader) as { isAgent: boolean; tier: string })
+    : null;
 
   return NextResponse.json({
     results,

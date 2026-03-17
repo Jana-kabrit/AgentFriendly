@@ -15,10 +15,10 @@ agentfriendly init [options]
 
 ## Options
 
-| Option | Description |
-|--------|-------------|
+| Option               | Description                                              |
+| -------------------- | -------------------------------------------------------- |
 | `--framework <name>` | Skip framework detection and use the specified framework |
-| `--force` | Overwrite existing config file without prompting |
+| `--force`            | Overwrite existing config file without prompting         |
 
 ## Interactive Prompts
 
@@ -31,13 +31,13 @@ agentfriendly init [options]
 
 Writes a configuration file based on your framework:
 
-| Framework | Output File |
-|-----------|------------|
-| Next.js | `middleware.ts` |
-| Express | `src/middleware.ts` |
-| Hono | `src/middleware.ts` |
-| Nuxt 3 | `nuxt.config.ts` |
-| Astro | `src/middleware.ts` |
+| Framework | Output File         |
+| --------- | ------------------- |
+| Next.js   | `middleware.ts`     |
+| Express   | `src/middleware.ts` |
+| Hono      | `src/middleware.ts` |
+| Nuxt 3    | `nuxt.config.ts`    |
+| Astro     | `src/middleware.ts` |
 
 ## Examples
 

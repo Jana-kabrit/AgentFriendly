@@ -179,7 +179,9 @@ export function getCrl(): ReadonlyMap<string, { reason: string; revokedAt: strin
 /**
  * Load a previously persisted CRL. Call on startup if you persist revocations to a DB.
  */
-export function loadCrl(entries: Array<{ sessionId: string; reason: string; revokedAt: string }>): void {
+export function loadCrl(
+  entries: Array<{ sessionId: string; reason: string; revokedAt: string }>,
+): void {
   for (const entry of entries) {
     revokedSessions.set(entry.sessionId, { reason: entry.reason, revokedAt: entry.revokedAt });
   }

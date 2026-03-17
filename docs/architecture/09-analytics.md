@@ -16,6 +16,7 @@ type AnalyticsEvent =
 ```
 
 ### `AgentPageViewEvent`
+
 Fired for every agent request that reaches content (not blocked by access/payment layers).
 
 ```typescript
@@ -34,6 +35,7 @@ Fired for every agent request that reaches content (not blocked by access/paymen
 ```
 
 ### `AgentToolCallEvent`
+
 Fired when a registered tool is invoked.
 
 ```typescript
@@ -50,6 +52,7 @@ Fired when a registered tool is invoked.
 ```
 
 ### `AgentAccessDeniedEvent`
+
 Fired when a request is blocked by the access control layer.
 
 ```typescript
@@ -63,9 +66,11 @@ Fired when a request is blocked by the access control layer.
 ```
 
 ### `AgentPaymentChallengeEvent` / `AgentPaymentSuccessEvent`
+
 Fired when the x402 layer issues or verifies a payment.
 
 ### `LlmReferralEvent`
+
 Fired when an inbound request's `Referer` header matches a known LLM service domain (e.g., `chat.openai.com`, `claude.ai`, `perplexity.ai`).
 
 ```typescript
@@ -86,9 +91,11 @@ This event tracks **human users** arriving at your site after an LLM conversatio
 The collector forwards events to one or more adapters. Three are included:
 
 ### `NullAnalyticsAdapter`
+
 Default. Discards all events. Zero overhead.
 
 ### `WebhookAnalyticsAdapter`
+
 POSTs events to a webhook URL as NDJSON batches.
 
 ```typescript
@@ -103,6 +110,7 @@ analytics: {
 ```
 
 ### Custom Adapter
+
 Implement the `AnalyticsAdapter` interface:
 
 ```typescript
@@ -115,7 +123,9 @@ class PostHogAnalyticsAdapter implements AnalyticsAdapter {
   track(event) {
     posthog.capture(event.type, { ...event });
   }
-  async flush() { /* PostHog batches internally */ }
+  async flush() {
+    /* PostHog batches internally */
+  }
 }
 ```
 
@@ -124,6 +134,7 @@ class PostHogAnalyticsAdapter implements AnalyticsAdapter {
 ## Performance Characteristics
 
 The analytics layer is **off the critical path**. Events are:
+
 1. Emitted synchronously into an in-memory buffer (< 0.1ms per event).
 2. Flushed asynchronously in batches on a timer or when the buffer is full.
 
@@ -149,7 +160,7 @@ const LLM_REFERRAL_DOMAINS = [
 ];
 ```
 
-This is distinct from agent detection — it tracks *human users* who were directed to your site by an LLM assistant.
+This is distinct from agent detection — it tracks _human users_ who were directed to your site by an LLM assistant.
 
 ---
 

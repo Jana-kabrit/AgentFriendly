@@ -68,8 +68,7 @@ function toAgentRequest(event: H3Event): AgentRequest {
   }
 
   const rawPath = url.pathname;
-  const path =
-    rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
+  const path = rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
   return {
     method: event.node.req.method ?? "GET",
@@ -78,10 +77,7 @@ function toAgentRequest(event: H3Event): AgentRequest {
     headers,
     body: null,
     query,
-    ip:
-      (getRequestHeader(event, "x-forwarded-for") ?? "")
-        .split(",")[0]
-        ?.trim() ?? null,
+    ip: (getRequestHeader(event, "x-forwarded-for") ?? "").split(",")[0]?.trim() ?? null,
   };
 }
 
@@ -115,9 +111,7 @@ export function createH3Middleware(config: AgentFriendlyConfig = {}): EventHandl
     }
 
     // Inject agent response headers
-    for (const [key, value] of Object.entries(
-      result.contentInstructions.agentHeaders,
-    )) {
+    for (const [key, value] of Object.entries(result.contentInstructions.agentHeaders)) {
       setResponseHeader(event, key, value);
     }
 
@@ -149,11 +143,7 @@ export function defineAgentFriendlyHandler(
       | { enabled: boolean; requestUrl: string; stripSelectors: string[] }
       | undefined;
 
-    if (
-      convertCtx?.enabled &&
-      typeof result === "string" &&
-      result.trimStart().startsWith("<")
-    ) {
+    if (convertCtx?.enabled && typeof result === "string" && result.trimStart().startsWith("<")) {
       const { markdown, estimatedTokens } = await convertResponseToMarkdown(
         result,
         convertCtx.requestUrl,

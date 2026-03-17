@@ -64,6 +64,7 @@ export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
 ```
+
 </TabItem>
 <TabItem label="Express">
 ```typescript
@@ -73,10 +74,11 @@ import { createAgentFriendlyMiddleware } from "@agentfriendly/express";
 const app = express();
 
 app.use(createAgentFriendlyMiddleware({
-  detection: { proactiveMarkdown: "known" },
-  content: { markdown: true },
+detection: { proactiveMarkdown: "known" },
+content: { markdown: true },
 }));
-```
+
+````
 </TabItem>
 <TabItem label="Hono">
 ```typescript
@@ -89,7 +91,8 @@ app.use("*", createAgentFriendlyMiddleware({
   detection: { proactiveMarkdown: "known" },
   content: { markdown: true },
 }));
-```
+````
+
 </TabItem>
 <TabItem label="Nuxt 3">
 ```typescript
@@ -111,12 +114,13 @@ from agentfriendly import AgentFriendlyConfig, DetectionConfig
 
 app = FastAPI()
 app.add_middleware(
-    AgentFriendlyMiddleware,
-    config=AgentFriendlyConfig(
-        detection=DetectionConfig(proactive_markdown="known"),
-    ),
+AgentFriendlyMiddleware,
+config=AgentFriendlyConfig(
+detection=DetectionConfig(proactive_markdown="known"),
+),
 )
-```
+
+````
 </TabItem>
 </Tabs>
 
@@ -131,7 +135,7 @@ agentfriendly validate --url http://localhost:3000
 
 # Simulate detection for a specific User-Agent
 agentfriendly test-detection --ua "GPTBot/1.0"
-```
+````
 
 ## 4. What Happens Next?
 
@@ -145,6 +149,7 @@ Once the middleware is active:
 ## What Gets Served
 
 For a human browser visiting your home page:
+
 ```
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
@@ -153,6 +158,7 @@ Content-Type: text/html; charset=utf-8
 ```
 
 For GPTBot visiting the same page:
+
 ```
 HTTP/1.1 200 OK
 Content-Type: text/markdown; charset=utf-8

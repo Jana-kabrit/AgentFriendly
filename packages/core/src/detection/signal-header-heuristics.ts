@@ -51,9 +51,7 @@ const BROWSER_ACCEPT_PATTERNS = [
 /**
  * Run header heuristics analysis on the incoming request headers.
  */
-export function runHeaderHeuristics(
-  headers: Record<string, string>,
-): HeaderHeuristicsResult {
+export function runHeaderHeuristics(headers: Record<string, string>): HeaderHeuristicsResult {
   const scores: HeuristicScore[] = [];
 
   // Heuristic 1: Missing Accept-Language header (weight: 2)
@@ -84,7 +82,8 @@ export function runHeaderHeuristics(
   const acceptHeader = headers["accept"] ?? "";
   const isBrowserAccept = BROWSER_ACCEPT_PATTERNS.some((p) => acceptHeader.includes(p));
   const isWildcardOnly = acceptHeader === "*/*" || acceptHeader === "";
-  const isMinimalAccept = !isBrowserAccept && !isWildcardOnly && acceptHeader.split(",").length <= 2;
+  const isMinimalAccept =
+    !isBrowserAccept && !isWildcardOnly && acceptHeader.split(",").length <= 2;
   scores.push({
     name: "minimal-accept-header",
     fired: isWildcardOnly || isMinimalAccept,
@@ -146,9 +145,7 @@ export function runHeaderHeuristics(
   });
 
   // Calculate total score (only for fired heuristics)
-  const totalScore = scores
-    .filter((s) => s.fired)
-    .reduce((sum, s) => sum + s.weight, 0);
+  const totalScore = scores.filter((s) => s.fired).reduce((sum, s) => sum + s.weight, 0);
 
   const isSuspected = totalScore >= SUSPECTED_THRESHOLD;
   const signals: DetectionSignal[] = isSuspected ? ["header-heuristics"] : [];

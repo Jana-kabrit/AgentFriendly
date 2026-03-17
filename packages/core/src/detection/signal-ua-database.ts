@@ -3,7 +3,6 @@ import { matchUserAgent } from "@agentfriendly/ua-database";
 import type { DetectionSignal } from "../types/trust-tier.js";
 import type { UaMatch } from "@agentfriendly/ua-database";
 
-
 /**
  * SIGNAL 2: User-Agent Database Lookup
  *

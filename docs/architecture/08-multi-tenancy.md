@@ -6,7 +6,7 @@ Multi-tenancy enables agents to act on behalf of specific users within a SaaS pl
 
 Consider a SaaS like a project management tool. A user wants their AI assistant to "create a task in my account." The agent needs to:
 
-1. Authenticate as the *user's agent*, not as a generic API client.
+1. Authenticate as the _user's agent_, not as a generic API client.
 2. Access only that user's projects, not all projects on the platform.
 3. Reveal only the user's PII (their own email, etc.), not other users'.
 4. Be restricted to the operations the user has consented to.
@@ -65,7 +65,7 @@ The delegation token is a signed JWT:
 }
 ```
 
-The `act` claim follows RFC 8693 token exchange semantics — indicating that the token is issued to act *on behalf of* the user, not as the user.
+The `act` claim follows RFC 8693 token exchange semantics — indicating that the token is issued to act _on behalf of_ the user, not as the user.
 
 ---
 
@@ -73,12 +73,12 @@ The `act` claim follows RFC 8693 token exchange semantics — indicating that th
 
 Scopes are arbitrary strings agreed upon between your application and the agents you authorize. The SDK provides some built-in conventions:
 
-| Scope prefix | Meaning |
-|--------------|---------|
-| `read:*` | Read access to a resource |
-| `write:*` | Write/mutate access to a resource |
-| `reveal:*` | Bypass PII masking for a specific field |
-| `admin:*` | Administrative operations |
+| Scope prefix | Meaning                                 |
+| ------------ | --------------------------------------- |
+| `read:*`     | Read access to a resource               |
+| `write:*`    | Write/mutate access to a resource       |
+| `reveal:*`   | Bypass PII masking for a specific field |
+| `admin:*`    | Administrative operations               |
 
 The privacy layer (Layer 5) specifically checks for `reveal:` scopes when deciding whether to mask PII fields.
 
@@ -91,10 +91,10 @@ import { issueDelegationToken } from "@agentfriendly/core";
 
 // In your POST /agent-sessions endpoint:
 const token = await issueDelegationToken(
-  req.user.id,           // userId
-  req.user.orgId,        // tenantId
+  req.user.id, // userId
+  req.user.orgId, // tenantId
   ["read:projects", "write:tasks", "reveal:email"],
-  config.multitenancy    // contains tokenSecret and ttl
+  config.multitenancy, // contains tokenSecret and ttl
 );
 
 res.json({ token, expiresIn: 86400 });

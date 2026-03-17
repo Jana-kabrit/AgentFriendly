@@ -164,12 +164,9 @@ describe("getAllAgents", () => {
       expect(agent.operator).toBeTruthy();
       expect(agent.pattern).toBeTruthy();
       expect(["exact", "prefix", "regex"]).toContain(agent.matchType);
-      expect([
-        "training-crawler",
-        "search-bot",
-        "interactive-agent",
-        "browser-agent",
-      ]).toContain(agent.category);
+      expect(["training-crawler", "search-bot", "interactive-agent", "browser-agent"]).toContain(
+        agent.category,
+      );
     }
   });
 });

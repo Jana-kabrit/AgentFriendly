@@ -4,9 +4,7 @@ import { detectLlmReferral } from "../../src/analytics/collector.js";
 
 describe("detectLlmReferral", () => {
   it("detects perplexity.ai as LLM referral", () => {
-    const result = detectLlmReferral(
-      "https://www.perplexity.ai/search?q=best+monitoring+tools",
-    );
+    const result = detectLlmReferral("https://www.perplexity.ai/search?q=best+monitoring+tools");
     expect(result).toBe("perplexity.ai");
   });
 

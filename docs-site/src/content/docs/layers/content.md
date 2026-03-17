@@ -19,12 +19,12 @@ Layer 2 converts your existing HTML responses to clean, token-efficient markdown
 
 Typical HTML pages contain a significant amount of noise:
 
-| Page Type | HTML Tokens | Markdown Tokens | Savings |
-|-----------|-------------|-----------------|---------|
-| Blog post (with nav/ads) | ~8,000 | ~1,200 | ~85% |
-| Product listing | ~12,000 | ~2,400 | ~80% |
-| Documentation page | ~5,000 | ~1,800 | ~64% |
-| API reference | ~15,000 | ~4,000 | ~73% |
+| Page Type                | HTML Tokens | Markdown Tokens | Savings |
+| ------------------------ | ----------- | --------------- | ------- |
+| Blog post (with nav/ads) | ~8,000      | ~1,200          | ~85%    |
+| Product listing          | ~12,000     | ~2,400          | ~80%    |
+| Documentation page       | ~5,000      | ~1,800          | ~64%    |
+| API reference            | ~15,000     | ~4,000          | ~73%    |
 
 ## Configuration
 
@@ -36,14 +36,14 @@ createAgentFriendlyMiddleware({
 
     // Content-Signal header values
     signals: {
-      "ai-train": false,  // Don't allow training on your content
-      "ai-input": true,   // Allow use as LLM input (inference)
-      search: true,       // Allow AI search indexing
+      "ai-train": false, // Don't allow training on your content
+      "ai-input": true, // Allow use as LLM input (inference)
+      search: true, // Allow AI search indexing
     },
 
     // Routes to exclude from markdown conversion
     excludeFromMarkdown: [
-      "/api/**",   // API endpoints serve JSON, not HTML
+      "/api/**", // API endpoints serve JSON, not HTML
       "**/*.json", // JSON routes
     ],
 

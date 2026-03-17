@@ -17,24 +17,31 @@
 ## Design Principles
 
 ### 1. Middleware-First (ADR-007)
+
 The SDK integrates as a standard HTTP middleware. It does not require framework-specific hooks, custom build steps, or database setup. A single function call is sufficient. This maximizes adoption and minimizes the integration surface.
 
 ### 2. Zero Human Impact
+
 Human browser requests are detected in Layer 0 and exit the pipeline immediately. Every CPU cycle spent on agent logic is invisible to human users.
 
 ### 3. Progressive Disclosure
+
 Every feature is opt-in and can be enabled independently. A minimal integration (just detection + markdown) adds less than 5ms latency. Full integration (all 8 layers) adds 10–30ms.
 
 ### 4. Context Is Immutable
+
 The `AgentContext` object created in Layer 0 is frozen. Subsequent layers may create derived contexts (e.g., injecting `tenantContext`) but never mutate the original.
 
 ### 5. Framework Agnostic Core
+
 `@agentfriendly/core` has zero framework dependencies. It operates on a framework-agnostic `AgentRequest` / `AgentResponse` interface. Framework adapters handle the translation to/from framework-native request/response types.
 
 ### 6. Edge Runtime Compatible
+
 The core detection and access control layers are Edge-compatible (no Node.js-specific APIs). HTML→Markdown conversion gracefully falls back when `jsdom` is unavailable in Edge environments.
 
 ### 7. Stable Dependencies Only (ADR-002)
+
 The SDK depends only on finalized or widely-adopted standards (RFC 9421, RFC 8693, x402 v1). Experimental specs like WebMCP are explicitly excluded until stable.
 
 ---
@@ -129,17 +136,17 @@ The SDK depends only on finalized or widely-adopted standards (RFC 9421, RFC 869
 
 ## Layer Map
 
-| # | Name | Responsibility | Early Exit? |
-|---|------|---------------|-------------|
-| 0 | Detection | Resolve `TrustTier` from 4 signals | — |
-| 8* | Multi-Tenancy (pre) | Validate delegation JWT | — |
-| 1 | Discovery | Serve static agent files | ✓ (200) |
-| 4 | Access Control | Evaluate deny/allow policies | ✓ (403/429) |
-| 7 | Monetization | x402 payment challenge | ✓ (402) |
-| 2 | Content | Build markdown instructions | — |
-| 3 | Analytics | (emitted asynchronously, no-op on critical path) | — |
-| 5 | Privacy | (applied per-field in route handlers, not on the pipeline) | — |
-| 6 | Tools | (registered at startup, invoked via POST /agent/tools/:id) | — |
+| #   | Name                | Responsibility                                             | Early Exit? |
+| --- | ------------------- | ---------------------------------------------------------- | ----------- |
+| 0   | Detection           | Resolve `TrustTier` from 4 signals                         | —           |
+| 8\* | Multi-Tenancy (pre) | Validate delegation JWT                                    | —           |
+| 1   | Discovery           | Serve static agent files                                   | ✓ (200)     |
+| 4   | Access Control      | Evaluate deny/allow policies                               | ✓ (403/429) |
+| 7   | Monetization        | x402 payment challenge                                     | ✓ (402)     |
+| 2   | Content             | Build markdown instructions                                | —           |
+| 3   | Analytics           | (emitted asynchronously, no-op on critical path)           | —           |
+| 5   | Privacy             | (applied per-field in route handlers, not on the pipeline) | —           |
+| 6   | Tools               | (registered at startup, invoked via POST /agent/tools/:id) | —           |
 
 \* Layer 8 runs before Layer 1 (before discovery file serving) to ensure discovery file requests can also carry tenant context.
 
@@ -292,6 +299,7 @@ Every framework adapter implements the same 4-step pattern:
 ```
 
 The adapter is responsible for:
+
 - Lowercasing all header keys (the core always expects lowercase).
 - Normalizing the path (removing trailing slash, except root `/`).
 - Injecting `result.contentInstructions.agentHeaders` into the outgoing response.

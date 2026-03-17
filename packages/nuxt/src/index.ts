@@ -20,11 +20,7 @@ export type { ModuleOptions } from "./module.js";
 
 export { createH3Middleware, defineAgentFriendlyHandler } from "./server-middleware.js";
 
-export {
-  getAgentContext,
-  issueDelegationToken,
-  revokeSession,
-} from "@agentfriendly/core";
+export { getAgentContext, issueDelegationToken, revokeSession } from "@agentfriendly/core";
 export type {
   AgentFriendlyConfig,
   AgentContext,

@@ -3,12 +3,15 @@
 ## The Problem
 
 User-Agent headers are trivially spoofable. Any HTTP client can send:
+
 ```
 User-Agent: ClaudeBot/1.0
 ```
+
 And your server has no way to verify this is actually Anthropic's Claude.
 
 This matters because:
+
 - Malicious scrapers can spoof legitimate agent UAs to bypass access controls
 - `verified-only` routes that should only serve Claude cannot distinguish real Claude from a scraper claiming to be Claude
 - Monetization policies applied to specific agent types can be bypassed
@@ -26,25 +29,17 @@ The solution is **cryptographic identity verification** — the agent signs its 
 ### How It Works
 
 **Agent side (one-time setup)**:
+
 1. Generate an Ed25519 keypair
 2. Host the public key as a JWKS (JSON Web Key Set) at `/.well-known/http-message-signatures-directory` on the agent operator's domain
 
-**Agent side (per-request)**:
-3. Select the message components to sign (typically: method, path, `Content-Type`, `Digest`, timestamp)
-4. Compute the "signature base" (a deterministic string from the selected components)
-5. Sign with the Ed25519 private key
-6. Add two headers to the request:
-   - `Signature-Input: sig1=("@method" "@target-uri" "content-type");keyid="https://agent-operator.com/key1";created=1709823456`
-   - `Signature: sig1=:Base64EncodedSignature:`
+**Agent side (per-request)**: 3. Select the message components to sign (typically: method, path, `Content-Type`, `Digest`, timestamp) 4. Compute the "signature base" (a deterministic string from the selected components) 5. Sign with the Ed25519 private key 6. Add two headers to the request:
 
-**Server side (per-request)**:
-7. Check for `Signature` and `Signature-Input` headers
-8. Parse `Signature-Input` to extract: component names, `keyid`, and `created` timestamp
-9. Fetch the JWKS from `https://<keyid-domain>/.well-known/http-message-signatures-directory`
-   (cached with configurable TTL — typically 1 hour)
-10. Find the matching public key by key ID
-11. Reconstruct the signature base from the request components listed in `Signature-Input`
-12. Verify the Ed25519 signature
+- `Signature-Input: sig1=("@method" "@target-uri" "content-type");keyid="https://agent-operator.com/key1";created=1709823456`
+- `Signature: sig1=:Base64EncodedSignature:`
+
+**Server side (per-request)**: 7. Check for `Signature` and `Signature-Input` headers 8. Parse `Signature-Input` to extract: component names, `keyid`, and `created` timestamp 9. Fetch the JWKS from `https://<keyid-domain>/.well-known/http-message-signatures-directory`
+(cached with configurable TTL — typically 1 hour) 10. Find the matching public key by key ID 11. Reconstruct the signature base from the request components listed in `Signature-Input` 12. Verify the Ed25519 signature
 
 If verification passes: trust tier is `verified-agent`. If it fails or no signature headers are present: fall back to UA database classification.
 
@@ -67,22 +62,19 @@ If verification passes: trust tier is `verified-agent`. If it fails or no signat
 ### Verifying a Request (TypeScript Example)
 
 ```typescript
-import * as ed from "@noble/ed25519"
+import * as ed from "@noble/ed25519";
 
-async function verifyAgentSignature(
-  request: Request,
-  publicKeyBase64: string
-): Promise<boolean> {
-  const signatureHeader = request.headers.get("Signature")
-  const signatureInputHeader = request.headers.get("Signature-Input")
+async function verifyAgentSignature(request: Request, publicKeyBase64: string): Promise<boolean> {
+  const signatureHeader = request.headers.get("Signature");
+  const signatureInputHeader = request.headers.get("Signature-Input");
 
-  if (!signatureHeader || !signatureInputHeader) return false
+  if (!signatureHeader || !signatureInputHeader) return false;
 
-  const signatureBase = buildSignatureBase(request, signatureInputHeader)
-  const signatureBytes = base64Decode(signatureHeader.replace("sig1=:", "").replace(":", ""))
-  const publicKeyBytes = base64UrlDecode(publicKeyBase64)
+  const signatureBase = buildSignatureBase(request, signatureInputHeader);
+  const signatureBytes = base64Decode(signatureHeader.replace("sig1=:", "").replace(":", ""));
+  const publicKeyBytes = base64UrlDecode(publicKeyBase64);
 
-  return ed.verify(signatureBytes, new TextEncoder().encode(signatureBase), publicKeyBytes)
+  return ed.verify(signatureBytes, new TextEncoder().encode(signatureBase), publicKeyBytes);
 }
 ```
 
@@ -115,6 +107,7 @@ Clawdentity adds a **registry layer**: a trusted registry issues Agent Identity 
 The agent presents this token in `Authorization: AgentToken <jwt>`.
 
 The server:
+
 1. Extracts the JWT
 2. Verifies the JWT signature against Clawdentity's public key (published at the registry)
 3. Checks the `exp` claim (not expired)
@@ -169,9 +162,9 @@ export default {
     requireVerification: ["/api/premium/**", "/admin/agent/**"],
     clawdentityRegistry: "https://registry.clawdentity.org",
     keyCache: {
-      ttlSeconds: 3600,  // Cache public keys for 1 hour
+      ttlSeconds: 3600, // Cache public keys for 1 hour
       maxEntries: 1000,
-    }
-  }
-}
+    },
+  },
+};
 ```

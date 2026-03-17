@@ -67,7 +67,9 @@ export function serveDiscoveryFile(
         handled: true,
         status: 404,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ error: "Debug mode is not enabled. Set debug: true in AgentFriendlyConfig." }),
+        body: JSON.stringify({
+          error: "Debug mode is not enabled. Set debug: true in AgentFriendlyConfig.",
+        }),
         contentType: "application/json",
       };
     }

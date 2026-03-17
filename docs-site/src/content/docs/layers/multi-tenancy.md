@@ -5,16 +5,18 @@ description: Issue scoped agent delegation tokens so agents act on behalf of spe
 
 # Layer 8: Multi-Tenancy
 
-Multi-tenancy enables agents to act *on behalf of* specific users within a SaaS platform. This is critical when users authorize an AI agent to access their account data — you need to know *whose* data the agent is accessing and *what* it's allowed to do.
+Multi-tenancy enables agents to act _on behalf of_ specific users within a SaaS platform. This is critical when users authorize an AI agent to access their account data — you need to know _whose_ data the agent is accessing and _what_ it's allowed to do.
 
 ## The Problem
 
 Without multi-tenancy:
-- An agent accessing `/api/invoices` could receive *all* invoices for *all* tenants.
+
+- An agent accessing `/api/invoices` could receive _all_ invoices for _all_ tenants.
 - There is no way to scope the agent's access to a specific user's data.
 - You cannot audit which agent accessed which user's data.
 
 With multi-tenancy:
+
 - The user authorizes the agent via your app's OAuth flow.
 - Your server issues a scoped **delegation token** (JWT) to the agent.
 - The agent presents the token on every request.
@@ -83,11 +85,16 @@ Delegation tokens can carry `reveal:*` scopes to allow specific PII fields to be
 
 ```typescript
 // Issue token with reveal scopes
-await issueDelegationToken(userId, tenantId, [
-  "read:invoices",
-  "reveal:email",     // Allow agent to see the email field
-  "reveal:phone",     // Allow agent to see the phone field
-], config.multiTenancy);
+await issueDelegationToken(
+  userId,
+  tenantId,
+  [
+    "read:invoices",
+    "reveal:email", // Allow agent to see the email field
+    "reveal:phone", // Allow agent to see the phone field
+  ],
+  config.multiTenancy,
+);
 ```
 
 ```typescript
@@ -139,6 +146,7 @@ Delegation tokens are signed JWTs with RFC 8693-style `act` (actor) claims:
 ## Token Transport
 
 Agents should present the token in one of:
+
 - `X-Agent-Session: <token>` header (preferred)
 - `Authorization: Bearer <token>` header
 - `Authorization: AgentSession <token>` header

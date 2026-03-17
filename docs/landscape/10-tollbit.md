@@ -47,6 +47,7 @@ Rates can be adjusted at any time without renegotiating contracts. As AI traffic
 ## Who Pays TollBit
 
 AI companies pay TollBit for access to your content. TollBit handles:
+
 - License negotiation with AI companies
 - Payment collection from AI companies
 - Passing the rate you set through to you (minus their transaction fee)
@@ -55,6 +56,7 @@ AI companies pay TollBit for access to your content. TollBit handles:
 ## Who Uses It
 
 TollBit is primarily designed for:
+
 - News publishers and media organizations
 - Blog networks and content sites
 - Documentation sites where AI companies want to index content for RAG

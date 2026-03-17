@@ -51,10 +51,10 @@ function isCacheEntryValid(entry: CachedKey): boolean {
  */
 function decodeBase64Url(b64url: string): Uint8Array {
   // Normalize Base64URL to Base64
-  const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/").padEnd(
-    b64url.length + (4 - (b64url.length % 4)) % 4,
-    "=",
-  );
+  const b64 = b64url
+    .replace(/-/g, "+")
+    .replace(/_/g, "/")
+    .padEnd(b64url.length + ((4 - (b64url.length % 4)) % 4), "=");
   const binary = atob(b64);
   return Uint8Array.from(binary, (c) => c.charCodeAt(0));
 }
@@ -96,9 +96,7 @@ async function fetchPublicKey(
   });
 
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch JWKS from ${jwksUrl}: HTTP ${response.status}`,
-    );
+    throw new Error(`Failed to fetch JWKS from ${jwksUrl}: HTTP ${response.status}`);
   }
 
   const jwks = (await response.json()) as { keys?: unknown[] };
@@ -107,16 +105,16 @@ async function fetchPublicKey(
   }
 
   // Find the key matching the keyId, or fall back to the first Ed25519 key
-  const key = (jwks.keys as Array<Record<string, unknown>>).find(
-    (k) => k["kid"] === keyId && k["kty"] === "OKP" && k["crv"] === "Ed25519",
-  ) ?? (jwks.keys as Array<Record<string, unknown>>).find(
-    (k) => k["kty"] === "OKP" && k["crv"] === "Ed25519",
-  );
+  const key =
+    (jwks.keys as Array<Record<string, unknown>>).find(
+      (k) => k["kid"] === keyId && k["kty"] === "OKP" && k["crv"] === "Ed25519",
+    ) ??
+    (jwks.keys as Array<Record<string, unknown>>).find(
+      (k) => k["kty"] === "OKP" && k["crv"] === "Ed25519",
+    );
 
   if (!key || typeof key["x"] !== "string") {
-    throw new Error(
-      `No Ed25519 key found in JWKS at ${jwksUrl} for keyId "${keyId}"`,
-    );
+    throw new Error(`No Ed25519 key found in JWKS at ${jwksUrl} for keyId "${keyId}"`);
   }
 
   const publicKeyBytes = decodeBase64Url(key["x"]);

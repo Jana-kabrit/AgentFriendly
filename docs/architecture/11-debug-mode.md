@@ -17,15 +17,15 @@ const sdk = createAgentFriendlyMiddleware({
 
 When `debug: true`, every agent response (not just discovery files) includes `X-AgentFriendly-*` headers:
 
-| Header | Example Value | Meaning |
-|--------|--------------|---------|
-| `X-AgentFriendly-Tier` | `known-agent` | The resolved TrustTier |
-| `X-AgentFriendly-Signals` | `ua-database,accept-header` | Comma-separated DetectionSignals that fired |
-| `X-AgentFriendly-Operator` | `openai` | Detected agent operator |
-| `X-AgentFriendly-Type` | `crawler` | Detected agent type |
-| `X-AgentFriendly-RequestId` | `a1b2c3d4-...` | UUID for this request (correlate with logs) |
-| `X-AgentFriendly-ConvertMd` | `true` | Whether HTML→Markdown conversion was applied |
-| `X-AgentFriendly-TokenCount` | `742` | Estimated tokens in markdown response |
+| Header                       | Example Value               | Meaning                                      |
+| ---------------------------- | --------------------------- | -------------------------------------------- |
+| `X-AgentFriendly-Tier`       | `known-agent`               | The resolved TrustTier                       |
+| `X-AgentFriendly-Signals`    | `ua-database,accept-header` | Comma-separated DetectionSignals that fired  |
+| `X-AgentFriendly-Operator`   | `openai`                    | Detected agent operator                      |
+| `X-AgentFriendly-Type`       | `crawler`                   | Detected agent type                          |
+| `X-AgentFriendly-RequestId`  | `a1b2c3d4-...`              | UUID for this request (correlate with logs)  |
+| `X-AgentFriendly-ConvertMd`  | `true`                      | Whether HTML→Markdown conversion was applied |
+| `X-AgentFriendly-TokenCount` | `742`                       | Estimated tokens in markdown response        |
 
 These headers are stripped from production responses (when `debug: false`).
 
@@ -113,6 +113,7 @@ The `agentfriendly test-detection` and `agentfriendly preview` CLI commands auto
 ## Security Warning
 
 `debug: true` exposes:
+
 - Internal trust tier decisions (could be used to craft evasion payloads).
 - Full pipeline timing (could inform denial-of-service targeting of slow steps).
 - Tenant context claims (could leak user ID structure).

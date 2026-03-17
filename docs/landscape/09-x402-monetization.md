@@ -76,14 +76,14 @@ USDC on Base (Coinbase's Layer 2 network) has sub-cent transaction fees (typical
 ## One Middleware Line to Implement
 
 ```typescript
-import { paymentMiddleware } from "x402-express"
-import { coinbaseProvider } from "x402-express/providers"
+import { paymentMiddleware } from "x402-express";
+import { coinbaseProvider } from "x402-express/providers";
 
 const provider = coinbaseProvider({
   networkId: "base-mainnet",
   apiKeyId: process.env.CDP_API_KEY_ID,
   apiKeySecret: process.env.CDP_API_KEY_SECRET,
-})
+});
 
 app.use(
   paymentMiddleware(
@@ -99,9 +99,9 @@ app.use(
         config: { description: "Data API endpoint" },
       },
     },
-    provider
-  )
-)
+    provider,
+  ),
+);
 ```
 
 That is the entire implementation. No webhook setup, no dashboard configuration, no subscription management.
@@ -128,13 +128,13 @@ https://docs.x402.org/agent-integration
 
 ## Pricing Models
 
-| Model | How it works | Best for |
-|-------|-------------|---------|
-| `per-request` | Fixed USDC per HTTP request | Simple APIs, tool calls |
-| `per-token` | Rate × `x-markdown-tokens` header | Content consumption |
-| `subscription` | Agent presents valid subscription JWT | Regular heavy users |
+| Model           | How it works                            | Best for                       |
+| --------------- | --------------------------------------- | ------------------------------ |
+| `per-request`   | Fixed USDC per HTTP request             | Simple APIs, tool calls        |
+| `per-token`     | Rate × `x-markdown-tokens` header       | Content consumption            |
+| `subscription`  | Agent presents valid subscription JWT   | Regular heavy users            |
 | `verified-only` | Requires Ed25519 signature (no payment) | Access control without billing |
-| `free` | No payment required | Public endpoints |
+| `free`          | No payment required                     | Public endpoints               |
 
 ## How `@agentfriendly` Implements x402
 

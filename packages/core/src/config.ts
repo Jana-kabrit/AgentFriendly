@@ -30,7 +30,7 @@ export function resolveConfig(config: AgentFriendlyConfig = {}): ResolvedConfig 
       signals: {
         "ai-train": config.content?.signals?.["ai-train"] ?? false,
         "ai-input": config.content?.signals?.["ai-input"] ?? true,
-        "search": config.content?.signals?.["search"] ?? true,
+        search: config.content?.signals?.["search"] ?? true,
       },
       excludeFromMarkdown: config.content?.excludeFromMarkdown ?? [],
       tokenHeader: config.content?.tokenHeader ?? true,
@@ -41,9 +41,13 @@ export function resolveConfig(config: AgentFriendlyConfig = {}): ResolvedConfig 
     analytics: {
       enabled: config.analytics?.enabled ?? true,
       storage: config.analytics?.storage ?? "sqlite",
-      ...(config.analytics?.connectionString !== undefined ? { connectionString: config.analytics.connectionString } : {}),
+      ...(config.analytics?.connectionString !== undefined
+        ? { connectionString: config.analytics.connectionString }
+        : {}),
       trackLlmReferrals: config.analytics?.trackLlmReferrals ?? true,
-      ...(config.analytics?.webhookHeaders !== undefined ? { webhookHeaders: config.analytics.webhookHeaders } : {}),
+      ...(config.analytics?.webhookHeaders !== undefined
+        ? { webhookHeaders: config.analytics.webhookHeaders }
+        : {}),
       batchSize: config.analytics?.batchSize ?? 50,
       flushIntervalMs: config.analytics?.flushIntervalMs ?? 5000,
     },
@@ -61,7 +65,9 @@ export function resolveConfig(config: AgentFriendlyConfig = {}): ResolvedConfig 
       additionalPatterns: config.privacy?.additionalPatterns ?? [],
       nerEnabled: config.privacy?.nerEnabled ?? false,
       reversibleTokenization: config.privacy?.reversibleTokenization ?? false,
-      ...(config.privacy?.tokenizationSecret !== undefined ? { tokenizationSecret: config.privacy.tokenizationSecret } : {}),
+      ...(config.privacy?.tokenizationSecret !== undefined
+        ? { tokenizationSecret: config.privacy.tokenizationSecret }
+        : {}),
       applyToRoutes: config.privacy?.applyToRoutes ?? ["**"],
       excludeRoutes: config.privacy?.excludeRoutes ?? [],
     },
@@ -76,17 +82,23 @@ export function resolveConfig(config: AgentFriendlyConfig = {}): ResolvedConfig 
 
     monetization: {
       enabled: config.monetization?.enabled ?? false,
-      ...(config.monetization?.walletAddress !== undefined ? { walletAddress: config.monetization.walletAddress } : {}),
+      ...(config.monetization?.walletAddress !== undefined
+        ? { walletAddress: config.monetization.walletAddress }
+        : {}),
       network: config.monetization?.network ?? "base-mainnet",
       routes: config.monetization?.routes ?? {},
       fallback: config.monetization?.fallback ?? false,
-      ...(config.monetization?.tollbit !== undefined ? { tollbit: config.monetization.tollbit } : {}),
+      ...(config.monetization?.tollbit !== undefined
+        ? { tollbit: config.monetization.tollbit }
+        : {}),
       exempt: config.monetization?.exempt ?? [],
     },
 
     multiTenancy: {
       enabled: config.multiTenancy?.enabled ?? false,
-      ...(config.multiTenancy?.tokenSecret !== undefined ? { tokenSecret: config.multiTenancy.tokenSecret } : {}),
+      ...(config.multiTenancy?.tokenSecret !== undefined
+        ? { tokenSecret: config.multiTenancy.tokenSecret }
+        : {}),
       sessionTtlSeconds: config.multiTenancy?.sessionTtlSeconds ?? 3600,
       ormAdapter: config.multiTenancy?.ormAdapter ?? "none",
       authorizationPagePath: config.multiTenancy?.authorizationPagePath ?? "/agent-access",

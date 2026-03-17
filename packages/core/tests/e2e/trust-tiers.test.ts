@@ -47,18 +47,20 @@ describe("E2E: Trust Tier — human", () => {
   });
 
   it("injects no agent headers for human request", async () => {
-    const result = await sdk.process(makeRequest({
-      headers: {
-        accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,*/*;q=0.8",
-        "accept-language": "en-US,en;q=0.9",
-        "user-agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        cookie: "session=abc",
-        "sec-fetch-site": "same-origin",
-        "sec-fetch-mode": "navigate",
-        referer: "https://example.com/",
-      },
-    }));
+    const result = await sdk.process(
+      makeRequest({
+        headers: {
+          accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,*/*;q=0.8",
+          "accept-language": "en-US,en;q=0.9",
+          "user-agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+          cookie: "session=abc",
+          "sec-fetch-site": "same-origin",
+          "sec-fetch-mode": "navigate",
+          referer: "https://example.com/",
+        },
+      }),
+    );
     expect(result.context.isAgent).toBe(false);
     // content-signal is only injected for agents
     expect(result.contentInstructions.agentHeaders["content-signal"]).toBeUndefined();
@@ -110,9 +112,7 @@ describe("E2E: Trust Tier — known-agent", () => {
   });
 
   it("resolves ClaudeBot as known-agent", async () => {
-    const result = await sdk.process(
-      makeRequest({ headers: { "user-agent": "ClaudeBot/1.0" } }),
-    );
+    const result = await sdk.process(makeRequest({ headers: { "user-agent": "ClaudeBot/1.0" } }));
     expect(result.context.tier).toBe("known-agent");
     expect(result.context.matchedAgent?.operator).toBe("Anthropic");
   });
@@ -125,9 +125,7 @@ describe("E2E: Trust Tier — known-agent", () => {
   });
 
   it("injects debug headers in debug mode", async () => {
-    const result = await sdk.process(
-      makeRequest({ headers: { "user-agent": "GPTBot/1.0" } }),
-    );
+    const result = await sdk.process(makeRequest({ headers: { "user-agent": "GPTBot/1.0" } }));
     expect(result.contentInstructions.agentHeaders["x-agentfriendly-tier"]).toBe("known-agent");
     expect(result.contentInstructions.agentHeaders["x-agentfriendly-signals"]).toContain(
       "ua-database",
@@ -142,9 +140,7 @@ describe("E2E: Trust Tier — markdown serving decision", () => {
       detection: { proactiveMarkdown: "known" },
       content: { markdown: true },
     });
-    const result = await sdk2.process(
-      makeRequest({ headers: { "user-agent": "GPTBot/1.0" } }),
-    );
+    const result = await sdk2.process(makeRequest({ headers: { "user-agent": "GPTBot/1.0" } }));
     expect(result.contentInstructions.convertToMarkdown).toBe(true);
   });
 

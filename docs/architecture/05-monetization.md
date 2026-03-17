@@ -4,11 +4,11 @@ The monetization layer enables websites to charge AI agents for access to specif
 
 ## Why x402?
 
-| Option | Tradeoff |
-|--------|---------|
-| x402 (on-chain USDC) | Open standard, no intermediary, works for any agent that implements x402 |
-| TollBit | SaaS paywall, requires agent operators to pre-register with TollBit, but has better coverage for agents that don't support x402 |
-| API keys / subscriptions | Requires account creation — incompatible with autonomous agent sessions |
+| Option                   | Tradeoff                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| x402 (on-chain USDC)     | Open standard, no intermediary, works for any agent that implements x402                                                        |
+| TollBit                  | SaaS paywall, requires agent operators to pre-register with TollBit, but has better coverage for agents that don't support x402 |
+| API keys / subscriptions | Requires account creation — incompatible with autonomous agent sessions                                                         |
 
 The SDK implements x402 as the primary mechanism and TollBit as a fallback (ADR-003). Human users are never affected by the monetization layer.
 
@@ -103,12 +103,12 @@ When enabled, the 402 response includes both an `X-Payment` (x402) and a `Tollbi
 
 ## Supported Networks
 
-| Network | Currency | Notes |
-|---------|----------|-------|
-| `base-mainnet` | USDC | Primary recommendation — low fees (~$0.0001/tx) |
-| `base-sepolia` | USDC | Testnet for development |
-| `solana-mainnet` | USDC | Higher throughput, different SPL token address |
-| `ethereum-mainnet` | USDC | High fees — only suitable for larger payments |
+| Network            | Currency | Notes                                           |
+| ------------------ | -------- | ----------------------------------------------- |
+| `base-mainnet`     | USDC     | Primary recommendation — low fees (~$0.0001/tx) |
+| `base-sepolia`     | USDC     | Testnet for development                         |
+| `solana-mainnet`   | USDC     | Higher throughput, different SPL token address  |
+| `ethereum-mainnet` | USDC     | High fees — only suitable for larger payments   |
 
 Multiple networks can be listed in `accepts[]` of the 402 response. The agent chooses which network to pay on.
 
@@ -117,6 +117,7 @@ Multiple networks can be listed in `accepts[]` of the 402 response. The agent ch
 ## No-op for Humans
 
 The monetization layer is completely invisible to human users:
+
 - Browsers never receive a 402 response.
 - The payment challenge is only issued to requests with `tier != "human"`.
 - No cookies, redirects, or UI changes are involved.

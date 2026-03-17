@@ -100,6 +100,7 @@ access: {
 ```
 
 When the limit is exceeded, the layer returns `429 Too Many Requests` with:
+
 ```
 Retry-After: 15
 X-RateLimit-Limit: 100
@@ -150,6 +151,7 @@ Policy denials return a structured JSON body to help agents understand why acces
 ```
 
 Rate limit responses:
+
 ```json
 {
   "error": "rate_limit_exceeded",

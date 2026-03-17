@@ -15,10 +15,10 @@ agentfriendly preview [--url <url>] [--ua <user-agent>]
 
 ## Options
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--url <url>` | `http://localhost:3000/` | The URL to preview |
-| `--ua <string>` | `GPTBot/1.0` | User-Agent to use for the request |
+| Option          | Default                  | Description                       |
+| --------------- | ------------------------ | --------------------------------- |
+| `--url <url>`   | `http://localhost:3000/` | The URL to preview                |
+| `--ua <string>` | `GPTBot/1.0`             | User-Agent to use for the request |
 
 ## Examples
 

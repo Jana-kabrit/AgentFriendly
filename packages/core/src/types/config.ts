@@ -103,7 +103,10 @@ export interface DiscoveryConfig {
      * Custom handler for converse requests.
      * Receives the agent's question and returns an answer.
      */
-    handler: (question: string, context?: Record<string, unknown>) => Promise<{
+    handler: (
+      question: string,
+      context?: Record<string, unknown>,
+    ) => Promise<{
       answer: string;
       sources?: string[];
       confidence?: number;
@@ -130,7 +133,7 @@ export interface ContentSignalsConfig {
    * May this site's content be used for traditional search indexing?
    * Default: true
    */
-  "search"?: boolean;
+  search?: boolean;
 }
 
 export interface ContentConfig {
@@ -230,9 +233,9 @@ export interface AnalyticsConfig {
 // ---------------------------------------------------------------------------
 
 export type AgentTypePolicy =
-  | "deny-all"     // Block all requests from this agent type
+  | "deny-all" // Block all requests from this agent type
   | "allow-public" // Allow access to non-restricted routes only
-  | "allow-all";   // Allow access to all routes (subject to route-level restrictions)
+  | "allow-all"; // Allow access to all routes (subject to route-level restrictions)
 
 export interface AccessConfig {
   /**

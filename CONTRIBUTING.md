@@ -96,16 +96,16 @@ Maintainers will review for:
 
 Configure in **GitHub → Settings → Branches → Branch protection rules** for `main`:
 
-| Setting | Recommended value |
-|--------|-------------------|
-| Require a pull request before merging | ✅ Yes |
-| Require approvals | 1 (or more for sensitive paths) |
-| Dismiss stale pull request approvals when new commits are pushed | ✅ Yes |
-| Require status checks to pass before merging | ✅ Yes |
-| Require branches to be up to date before merging | ✅ Yes |
-| Status checks required | `build` (or your CI job name), `test` |
-| Do not allow bypassing the above settings | ✅ Yes (including admins) |
-| Restrict who can push to matching branches | Optional: restrict to a specific team |
+| Setting                                                          | Recommended value                     |
+| ---------------------------------------------------------------- | ------------------------------------- |
+| Require a pull request before merging                            | ✅ Yes                                |
+| Require approvals                                                | 1 (or more for sensitive paths)       |
+| Dismiss stale pull request approvals when new commits are pushed | ✅ Yes                                |
+| Require status checks to pass before merging                     | ✅ Yes                                |
+| Require branches to be up to date before merging                 | ✅ Yes                                |
+| Status checks required                                           | `build` (or your CI job name), `test` |
+| Do not allow bypassing the above settings                        | ✅ Yes (including admins)             |
+| Restrict who can push to matching branches                       | Optional: restrict to a specific team |
 
 ### CODEOWNERS
 

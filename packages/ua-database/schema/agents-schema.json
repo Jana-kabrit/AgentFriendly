@@ -66,12 +66,7 @@
         },
         "category": {
           "type": "string",
-          "enum": [
-            "training-crawler",
-            "search-bot",
-            "interactive-agent",
-            "browser-agent"
-          ],
+          "enum": ["training-crawler", "search-bot", "interactive-agent", "browser-agent"],
           "description": "training-crawler: ingests for model training; search-bot: real-time search citations; interactive-agent: acts on behalf of users; browser-agent: headless browser automation"
         },
         "description": {

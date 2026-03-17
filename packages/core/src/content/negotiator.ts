@@ -6,7 +6,6 @@ import type { AgentContext } from "../types/agent-context.js";
 import type { PassthroughResponse } from "../types/agent-response.js";
 import type { ContentConfig } from "../types/config.js";
 
-
 /**
  * Layer 2 — Content Negotiator
  *
@@ -25,18 +24,13 @@ import type { ContentConfig } from "../types/config.js";
  */
 
 /** Paths never converted to markdown (always JSON APIs). */
-const ALWAYS_EXCLUDE_PATTERNS = [
-  "**/*.json",
-  "**/api/**",
-];
+const ALWAYS_EXCLUDE_PATTERNS = ["**/*.json", "**/api/**"];
 
 /**
  * Build the `content-signal` HTTP response header value.
  * Format: "ai-train=no, ai-input=yes, search=yes"
  */
-export function buildContentSignalHeader(
-  signals: ContentConfig["signals"],
-): string {
+export function buildContentSignalHeader(signals: ContentConfig["signals"]): string {
   const aiTrain = signals?.["ai-train"] ?? false;
   const aiInput = signals?.["ai-input"] ?? true;
   const search = signals?.["search"] ?? true;

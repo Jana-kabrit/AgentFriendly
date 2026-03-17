@@ -31,7 +31,7 @@ export function parseAcceptHeader(acceptHeader: string): AcceptEntry[] {
   return acceptHeader
     .split(",")
     .map((part) => {
-      const [rawType, ...params] = part.trim().split(";")
+      const [rawType, ...params] = part.trim().split(";");
       const mimeType = (rawType ?? "").trim().toLowerCase();
       const qParam = params.find((p) => p.trim().startsWith("q="));
       const quality = qParam ? Number(qParam.replace(/q=/i, "").trim()) : 1.0;

@@ -1,8 +1,4 @@
-
-import {
-  AgentFriendlyMiddleware,
-  convertResponseToMarkdown,
-} from "@agentfriendly/core";
+import { AgentFriendlyMiddleware, convertResponseToMarkdown } from "@agentfriendly/core";
 
 import type { AgentFriendlyConfig, AgentRequest, AgentContext } from "@agentfriendly/core";
 import type { Context, MiddlewareHandler } from "hono";
@@ -64,9 +60,7 @@ function toAgentRequest(c: Context): AgentRequest {
   }
 
   const rawPath = parsed.pathname;
-  const path = rawPath.length > 1 && rawPath.endsWith("/")
-    ? rawPath.slice(0, -1)
-    : rawPath;
+  const path = rawPath.length > 1 && rawPath.endsWith("/") ? rawPath.slice(0, -1) : rawPath;
 
   return {
     method: c.req.method,
@@ -75,16 +69,17 @@ function toAgentRequest(c: Context): AgentRequest {
     headers,
     body: null, // Body reading must happen outside middleware for Hono
     query,
-    ip: c.req.header("cf-connecting-ip") ?? c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+    ip:
+      c.req.header("cf-connecting-ip") ??
+      c.req.header("x-forwarded-for")?.split(",")[0]?.trim() ??
+      null,
   };
 }
 
 /**
  * Create a Hono middleware from an AgentFriendly configuration.
  */
-export function createAgentFriendlyMiddleware(
-  config: AgentFriendlyConfig = {},
-): MiddlewareHandler {
+export function createAgentFriendlyMiddleware(config: AgentFriendlyConfig = {}): MiddlewareHandler {
   const sdk = new AgentFriendlyMiddleware(config);
 
   return async function agentFriendlyMiddleware(c, next): Promise<Response | void> {

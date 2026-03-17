@@ -6,6 +6,7 @@
 ## Context
 
 The SDK must be usable by the widest possible range of web developers. The primary use cases are:
+
 1. Adding agent-friendly capabilities to an existing website
 2. Serving as middleware in a web framework
 3. Being installed as a package with minimal setup
