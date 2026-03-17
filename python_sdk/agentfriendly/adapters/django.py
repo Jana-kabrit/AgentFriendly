@@ -73,7 +73,7 @@ def _dict_to_config(raw: dict[str, object]) -> AgentFriendlyConfig:
         tools=section("tools", ToolsConfig),
         monetization=section("monetization", MonetizationConfig),
         multi_tenancy=section("multi_tenancy", MultiTenancyConfig),
-        debug=raw.get("debug", False),
+        debug=bool(raw.get("debug", False)),
     )
 
 
